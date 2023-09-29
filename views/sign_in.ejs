@@ -1,0 +1,92 @@
+<!-- <title>
+    <%=title%>
+</title> -->
+<link rel="stylesheet" href="/css/sign_in.css">
+
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                    <label for="reg-log"></label>
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-3">Log In</h4>
+                                        <form action="/users/create-session" method="post">
+                                            <div class="my-2">
+                                                <input type="text" id="email_username" name="email_username"
+                                                    placeholder="Username / E-mail" class="form-style">
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="my-2">
+                                                <input type="password" id="password" name="password"
+                                                    placeholder="Password" class="form-style">
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <button type="submit" id="submit"
+                                                class="btn mt-4 btn-outline-light">LOGIN</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4>Sign Up</h4>
+                                        <form action="/users/new-user" method="post">
+                                            <div class="form-group my-1">
+                                                <input type="text" id="name" name="name" placeholder="Your Name"
+                                                    class="form-style">
+                                            </div>
+                                            <div class="form-group my-1">
+                                                <input type="text" id="username" name="username"
+                                                    placeholder="Your username" class="form-style">
+                                            </div>
+                                            <div class="form-group my-1">
+                                                <input type="text" id="email" name="email" placeholder="email@abc.com"
+                                                    class="form-style">
+                                            </div>
+                                            <div class="form-group my-1">
+                                                <input type="password" id="password" name="password"
+                                                    placeholder="Create Password" class="form-style">
+                                            </div>
+                                            <div class="form-group my-1">
+                                                <input type="password" id="re_password" name="re_password"
+                                                    placeholder="Re-enter Password" class="form-style">
+                                            </div>
+
+                                            <div id="role">
+                                                <label for="role">Register as:</label>
+                                                <div class="card" style="background-color: #f8fff0;">
+                                                    <div>
+                                                        <input type="radio" id="patient" name="role" value="patient">
+                                                        <label for="option1">Patient</label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" id="practitioner" name="role"
+                                                            value="practitioner">
+                                                        <label for="option2">Medical Practitioner</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="button">
+                                                <button type="submit" id="submit" class="m-3">Register</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

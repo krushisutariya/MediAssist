@@ -1,0 +1,198 @@
+* {
+  font-family: Quicksand, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+}
+
+label {
+  font-size: medium;
+  font-weight: bold;
+}
+
+
+.banner {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  background: url("../images/slider-bg-1.jpg") no-repeat;
+  background-size: cover;
+  min-height: 550px;
+}
+.banner1 {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  background: url("https://riseapps.co/wp-content/uploads/2020/05/img_Doctor-Appointment-App-1024x768-min-1024x768.jpg") no-repeat;
+  background-size: cover;
+  min-height: 550px;
+}
+.banner .block {
+  padding: 80px 0px 160px;
+}
+
+.banner .block h1 {
+  font-size: 60px;
+  line-height: 1.2;
+  letter-spacing: -1.2px;
+  text-transform: capitalize;
+  color: green;
+}
+
+.banner1 .block1 {
+  padding: 80px 0px 160px;
+}
+
+.banner1 .block1 h1 {
+  font-size: 60px;
+  line-height: 1.2;
+  letter-spacing: -1.2px;
+  text-transform: capitalize;
+  color: green;
+}
+.features{
+  background-color: rgba(159, 226, 191, 0.15);
+}
+
+@media (max-width: 480px) {
+  .banner .block h1 {
+    font-size: 38px;
+    line-height: 50px;
+  }
+  .banner {
+    min-height: 450px;
+    background: #fff !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .banner .block h1 {
+    font-size: 28px;
+    line-height: 40px;
+  }
+  .banner {
+    min-height: 450px;
+    background: #fff !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner .block h1 {
+    font-size: 56px;
+    line-height: 70px;
+  }
+  .banner {
+    background: #fff !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .banner {
+    background: #fff !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner1 .block1 h1 {
+    font-size: 38px;
+    line-height: 50px;
+  }
+  .banner1 {
+    min-height: 450px;
+    background: #fff !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .banner1 .block1 h1 {
+    font-size: 28px;
+    line-height: 40px;
+  }
+  .banner1 {
+    min-height: 450px;
+    background: #fff !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner1 .block1 h1 {
+    font-size: 56px;
+    line-height: 70px;
+  }
+  .banner1 {
+    background: #fff !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .banner1 {
+    background: #fff !important;
+  }
+}
+.features {
+  margin-top: -70px;
+  
+}
+
+.feature-item {
+  flex-basis: 33.33%;
+  margin: 0px 10px;
+  padding: 40px 30px;
+  background-color: #fff;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 42, 106, 0.1);
+  
+}
+
+.feature-item .feature-icon i {
+  font-size: 50px;
+  color: green;
+}
+
+.feature-item h4 {
+  color: green;
+}
+
+.feature-item p {
+  font-size: 14px;
+}
+
+.feature-section.border-top {
+  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+.container{
+.btn {
+  display: inline-block;
+  font-size: 14px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  padding: .75rem 2rem;
+  font-family: "Exo", sans-serif;
+  text-transform: uppercase;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  transition: all .35s ease;
+}
+.btn.btn-icon i {
+  border-left: 1px solid rgba(255, 255, 255, 0.09);
+  padding-left: 15px;
+}
+.btn-main-2 {
+  background: green;
+  color: #fff;
+  border-color: green;
+}
+
+.btn-main-2:hover {
+  background: gray;
+  color: #fff;
+  border-color: gray;
+}
+.btn-round-full {
+  border-radius: 50px;
+}
+
+}
+
+#l1{
+  width: 70%;
+}

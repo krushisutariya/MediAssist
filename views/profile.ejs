@@ -1,0 +1,213 @@
+<%var dateString=user.birth_date;var dateObject=new Date(dateString); var year=dateObject.getFullYear();var
+    month=dateObject.getMonth() + 1; var day=dateObject.getDate();var formattedDate=year + "-" + (month < 10 ? "0" +
+    month : month) + "-" + (day < 10 ? "0" + day : day);%>
+    <div class="mt-1">&nbsp;</div>
+    <div class="container mt-5  ">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4 text-center">
+                <div class="card my-4">
+                    <%if (!user.gender){if(user.role==='patient' ){%>
+                        <img src="/images/ll.avif" class="img-fluid" alt="/images/ll.avif">
+                        <%}else{%>
+                            <img src="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360"
+                                class="img-fluid"
+                                alt="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360">
+                            <%}%>
+                                <%}else if(user.role==='patient' ){ if (user.gender!=='male' ) {%>
+                                    <!-- <div class="d-flex flex-column align-items-center"> -->
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbGc-Uc-W-jkadzT2jk-Kwv9nbcJoOdMuckpeshxI4hxdPmw3BQc0KROOIKRbbVaKGZiQ&usqp=CAU"
+                                        class="img-fluid p-5" style="border-radius: 4rem;"
+                                        alt="/https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbGc-Uc-W-jkadzT2jk-Kwv9nbcJoOdMuckpeshxI4hxdPmw3BQc0KROOIKRbbVaKGZiQ&usqp=CAU">
+                                    <!-- </div> -->
+                                    <%}else{%>
+                                        <img src="/images/ll.avif" class="img-fluid" alt="/images/ll.avif">
+                                        <% }}else{ if (user.gender==='male' ) {%>
+                                            <img src="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360"
+                                                class="img-fluid"
+                                                alt="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360">
+                                            <% }else{ %>
+                                                <img src="https://img.freepik.com/premium-vector/avatar-female-doctor-with-black-hair-doctor-with-stethoscope-vector-illustrationxa_276184-33.jpg"
+                                                    class="img-fluid"
+                                                    alt="https://img.freepik.com/premium-vector/avatar-female-doctor-with-black-hair-doctor-with-stethoscope-vector-illustrationxa_276184-33.jpg">
+                                                <% }}%>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">
+                                                            <%=user.name%>
+                                                        </h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted">
+                                                            <%=user.email%>
+                                                        </h6>
+                                                        <h6 class="card-subtitle mb-2 text-muted">
+                                                            <%=user.contact%>
+                                                        </h6>
+                                                        <h6 class="card-subtitle mb-2 text-muted dark">
+                                                            <%=(user.role).toUpperCase()%>
+                                                        </h6>
+                                                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card my-4">
+                    <div class="card-body">
+                        <h2 class="card-title">Profile</h2>
+                        <div class="my-4"></div>
+                        <form id="timeForm" action="/users/update-profile/<%=user.id%>" method="post">
+                            <div class="form-group my-2">
+                                <label for="name">Name:</label>
+                                <input class="form-control" type="text" id="name" name="name" value="<%=user.name%>"
+                                    placeholder="Enter your name">
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="username">Username:</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                    <input class="form-control" type="text" id="username" name="username"
+                                        value="<%=user.username%>" placeholder="Enter your username">
+                                </div>
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="email">Email:</label>
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="email" id="email" name="email"
+                                        value="<%=user.email%>" placeholder="Enter your email" aria-label="Username"
+                                        aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="gender">Gender:</label>
+                                <%if(user.gender==='female'){%>
+                                    <div class="d-flex justify-content-between" id="gender">
+                                        <div>&nbsp;</div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender"
+                                                id="flexRadioDefault1" value="male">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Male
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender"
+                                                id="flexRadioDefault1" value="female" checked>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Female
+                                            </label>
+                                        </div>
+                                        <div>&nbsp;</div>
+                                        <div>&nbsp;</div>
+                                    </div>
+                                    <%}else{%>
+                                        <div class="d-flex justify-content-between" id="gender">
+                                            <div>&nbsp;</div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender"
+                                                    id="flexRadioDefault1" value="male" checked>
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender"
+                                                    id="flexRadioDefault1" value="female">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Female
+                                                </label>
+                                            </div>
+                                            <div>&nbsp;</div>
+                                            <div>&nbsp;</div>
+                                        </div>
+                                        <%}%>                                    
+                                    </div>
+
+                            <div class="form-group my-2">
+                                <label for="address">Address:</label>
+                                <textarea class="form-control" id="address" name="address" value="<%=user.address%>"
+                                    rows="4" placeholder="Enter your text here..."><%=user.address%></textarea>
+                            </div>
+
+                            <%if(user.role==='patient'){%>
+                                <div class="form-group my-2">
+                                    <label for="dob">Date of Birth:</label>
+                                    <input class="form-control" type="date" id="dob" name="birth_date"
+                                        value="<%=formattedDate%>" placeholder="Select Date of Birth">
+                                </div>
+                                <div class="form-group my-2">
+                                    <label for="weight">Weight:</label>
+                                    <input class="form-control" type="text" id="weight" name="weight"
+                                        value="<%=user.weight%>" placeholder="e.g. 45 (in kg)">
+                                    <p id="weight-feedback"></p>
+                                </div>
+
+                                <div class="form-group my-2">
+                                    <label for="height">Height:</label>
+                                    <input class="form-control" type="text" id="height" name="height"
+                                        value="<%=user.height%>" placeholder="e.g. 150 (in cms)">
+                                    <p id="height-feedback"></p>
+                                </div>
+
+                                <div class="form-group my-2">
+                                    <label for="history">History:</label>
+                                    <input class="form-control" type="text" id="history" name="history"
+                                        value="<%=user.history%>" placeholder="Enter your history">
+                                </div>
+                                <%}%>
+                                    <div class="form-group my-2">
+                                        <label for="contact">Contact No.:</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">+91</span>
+                                            <input class="form-control" type="text" id="contact" name="contact"
+                                                value="<%=user.contact%>" placeholder="Enter your contact number">
+                                        </div>
+                                        <p id="contact-feedback"></p>
+                                    </div>
+
+                                    <%if(user.role!=='patient'){%>
+                                        <div class="form-group my-2">
+                                            <label for="experience">Experience:</label>
+                                            <textarea class="form-control" id="experience" name="experience"
+                                                value="<%=user.experience%>" rows="3"
+                                                placeholder="Enter your text here..."><%=user.experience%></textarea>
+                                        </div>
+                                        <div class="form-group my-2">
+                                            <label for="qualification">Qualification:</label>
+                                            <textarea class="form-control" id="qualification" name="qualification"
+                                                value="<%=user.qualification%>" rows="3"
+                                                placeholder="Enter your text here..."><%=user.qualification%></textarea>
+                                        </div>
+                                        <div class="form-group my-2">
+                                            <label for="specialization">Specialization:</label>
+                                            <textarea class="form-control" id="specialization" name="specialization"
+                                                value="<%=user.specialization%>" rows="3"
+                                                placeholder="Enter your text here..."><%=user.specialization%></textarea>
+                                        </div>
+
+                                        <div class="form-group my-2">
+                                            <label for="openingTime">Opening time:</label>
+                                            <div class="input-group w-50">
+                                                <input type="time" class="form-control" id="openingTime"
+                                                    name="opening_time" value="<%=user.opening_time%>" min="00:00"
+                                                    max="23:59">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group my-2">
+                                            <label for="closingTime">Closing time:</label>
+                                            <div class="input-group w-50">
+                                                <input type="time" class="form-control" id="closingTime"
+                                                    name="closing_time" value="<%=user.closing_time%>" min="00:00"
+                                                    max="23:59">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="text-danger" id="validationMessage"></div>
+                                        <%}%>
+                                <div class="text-center">
+                                    <button class="btn btn-success my-4" type="submit">Submit</button>
+                                </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            </form>
+        </div>

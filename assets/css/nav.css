@@ -1,0 +1,15 @@
+/* nav{
+    background-color: #f4f4f4;
+} */
+
+#s1{
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%; 
+    z-index: 9000;
+}
+
+.color-me{
+    color:aliceblue;
+}

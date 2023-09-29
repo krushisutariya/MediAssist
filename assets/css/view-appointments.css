@@ -1,0 +1,7 @@
+.myViewBlock {
+    transition: all 0.2s;
+}
+
+.myViewBlock:hover {
+    transform: scale(1.1);
+}

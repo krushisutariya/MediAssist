@@ -1,0 +1,131 @@
+<!-- <div class="mt-4">&nbsp;</div> -->
+<!-- Slider Start -->
+<section class="banner">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-12 col-xl-7">
+				<div class="block">
+					<div class="divider mb-3"></div>
+					<span class="text-uppercase text-sm letter-spacing ">Total Health care solution</span>
+					<img src="/images/logo.png" alt="LOGO">
+
+					<p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium quisquam
+						aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="features">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="feature-block d-lg-flex">
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="fa-solid fa-laptop-medical"></i>
+						</div>
+						<span>24 Hours Service</span>
+						<h4 class="mb-3">Online Appoinment</h4>
+						<p class="mb-4">Get ALl time support for emergency.We have introduced the principle of family
+							medicine.</p>
+
+					</div>
+
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="fa-solid fa-clock"></i>
+						</div>
+						<span>Timing schedule</span>
+						<h4 class="mb-3">Working Hours</h4>
+						<p>Daily available from 9 am to 5 pm.</p>
+					</div>
+
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="fa-solid fa-hospital"></i>
+						</div>
+						<span>Emegency Cases</span>
+						<h4 class="mb-3">+91 9999911111</h4>
+						<p>Get ALl time support for emergency.We have introduced the principle of family medicine.Get
+							Conneted with us for any urgency .</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<%if(locals.user!==undefined && locals.user.role!=='practitioner' ){%>
+	<section class="banner1">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xl-7">
+					<div class="block1">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Book Appointment</h1>
+
+						<p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium quisquam
+							aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
+						<div class="btn-container ">
+							<a href="/users/appointment" class="btn btn-main-2 btn-icon btn-round-full">Make appoinment
+								<i class="icofont-simple-right ml-2  "></i></a>
+							<a href="/users/appointment/view-appointments"
+								class="btn btn-main-2 btn-icon btn-round-full">View appoinment <i
+									class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<%}else{%>
+		<section class="banner1">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-12 col-xl-7">
+						<div class="block1">
+							<div class="divider mb-3"></div>
+
+							<h1 class="mb-3 mt-3">Book Appointment</h1>
+
+							<p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium
+								quisquam
+								aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
+							<div class="btn-container ">
+								<a href="/users/appointment/doctor-view" class="btn btn-main-2 btn-icon btn-round-full">See all the appoinments
+									<i class="icofont-simple-right ml-2  "></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<%}%>
+			<section class="section about">
+				<div class="container">
+					<div class="row align-items-center">
+						<div class="col-lg-4 col-sm-6">
+							<div class="about-img">
+								<img src="/images/team-1.jpg" alt="" class="img-fluid">
+								<img src="/images/team-5.jpg" alt="" class="img-fluid mt-4">
+							</div>
+						</div>
+						<div class="col-lg-4 col-sm-6">
+							<div class="about-img mt-4 mt-lg-0">
+								<img src="/images/team-4.jpg" alt="" class="img-fluid">
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="about-content pl-4 mt-4 mt-lg-0">
+								<h2 class="title-color">Personal care <br>& healthy living</h2>
+								<p class="mt-4 mb-5">We provide best leading medicle service Nulla perferendis veniam
+									deleniti ipsum
+									officia dolores repellat laudantium obcaecati neque.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>

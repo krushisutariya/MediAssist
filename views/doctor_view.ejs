@@ -1,0 +1,35 @@
+<div class="mt-3">&nbsp;</div>
+<div class="mt-3">&nbsp;</div>
+
+<div class="container text-center" style="overflow-x: hidden;">
+    <div class="row d-flex justify-content-around" style="overflow-y:hidden;">
+        <% slots.forEach((element)=> { %>
+            <div class="col-lg-3 col-md-4 col-sm-6 myViewBlock m-2">
+                <div class="card border-secondary mb-3 mt-4">
+                    <div class="slot">
+                        <div class="slot-date">
+                            <p>Date</p>
+                            <%=element.date%>
+                        </div>
+                        <div class="slot-time">
+                            <p>Start Time</p>
+                            <%=element.start_time%>
+                        </div>
+                        <div class="slot-time">
+                            <p>End Time</p>
+                            <%=element.end_time%>
+                        </div>
+                        <div class="name">
+                            <p>Name</p>
+                            <%=element.patients.name%>
+                        </div>
+                        <div class="email">
+                            <p>Email</p>
+                            <%=element.patients.email%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+.myViewBlock {
+    transition: all 0.2s;
+}
+
+.myViewBlock:hover {
+    transform: scale(1.1);
+}
+
+.chageColor {
+    background-color: rgb(240, 255, 248);
+}
