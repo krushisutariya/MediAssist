@@ -19,7 +19,7 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 
 // providing access to the database
-// const db = require('./config/mongoose');
+const pool = require('./config/db');
 
 // importing express-session library to create session cookies
 const cookieParser = require('cookie-parser');
@@ -30,8 +30,9 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportJWT = require('./config/passport-jwt-strategy');
 
-// giving access to the mongo-connect
+// giving access to the mongo-connect || pg-connect-simple for session storage
 // const MongoStore = require('connect-mongo');
+const PgSession = require('connect-pg-simple')(session);
 
 // importing the connect-flash library to set up flash notifications and setting up its middleware
 const flash = require('connect-flash');
@@ -73,12 +74,10 @@ app.use(session({
         maxAge: (1000*60*100)
     },
     // storing the cookie-data in mongo db
-    // store: MongoStore.create({
-    //     mongoUrl: process.env.MONGOURL || 'mongodb://127.0.0.1:27017/appointment-scheduler',
-    //     autoRemove: 'disabled'
-    // }, function(err){
-    //     console.log(err || 'connect-mongo setup ok!!');
-    // })
+    store: new PgSession({
+        pool,
+        tableName: 'session'
+    })
 }));
 
 // handling passport middlewares

@@ -1,29 +1,31 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/user'); // Assuming the path to your user model
-const Practitioner = require('../models/practitioner'); // Assuming the path to your practitioner model
+const pool = require('../config/db');
 
 passport.use('local', new LocalStrategy({
     usernameField: 'email_username',
     passReqToCallback: true
-}, function (req, email_username, password, done) {
-    // First, check if it's a patient
-    User.findOne({ $or: [{ email: email_username }, { username: email_username }] }, function (err, user) {
-        if (err) {
-            console.log('Error encountered while finding the user:', err);
-            return done(err);
-        }
+}, async function (req, email_username, password, done) {
+        
+    try {
+        
+        const rows = await pool.query('SELECT * FROM Users WHERE email = $1 OR username = $1', [email_username]);
+        const user = rows.rows[0];
 
-        if (!user || user.password !== password) {
-            console.log('Invalid Email/Username or Password');
-            req.flash('error', 'Invalid Email/Username or Password');
+        if(!user || user.password != password){
+            req.flash('error', 'Invalid Username/Password');
             return done(null, false);
         }
 
         // User authenticated, set req.user and return it
         req.user = user;
         return done(null, user);
-    });
+
+    } catch (error) {
+        console.log('Error encountered while finding the user:', error);
+        return done(error);
+    }
+
 }));
 
 // using authentication as middleware 
@@ -41,14 +43,19 @@ passport.serializeUser(function (user, done) {
 });
 
 // deserializing the user from the key in the cookies
-passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
-        if (err) {
-            console.log('Error in finding the user through id obtained by deserializing');
-            return done(err);
+passport.deserializeUser(async function (id, done) {
+    try {
+        const rows = await pool.query('SELECT * FROM Users WHERE id = $1', [id]);
+        const user = await rows.rows[0];
+        if(user){
+            return done(null, user);
+        } else {
+            return done(null, false);
         }
-        return done(null, user);
-    });
+    } catch (error) {
+        console.log('Error while deserializing the users:', error);
+        return done(error);
+    }
 });
 
 // verifying if the user is authentic
@@ -74,10 +81,10 @@ passport.checkPatient = function(req, res, next){
     return res.redirect('/users/sign-in');
 }
 
-// check if the user is a Practitioner
-passport.checkPractitioner = function (req, res, next) {
+// check if the user is a Doctor
+passport.checkDoctor = function (req, res, next) {
     if (req.isAuthenticated()) {
-        if (req.user.role == 'practitioner') {
+        if (req.user.role == 'doctor') {
             return next();
         }
         return res.redirect('back');
@@ -85,10 +92,10 @@ passport.checkPractitioner = function (req, res, next) {
     return res.redirect('/users/sign-in');
 }
 
-// check if user is a builder or a Practitioner
-passport.checkPatientPractitioner = function (req, res, next) {
+// check if user is a builder or a Doctor
+passport.checkPatientDoctor = function (req, res, next) {
     if (req.isAuthenticated()) {
-        if (req.user.role == 'practitioner' || req.user.role == 'patient') {
+        if (req.user.role == 'doctor' || req.user.role == 'patient') {
             return next();
         }
         return res.redirect('back');
