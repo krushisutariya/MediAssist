@@ -33,7 +33,7 @@
             <div class="container-end">
                 <% if (locals.user) { %>
                     <a class="btn btn-outline-light" href="/users/profile/<%=locals.user.id%>">
-                        <%=user.username%>
+                        <%=user.name%>
                     </a>
                     <a class="btn btn-outline-light" href="/users/sign-out">LOGOUT</a>
                     <% } else { %>

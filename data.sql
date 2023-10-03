@@ -18,3 +18,18 @@ CREATE TABLE Users (
     role VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
+
+-- Patient Table
+CREATE TABLE Patient (
+    id CHAR(12),
+    email VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    gender CHAR(1),
+    height FLOAT,
+    weight FLOAT,
+    blood_group VARCHAR(3),
+    diseases VARCHAR(255),
+    past_history VARCHAR(1023),
+    address VARCHAR(255),
+    contact VARCHAR(255)
+);
