@@ -6,9 +6,11 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-4 text-center">
                 <div class="card my-4">
-                    <%if (!user.gender){
+                    <%if (!user.gender) {
                         if(mode.role==='Patient'){%>
-                        <img src="/images/ll.avif" class="img-fluid" alt="/images/ll.avif">
+                            <img src="/images/ll.avif" class="img-fluid" alt="/images/ll.avif">
+                        <%} if(mode.role === 'Hospital'){%>
+                            <img src="/images/hospital.jpg" class="img-fluid" alt="Hospital">
                         <%}else{%>
                             <img src="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360"
                                 class="img-fluid"
@@ -70,45 +72,26 @@
                                 <label for="email">Email:</label>
                                 <div class="input-group mb-3">
                                     <input class="form-control" type="email" id="email" name="email"
-                                        value="<%=user.email%>" placeholder="Enter your email" aria-label="Username"
-                                        aria-describedby="basic-addon1">
+                                        value="<%=user.email%>" aria-label="Username"
+                                        aria-describedby="basic-addon1" disabled>
                                 </div>
                             </div>
                             <div>
-                                <label for="gender">Gender:</label>
-                                <%if(user.gender==='F'){%>
-                                    <div class="d-flex justify-content-between" id="gender">
-                                        <div>&nbsp;</div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender"
-                                                id="flexRadioDefault1" value="M">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Male
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender"
-                                                id="flexRadioDefault1" value="F" checked>
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Female
-                                            </label>
-                                        </div>
-                                        <div>&nbsp;</div>
-                                        <div>&nbsp;</div>
-                                    </div>
-                                    <%}else{%>
+                                <% if (user.gender) {%>
+                                    <label for="gender">Gender:</label>
+                                    <%if(user.gender==='F'){%>
                                         <div class="d-flex justify-content-between" id="gender">
                                             <div>&nbsp;</div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender"
-                                                    id="flexRadioDefault1" value="M" checked>
+                                                    id="flexRadioDefault1" value="M">
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Male
                                                 </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender"
-                                                    id="flexRadioDefault1" value="F">
+                                                    id="flexRadioDefault1" value="F" checked>
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Female
                                                 </label>
@@ -116,8 +99,29 @@
                                             <div>&nbsp;</div>
                                             <div>&nbsp;</div>
                                         </div>
-                                        <%}%>                                    
-                                    </div>
+                                        <%}else{%>
+                                            <div class="d-flex justify-content-between" id="gender">
+                                                <div>&nbsp;</div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                        id="flexRadioDefault1" value="M" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Male
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                        id="flexRadioDefault1" value="F">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Female
+                                                    </label>
+                                                </div>
+                                                <div>&nbsp;</div>
+                                                <div>&nbsp;</div>
+                                            </div>
+                                            <%}%>                                    
+                                        </div>
+                                <%}%>
 
                             <div class="form-group my-2">
                                 <label for="address">Address:</label>
@@ -171,56 +175,166 @@
                                         value="<%=user.past_history%>" placeholder="Enter your history" disabled>
                                 </div>
                                 <%}%>
-                                    <div class="form-group my-2">
-                                        <label for="contact">Contact No.:</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">+91</span>
-                                            <input class="form-control" type="text" id="contact" name="contact"
+                                
+                                <div class="form-group my-2">
+                                    
+                                        <% if(mode.role === 'Hospital') {%>
+                                            <label for="contact">Contact1:</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">+91</span>
+                                                <input class="form-control" type="text" class="contact" name="contact1"
+                                                <%contact.forEach(contact => {%>
+                                                    <%if(contact.index === 1){%>
+                                                        value="<%=contact.contact%>"
+                                                    <%}
+                                                });%>
                                                 value="<%=user.contact%>" placeholder="Enter your contact number">
-                                        </div>
-                                        <p id="contact-feedback"></p>
-                                    </div>
-
-                                    <%if(mode.role!=='Patient'){%>
-                                        <div class="form-group my-2">
-                                            <label for="experience">Experience:</label>
-                                            <textarea class="form-control" id="experience" name="experience"
-                                                value="<%=user.experience%>" rows="3"
-                                                placeholder="Enter your text here..."><%=user.experience%></textarea>
-                                        </div>
-                                        <div class="form-group my-2">
-                                            <label for="qualification">Qualification:</label>
-                                            <textarea class="form-control" id="qualification" name="qualification"
-                                                value="<%=user.qualification%>" rows="3"
-                                                placeholder="Enter your text here..."><%=user.qualification%></textarea>
-                                        </div>
-                                        <div class="form-group my-2">
-                                            <label for="specialization">Specialization:</label>
-                                            <textarea class="form-control" id="specialization" name="specialization"
-                                                value="<%=user.specialization%>" rows="3"
-                                                placeholder="Enter your text here..."><%=user.specialization%></textarea>
-                                        </div>
-
-                                        <div class="form-group my-2">
-                                            <label for="openingTime">Opening time:</label>
-                                            <div class="input-group w-50">
-                                                <input type="time" class="form-control" id="openingTime"
-                                                    name="start_time" value="<%=user.start_time%>" min="00:00"
-                                                    max="23:59">
                                             </div>
-                                        </div>
 
-                                        <div class="form-group my-2">
-                                            <label for="closingTime">Closing time:</label>
-                                            <div class="input-group w-50">
-                                                <input type="time" class="form-control" id="closingTime"
-                                                    name="end_time" value="<%=user.end_time%>" min="00:00"
-                                                    max="23:59">
+                                            <label for="contact">Contact2:</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">+91</span>
+                                                <input class="form-control" type="text" class="contact" name="contact2"
+                                                <%contact.forEach(contact => {%>
+                                                    <%if(contact.index === 2){%>
+                                                        value="<%=contact.contact%>"
+                                                    <%}
+                                                });%>
+                                                placeholder="Enter your contact number">
                                             </div>
                                             
-                                        </div>
-                                        <div class="text-danger" id="validationMessage"></div>
+                                            <label for="contact">Landline:</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">0</span>
+                                                <input class="form-control" type="text" class="contact" name="landline"
+                                                <%contact.forEach(contact => {%>
+                                                    <%if(contact.index === 3){%>
+                                                        value="<%=contact.contact%>"
+                                                    <%}
+                                                });%>
+                                                value="<%=user.contact%>" placeholder="Enter your landline number">
+                                            </div>
+                                        <%} else {%>
+                                            <label for="contact">Contact:</label>
+                                            <div class="input-group mb-3">
+                                                <input class="form-control" type="text" class="contact" name="contact"
+                                                value="<%=user.contact%>" placeholder="Enter your contact number">
+                                            </div>
                                         <%}%>
+                                    </div>
+                                    <p id="contact-feedback"></p>
+                                </div>
+                                                               
+
+                                <%if(mode.role==='Doctor'){%>
+                                    <div class="form-group my-2">
+                                        <label for="experience">Experience:</label>
+                                        <textarea class="form-control" id="experience" name="experience"
+                                            value="<%=user.experience%>" rows="3"
+                                            placeholder="Enter your text here..."><%=user.experience%></textarea>
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="qualification">Qualification:</label>
+                                        <textarea class="form-control" id="qualification" name="qualification"
+                                            value="<%=user.qualification%>" rows="3"
+                                            placeholder="Enter your text here..."><%=user.qualification%></textarea>
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="specialization">Specialization:</label>
+                                        <textarea class="form-control" id="specialization" name="specialization"
+                                            value="<%=user.specialization%>" rows="3"
+                                            placeholder="Enter your text here..."><%=user.specialization%></textarea>
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <label for="openingTime">Opening time:</label>
+                                        <div class="input-group w-50">
+                                            <input type="time" class="form-control" id="openingTime"
+                                                name="start_time" value="<%=user.start_time%>" min="00:00"
+                                                max="23:59">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <label for="closingTime">Closing time:</label>
+                                        <div class="input-group w-50">
+                                            <input type="time" class="form-control" id="closingTime"
+                                                name="end_time" value="<%=user.end_time%>" min="00:00"
+                                                max="23:59">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="text-danger" id="validationMessage"></div>
+                                <%}%>
+
+                                <%if(mode.role==='Hospital'){%>
+                                    <div class="form-group my-2">
+                                        <label for="total_doctors">Total Doctors:</label>
+                                        <input class="form-control" id="total_doctors" name="total_doctors"
+                                            value="<%=total_doctors%>" disabled>
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="specialities">Specialities:</label>
+                                        <textarea class="form-control" id="specialities" name="specialities"
+                                        rows="3" placeholder="Specialities"><%=user.specialities%></textarea>
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="insurance_policies">Insurance Policies:</label>
+                                        <textarea class="form-control" id="insurance_policies" name="insurance_policies"
+                                            rows="3" placeholder="Insurance Policies"><%=user.insurance_policies%></textarea>
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <label for="cashless">Cashless</label>
+                                        <input class="form-control" id="cashless" name="cashless"
+                                            value="<%=user.cashless%>" placeholder="Yes/No">
+                                    </div>
+
+                                    <h2>Beds: </h2>
+                                    <div class="form-group my-2">
+                                        <label for="icu">ICU</label>
+                                        <input class="form-control" id="icu" name="icu"
+                                            value="<%=user.icu%>" placeholder="999">
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <label for="iicu">IICU</label>
+                                        <input class="form-control" id="iicu" name="iicu"
+                                            value="<%=user.iicu%>" placeholder="999">
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <label for="operation_theatres">Operation Theatres</label>
+                                        <input class="form-control" id="operation_theatres" name="operation_theatres"
+                                            value="<%=user.operation_theatres%>" placeholder="999">
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <label for="general_ward">General Ward</label>
+                                        <input class="form-control" id="general_ward" name="general_ward"
+                                            value="<%=user.general_ward%>" placeholder="999">
+                                    </div>
+                                    
+                                    <h2>Staff: </h2>
+                                    <div class="form-group my-2">
+                                        <label for="nurse">Nurse</label>
+                                        <input class="form-control" id="nurse" name="nurse"
+                                            value="<%=user.nurse%>" placeholder="nurse">
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <label for="interns">Interns</label>
+                                        <input class="form-control" id="interns" name="interns"
+                                            value="<%=user.interns%>" placeholder="interns">
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <label for="ot_technicians">OT Technicians</label>
+                                        <input class="form-control" id="ot_technicians" name="ot_technicians"
+                                            value="<%=user.ot_technicians%>" placeholder="ot_technicians">
+                                    </div>
+                                <%}%>
+
                                 <div class="text-center">
                                     <button class="btn btn-success my-4" type="submit">Submit</button>
                                 </div>

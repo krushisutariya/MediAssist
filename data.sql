@@ -1,6 +1,6 @@
 CREATE DATABASE MediAssist;
 
--- Sessions Table
+-- Session Table
 CREATE TABLE Session (
     sid VARCHAR(255) NOT NULL,
     sess json NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE Session (
     PRIMARY KEY (sid)
 );
 
--- User Table
+-- UserS Table
 CREATE TABLE Users (
     id VARCHAR(255),
     username VARCHAR(255) NOT NULL,
@@ -23,6 +23,7 @@ CREATE TABLE Users (
 CREATE TABLE Patient (
     id CHAR(12),
     email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     gender CHAR(1),
     height FLOAT,
@@ -31,5 +32,35 @@ CREATE TABLE Patient (
     diseases VARCHAR(255),
     past_history VARCHAR(1023),
     address VARCHAR(255),
-    contact VARCHAR(255)
+    contact VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+-- Hospital Table
+CREATE TABLE Hospital(
+	EMAIL VARCHAR(255),
+	USERNAME VARCHAR(255),
+	NAME VARCHAR(255),
+	LOCATION VARCHAR(1023),
+	ADDRESS VARCHAR(1023),
+	TOTAL_DOCTORS INT,
+	SPECIALITIES VARCHAR(1023),
+	INSURANCE_POLICIES VARCHAR(1023),
+	CASHLESS VARCHAR(3),
+	ICU INT,
+	IICU INT,
+	OPERATION_THEATRES INT,
+	GENERAL_WARD INT,
+	NURSE INT,
+	INTERNS INT,
+	OT_TECHNICIANS INT,
+	PRIMARY KEY(EMAIL)
+);
+
+-- Hospital Contact Table
+CREATE TABLE Hospital_Contact(
+    INDEX INTEGER,
+	EMAIL VARCHAR(255),
+	CONTACT VARCHAR(20),
+	PRIMARY KEY (EMAIL, CONTACT)
 );
