@@ -55,7 +55,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Profile</h2>
                         <div class="my-4"></div>
-                        <form id="timeForm" action="/users/update-profile/<%=mode.id%>" method="post">
+                        <form id="timeForm" action="/users/update-profile/<%=mode.email%>" method="post">
                             <div class="form-group my-2">
                                 <label for="name">Name:</label>
                                 <input class="form-control" type="text" id="name" name="name" value="<%=user.name%>"
@@ -71,7 +71,7 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">@</span>
                                     <input class="form-control" type="text" id="username" name="username"
-                                        value="<%=mode.username%>" placeholder="Enter your username">
+                                        value="<%=user.username%>" placeholder="Enter your username">
                                 </div>
                             </div>
                             <div class="form-group my-2">
@@ -82,6 +82,22 @@
                                         aria-describedby="basic-addon1" disabled>
                                 </div>
                             </div>
+                            <%if(mode.role === 'Doctor'){%>
+                                <div>
+                                    <label for="hospital">Hospital:</label>
+                                    <div class="input-group mb-3">
+                                        <input class="form-control" type="text" id="hospital" name="hospital"
+                                            value="<%=hospital%>" aria-label="Hospital"
+                                            aria-describedby="basic-addon1" disabled>
+                                    </div>
+                                    <label for="salary">Salary:</label>
+                                    <div class="input-group mb-3">
+                                        <input class="form-control" type="text" id="salary" name="salary"
+                                            value="<%=salary%>" aria-label="Salary"
+                                            aria-describedby="basic-addon1" disabled>
+                                    </div>
+                                </div>
+                            <%}%>
                             <div>
                                 <% if (user.gender || user.gender === null) {%>
                                     <label for="gender">Gender:</label>
@@ -258,7 +274,7 @@
                                         <label for="openingTime">Opening time:</label>
                                         <div class="input-group w-50">
                                             <input type="time" class="form-control" id="openingTime"
-                                                name="start_time" value="<%=user.start_time%>" min="00:00"
+                                                name="start_time" value="<%=start_time%>" min="00:00"
                                                 max="23:59">
                                         </div>
                                     </div>
@@ -267,11 +283,11 @@
                                         <label for="closingTime">Closing time:</label>
                                         <div class="input-group w-50">
                                             <input type="time" class="form-control" id="closingTime"
-                                                name="end_time" value="<%=user.end_time%>" min="00:00"
+                                                name="end_time" value="<%=end_time%>" min="00:00"
                                                 max="23:59">
                                         </div>
-                                        
                                     </div>
+
                                     <div class="text-danger" id="validationMessage"></div>
                                 <%}%>
 

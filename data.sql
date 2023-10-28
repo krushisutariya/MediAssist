@@ -1,6 +1,4 @@
 CREATE DATABASE MediAssist;
--- REMOVE THE ID, USERNAME AND NAME FIELD FROM THE USER TABLE AS IT IS NOT REQUIRED
--- ALSO CORRECT THE SEARCHING OF USER FOR PROFILE PAGE FROM ID TO EMAIL
 
 -- Session Table
 CREATE TABLE Session (
@@ -78,4 +76,62 @@ CREATE TABLE Doctor(
     ADDRESS VARCHAR(1023),
     SPECIALIZATION VARCHAR(255),
     PRIMARY KEY (EMAIL)
+);
+
+--Ambulance_driver
+CREATE TABLE Ambulance_driver(
+    email VARCHAR(255) PRIMARY KEY,
+    contact_number  CHAR(10), 
+    licence  CHAR(16) NOT NULL,
+    vehicle_number VARCHAR(16) NOT NULL,
+);
+--Laboratory table
+CREATE TABLE Laboratory(
+    email VARCHAR(255) ,
+    lab_name VARCHAR(255) NOT NULL,
+    contact_number CHAR(10) ,
+    instruments VARCHAR(255),
+    email_hospital VARCHAR(255) NOT NULL,
+    FOREIGN KEY (email_hospital) REFERENCES Hospital(email)
+    PRIMARY KEY(email)
+);
+-- appointment table
+CREATE TABLE appointment (
+    appointment_id CHAR(20),
+    patient_id CHAR(12) NOT NULL,
+    doctor_reg_number VARCHAR(12) NOT NULL,
+    slot INT NOT NULL,
+    date VARCHAR(10) NOT NULL,
+    PRIMARY KEY(appointment_id),
+    FOREIGN KEY (patient_id) REFERENCES Patient(id),
+    FOREIGN KEY (doctor_reg_number) REFERENCES Doctor(doctor_reg_number)
+);
+
+-- Medicine Table
+CREATE TABLE Medicine(
+    medicine_name VARCHAR(255),
+    brand_name VARCHAR(255),
+    PRIMARY KEY(medicine_name, brand_name)
+);
+
+-- Pharmacy Table
+CREATE TABLE Pharmacy(
+    email VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
+    contact CHAR(10),
+    email_hospital CHAR(255),
+    PRIMARY KEY(email),
+    FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL)
+);
+
+-- Works Table
+CREATE TABLE works(
+    doc_email VARCHAR(255),
+    hosp_email VARCHAR(255),
+    start_time VARCHAR(8),
+    end_time VARCHAR(8),
+    salary DECIMAL(9,2),
+    PRIMARY KEY(doc_email, hosp_email),
+    FOREIGN KEY(doc_email) REFERENCES Doctor(EMAIL),
+    FOREIGN KEY(hosp_email) REFERENCES Hospital(EMAIL)
 );

@@ -1,5 +1,6 @@
 const { query } = require('express');
 const pool = require('../config/db');
+const e = require('connect-flash');
 
 // Sign-In Page Rendering
 module.exports.sign_in = function (req, res) {
@@ -73,6 +74,8 @@ module.exports.profile = async function (req, res) {
         const mode = await pool.query('SELECT * FROM Users WHERE email = $1', [req.params.email]);
         const rows = mode.rows[0];
         const user = await pool.query(`SELECT * FROM ${rows.role} WHERE email = $1`, [rows.email]);
+        
+        // Hospital's Profile
         var contact = null;
         if(rows.role == 'Hospital') {
             contact = await pool.query(`SELECT * FROM Hospital_Contact WHERE email = $1`, [rows.email]);
@@ -91,7 +94,27 @@ module.exports.profile = async function (req, res) {
                 total_doctors: total_doctors
             });
         }
-        console.log('Gender: ', user.rows[0].gender);
+
+        // Doctor's Profile
+        if(rows.role == 'Doctor') {
+            console.log('Entered Doctors section');
+            var start_time = await pool.query(`SELECT start_time FROM works WHERE doc_email = $1`, [rows.email]);
+            var end_time = await pool.query(`SELECT end_time FROM works WHERE doc_email = $1`, [rows.email]);
+            var salary = await pool.query(`SELECT salary FROM works WHERE doc_email = $1`, [rows.email]);
+            var hosp = await pool.query(`SELECT hosp_email FROM works WHERE doc_email = $1`, [rows.email]);
+            hosp = await pool.query(`SELECT name FROM Hospital WHERE email = $1`, [hosp.rows[0].hosp_email]);
+
+            return res.render('profile', {
+                title: "MediAssist | Profile",
+                user: user.rows[0],
+                mode: rows,
+                start_time: start_time.rows[0].start_time,
+                end_time: end_time.rows[0].end_time,
+                salary: salary.rows[0].salary,
+                hospital: hosp.rows[0].name
+            });
+        }
+
         return res.render('profile', {
             title: "MediAssist | Profile",
             user: user.rows[0],
@@ -112,9 +135,10 @@ module.exports.profile = async function (req, res) {
 module.exports.update_profile = async function (req, res) {
     if (req.params.email == req.user.email) {
         try {
-            let user = await pool.query('SELECT * FROM Users WHERE id = $1', [req.params.email]);
+            let user = await pool.query('SELECT * FROM Users WHERE email = $1', [req.params.email]);
             user = user.rows[0];
             
+            // Update Patient
             if (user.role == 'Patient') {
 
                 await pool.query('UPDATE Patient SET username = $1 WHERE email = $2', [req.body.username, user.email]);
@@ -129,7 +153,9 @@ module.exports.update_profile = async function (req, res) {
                 await pool.query('UPDATE Patient SET address = $1 WHERE email = $2', [req.body.address, user.email]);
             
             } else if (user.role == 'Hospital') {
-            
+                
+            // Update Hospital
+                
                 await pool.query('UPDATE Hospital SET username = $1 WHERE email = $2', [req.body.username, user.email]);
                 await pool.query('UPDATE Hospital SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Hospital SET address = $1 WHERE email = $2', [req.body.address, user.email]);
@@ -172,7 +198,25 @@ module.exports.update_profile = async function (req, res) {
                 await pool.query('UPDATE Hospital SET interns = $1 WHERE email = $2', [(req.body.interns === null || req.body.interns === '') ? 999 : parseFloat(req.body.interns), user.email]);
                 await pool.query('UPDATE Hospital SET ot_technicians = $1 WHERE email = $2', [(req.body.ot_technicians === null || req.body.ot_technicians === '') ? 999 : parseFloat(req.body.ot_technicians), user.email]);
             
+            } else if(user.role == 'Doctor') {
+
+                // Update Doctor
+
+                await pool.query('UPDATE Doctor SET username = $1 WHERE email = $2', [req.body.username, user.email]);
+                await pool.query('UPDATE Doctor SET name = $1 WHERE email = $2', [req.body.name, user.email]);
+                await pool.query('UPDATE Doctor SET reg_no = $1 WHERE email = $2', [req.body.reg_no, user.email]);
+                await pool.query('UPDATE Doctor SET address = $1 WHERE email = $2', [req.body.address, user.email]);
+                await pool.query('UPDATE Doctor SET gender = $1 WHERE email = $2', [req.body.gender, user.email]);
+                await pool.query('UPDATE Doctor SET contact = $1 WHERE email = $2', [req.body.contact, user.email]);
+                await pool.query('UPDATE Doctor SET specialization = $1 WHERE email = $2', [req.body.specialization, user.email]);
+                await pool.query('UPDATE Doctor SET experience = $1 WHERE email = $2', [req.body.experience, user.email]);
+                await pool.query('UPDATE Doctor SET qualification = $1 WHERE email = $2', [req.body.qualification, user.email]);
+                await pool.query('UPDATE Doctor SET institute = $1 WHERE email = $2', [req.body.institute, user.email]);
+                await pool.query(`UPDATE works SET start_time = $1 where doc_email = $2`, [req.body.start_time, user.email]);
+                await pool.query(`UPDATE works SET end_time = $1 where doc_email = $2`, [req.body.end_time, user.email]);
+
             }
+
             req.flash('success', 'Profile Updated Successfully!');
             return res.redirect('back');
 
