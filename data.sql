@@ -65,6 +65,35 @@ CREATE TABLE Hospital_Contact(
 	PRIMARY KEY (EMAIL, CONTACT)
 );
 
+--Ambulance_driver
+CREATE TABLE Ambulance_driver(
+    email VARCHAR(255) PRIMARY KEY,
+    contact_number  CHAR(10), 
+    licence  CHAR(16) NOT NULL,
+    vehicle_number VARCHAR(16) NOT NULL,
+);
+--Laboratory table
+CREATE TABLE Laboratory(
+ email VARCHAR(255) ,
+ lab_name VARCHAR(255) NOT NULL,
+ contact_number CHAR(10) ,
+ instruments VARCHAR(255),
+ email_hospital VARCHAR(255) NOT NULL,
+ FOREIGN KEY (email_hospital) REFERENCES Hospital(email)
+ PRIMARY KEY(email)
+);
+-- appointment table
+CREATE TABLE appointment (
+    appointment_id CHAR(20),
+    patient_id CHAR(12) NOT NULL,
+    doctor_reg_number VARCHAR(12) NOT NULL,
+    slot INT NOT NULL,
+    date VARCHAR(10) NOT NULL,
+    PRIMARY KEY(appointment_id),
+    FOREIGN KEY (patient_id) REFERENCES Patient(id),
+    FOREIGN KEY (doctor_reg_number) REFERENCES Doctor(doctor_reg_number)
+);
+
 -- Medicine Table
 CREATE TABLE Medicine(
     medicine_name VARCHAR(255),
