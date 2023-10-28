@@ -70,7 +70,7 @@ module.exports.details = function (req, res) {
 // Profile section for User
 module.exports.profile = async function (req, res) {
     try {
-        const mode = await pool.query('SELECT * FROM Users WHERE id = $1', [req.params.id]);
+        const mode = await pool.query('SELECT * FROM Users WHERE email = $1', [req.params.email]);
         const rows = mode.rows[0];
         const user = await pool.query(`SELECT * FROM ${rows.role} WHERE email = $1`, [rows.email]);
         var contact = null;
@@ -91,7 +91,7 @@ module.exports.profile = async function (req, res) {
                 total_doctors: total_doctors
             });
         }
-
+        console.log('Gender: ', user.rows[0].gender);
         return res.render('profile', {
             title: "MediAssist | Profile",
             user: user.rows[0],
@@ -110,15 +110,13 @@ module.exports.profile = async function (req, res) {
 
 // Update Profile for User
 module.exports.update_profile = async function (req, res) {
-    if (req.params.id == req.user.id) {
+    if (req.params.email == req.user.email) {
         try {
-            let user = await pool.query('SELECT * FROM Users WHERE id = $1', [req.params.id]);
+            let user = await pool.query('SELECT * FROM Users WHERE id = $1', [req.params.email]);
             user = user.rows[0];
             
             if (user.role == 'Patient') {
 
-                await pool.query('UPDATE Users SET username = $1 WHERE email = $2', [req.body.username, user.email]);
-                await pool.query('UPDATE Users SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Patient SET username = $1 WHERE email = $2', [req.body.username, user.email]);
                 await pool.query('UPDATE Patient SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Patient SET gender = $1 WHERE email = $2', [req.body.gender, user.email]);
@@ -132,8 +130,6 @@ module.exports.update_profile = async function (req, res) {
             
             } else if (user.role == 'Hospital') {
             
-                await pool.query('UPDATE Users SET username = $1 WHERE email = $2', [req.body.username, user.email]);
-                await pool.query('UPDATE Users SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Hospital SET username = $1 WHERE email = $2', [req.body.username, user.email]);
                 await pool.query('UPDATE Hospital SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Hospital SET address = $1 WHERE email = $2', [req.body.address, user.email]);

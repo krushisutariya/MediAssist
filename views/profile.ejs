@@ -9,14 +9,15 @@
                     <%if (!user.gender) {
                         if(mode.role==='Patient'){%>
                             <img src="/images/ll.avif" class="img-fluid" alt="/images/ll.avif">
-                        <%} if(mode.role === 'Hospital'){%>
+                        <%} else if(mode.role === 'Hospital'){%>
                             <img src="/images/hospital.jpg" class="img-fluid" alt="Hospital">
-                        <%}else{%>
+                        <%} else if(mode.role === 'Doctor'){%>
+                            <img src="/images/ll.png" class="img-fluid" alt="Doctor">
+                        <%} else{%>
                             <img src="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360"
                                 class="img-fluid"
                                 alt="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360">
-                            <%}%>
-                                <%}else if(mode.role==='Patient' ){ if (user.gender!=='M' ) {%>
+                    <%}}else if(mode.role==='Patient' ){ if (user.gender!=='M' ) {%>
                                     <!-- <div class="d-flex flex-column align-items-center"> -->
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbGc-Uc-W-jkadzT2jk-Kwv9nbcJoOdMuckpeshxI4hxdPmw3BQc0KROOIKRbbVaKGZiQ&usqp=CAU"
                                         class="img-fluid p-5" style="border-radius: 4rem;"
@@ -61,6 +62,11 @@
                                     placeholder="Enter your name">
                             </div>
                             <div class="form-group my-2">
+                                <label for="reg_no">Registration Number:</label>
+                                <input class="form-control" type="text" id="reg_no" name="reg_no" value="<%=user.reg_no%>"
+                                    placeholder="Registration Number">
+                            </div>
+                            <div class="form-group my-2">
                                 <label for="username">Username:</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">@</span>
@@ -77,7 +83,7 @@
                                 </div>
                             </div>
                             <div>
-                                <% if (user.gender) {%>
+                                <% if (user.gender || user.gender === null) {%>
                                     <label for="gender">Gender:</label>
                                     <%if(user.gender==='F'){%>
                                         <div class="d-flex justify-content-between" id="gender">
@@ -125,7 +131,7 @@
 
                             <div class="form-group my-2">
                                 <label for="address">Address:</label>
-                                <textarea class="form-control" id="address" name="address" value="<%=user.address%>"
+                                <textarea class="form-control" id="address" name="address"
                                     rows="4" placeholder="Enter your text here..."><%=user.address%></textarea>
                             </div>
 
@@ -221,7 +227,7 @@
                                                 value="<%=user.contact%>" placeholder="Enter your contact number">
                                             </div>
                                         <%}%>
-                                    </div>
+                                    
                                     <p id="contact-feedback"></p>
                                 </div>
                                                                
@@ -230,20 +236,22 @@
                                     <div class="form-group my-2">
                                         <label for="experience">Experience:</label>
                                         <textarea class="form-control" id="experience" name="experience"
-                                            value="<%=user.experience%>" rows="3"
-                                            placeholder="Enter your text here..."><%=user.experience%></textarea>
+                                            rows="3" placeholder="Your Experience..."><%=user.experience%></textarea>
                                     </div>
                                     <div class="form-group my-2">
                                         <label for="qualification">Qualification:</label>
                                         <textarea class="form-control" id="qualification" name="qualification"
-                                            value="<%=user.qualification%>" rows="3"
-                                            placeholder="Enter your text here..."><%=user.qualification%></textarea>
+                                            rows="3" placeholder="Your Qualifications..."><%=user.qualification%></textarea>
                                     </div>
                                     <div class="form-group my-2">
                                         <label for="specialization">Specialization:</label>
                                         <textarea class="form-control" id="specialization" name="specialization"
-                                            value="<%=user.specialization%>" rows="3"
-                                            placeholder="Enter your text here..."><%=user.specialization%></textarea>
+                                            rows="3" placeholder="Your Specializations..."><%=user.specialization%></textarea>
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="institute">Institute:</label>
+                                        <textarea class="form-control" id="institute" name="institute"
+                                            rows="3" placeholder="Institutes you were enrolled in..."><%=user.institute%></textarea>
                                     </div>
 
                                     <div class="form-group my-2">
