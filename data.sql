@@ -62,6 +62,32 @@ CREATE TABLE Hospital_Contact(
 	PRIMARY KEY (EMAIL, CONTACT)
 );
 
+--Stores
+CREATE TABLE stores(
+    email_pharm VARCHAR(255),
+    medicine_name VARCHAR(255),
+    brand_name VARCHAR(255),
+    stock INT,
+    PRIMARY KEY(email_pharm,medicine_name,brand_name),
+    FOREIGN KEY(email_pharm) REFERENCES Pharmacy(email),
+    FOREIGN KEY(medicine_name,brand_name) REFERENCES Medicine
+);
+
+--Access
+CREATE TABLE sccess(
+    email_hospital VARCHAR(255),
+    email_driver VARCHAR(255),
+    PRIMARY KEY (email_hospital,email_driver),
+    FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL),
+    FOREIGN KEY(email_driver) REFERENCES Ambulance_driver(email) 
+);
+
+-- Gov_Agency
+CREATE TABLE Gov_Agency(
+    email VARCHAR(255) NOT NULL,
+    agency_id VARCHAR(20) NOT NULL,
+    PRIMARY KEY (email,agency_id)
+
 -- Doctor Table
 CREATE TABLE Doctor(
     REG_NO VARCHAR(12),
