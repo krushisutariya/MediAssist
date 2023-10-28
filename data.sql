@@ -64,3 +64,32 @@ CREATE TABLE Hospital_Contact(
 	CONTACT VARCHAR(20),
 	PRIMARY KEY (EMAIL, CONTACT)
 );
+
+-- Medicine Table
+CREATE TABLE Medicine(
+    medicine_name VARCHAR(255),
+    brand_name VARCHAR(255),
+    PRIMARY KEY(medicine_name, brand_name)
+);
+
+-- Pharmacy Table
+CREATE TABLE Pharmacy(
+    email VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
+    contact CHAR(10),
+    email_hospital CHAR(255),
+    PRIMARY KEY(email),
+    FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL)
+);
+
+-- Works Table
+CREATE TABLE works(
+    doc_reg_no VARCHAR(12),
+    email VARCHAR(12),
+    start_time TIME,
+    end_time TIME,
+    salary DECIMAL(9,2),
+    PRIMARY KEY(doc_reg_no,email),
+    FOREIGN KEY(doc_reg_no) REFERENCES Doctor(reg_no),
+    FOREIGN KEY(email) REFERENCES Hospital(EMAIL)
+);
