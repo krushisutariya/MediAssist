@@ -74,7 +74,7 @@ CREATE TABLE stores(
 );
 
 --Access
-CREATE TABLE sccess(
+CREATE TABLE access(
     email_hospital VARCHAR(255),
     email_driver VARCHAR(255),
     PRIMARY KEY (email_hospital,email_driver),
@@ -87,6 +87,7 @@ CREATE TABLE Gov_Agency(
     email VARCHAR(255) NOT NULL,
     agency_id VARCHAR(20) NOT NULL,
     PRIMARY KEY (email,agency_id)
+);
 
 -- Doctor Table
 CREATE TABLE Doctor(
