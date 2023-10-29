@@ -11,9 +11,10 @@ CREATE TABLE Session (
 -- UserS Table
 CREATE TABLE Users (
     email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (email)
 );
 
 -- Patient Table
@@ -30,7 +31,9 @@ CREATE TABLE Patient (
     past_history VARCHAR(1023),
     address VARCHAR(255),
     contact CHAR(10),
-    PRIMARY KEY (id)
+    PRIMARY KEY (email),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
 );
 
 -- Hospital Table
@@ -51,7 +54,9 @@ CREATE TABLE Hospital(
 	NURSE INT,
 	INTERNS INT,
 	OT_TECHNICIANS INT,
-	PRIMARY KEY(EMAIL)
+	PRIMARY KEY(EMAIL),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
 );
 
 -- Hospital Contact Table
@@ -83,10 +88,15 @@ CREATE TABLE access(
 );
 
 -- Gov_Agency
-CREATE TABLE Gov_Agency(
+CREATE TABLE Govt_agency(
     email VARCHAR(255) NOT NULL,
-    agency_id VARCHAR(20) NOT NULL,
-    PRIMARY KEY (email,agency_id)
+	name VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL,
+    id VARCHAR(20),
+    contact CHAR(10),
+    PRIMARY KEY (email),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
 );
 
 -- Doctor Table
@@ -102,7 +112,9 @@ CREATE TABLE Doctor(
     INSTITUTE VARCHAR(255),
     ADDRESS VARCHAR(1023),
     SPECIALIZATION VARCHAR(255),
-    PRIMARY KEY (EMAIL)
+    PRIMARY KEY (EMAIL),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
 );
 
 --Ambulance_driver
@@ -112,26 +124,31 @@ CREATE TABLE Ambulance_driver(
     licence  CHAR(16) NOT NULL,
     vehicle_number VARCHAR(16) NOT NULL,
 );
+
 --Laboratory table
 CREATE TABLE Laboratory(
-    email VARCHAR(255) ,
-    lab_name VARCHAR(255) NOT NULL,
-    contact_number CHAR(10) ,
+    email VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    contact CHAR(10) ,
     instruments VARCHAR(255),
     email_hospital VARCHAR(255) NOT NULL,
-    FOREIGN KEY (email_hospital) REFERENCES Hospital(email)
-    PRIMARY KEY(email)
+    FOREIGN KEY (email_hospital) REFERENCES Hospital(email),
+    PRIMARY KEY(email),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
 );
+
 -- appointment table
 CREATE TABLE appointment (
-    appointment_id CHAR(20),
+    id CHAR(20),
     patient_id CHAR(12) NOT NULL,
-    doctor_reg_number VARCHAR(12) NOT NULL,
+    doc_reg_no VARCHAR(12) NOT NULL,
     slot INT NOT NULL,
     date VARCHAR(10) NOT NULL,
-    PRIMARY KEY(appointment_id),
+    PRIMARY KEY(id),
     FOREIGN KEY (patient_id) REFERENCES Patient(id),
-    FOREIGN KEY (doctor_reg_number) REFERENCES Doctor(doctor_reg_number)
+    FOREIGN KEY (doc_reg_no) REFERENCES Doctor(reg_no)
 );
 
 -- Medicine Table
@@ -143,12 +160,15 @@ CREATE TABLE Medicine(
 
 -- Pharmacy Table
 CREATE TABLE Pharmacy(
-    email VARCHAR(255),
+    email VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     contact CHAR(10),
-    email_hospital CHAR(255),
+    email_hospital CHAR(255) NOT NULL,
     PRIMARY KEY(email),
-    FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL)
+    FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
 );
 
 -- Works Table

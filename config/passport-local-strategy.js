@@ -39,13 +39,13 @@ passport.setAuthenticatedUser = function (req, res, next) {
 
 // serializing the user to decide which key is to be kept in the cookies
 passport.serializeUser(function (user, done) {
-    done(null, user.id);
+    done(null, user.email);
 });
 
 // deserializing the user from the key in the cookies
-passport.deserializeUser(async function (id, done) {
+passport.deserializeUser(async function (email, done) {
     try {
-        const rows = await pool.query('SELECT * FROM Users WHERE id = $1', [id]);
+        const rows = await pool.query('SELECT * FROM Users WHERE email = $1', [email]);
         const user = await rows.rows[0];
         if(user){
             return done(null, user);

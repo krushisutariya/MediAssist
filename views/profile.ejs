@@ -13,7 +13,13 @@
                             <img src="/images/hospital.jpg" class="img-fluid" alt="Hospital">
                         <%} else if(mode.role === 'Doctor'){%>
                             <img src="/images/ll.png" class="img-fluid" alt="Doctor">
-                        <%} else{%>
+                        <%} else if(mode.role === 'Laboratory'){%>
+                            <img src="/images/laboratory.webp" class="img-fluid" alt="Laboratory">
+                        <%} else if(mode.role === 'Pharmacy'){%>
+                            <img src="/images/pharmacy.jpg" class="img-fluid" alt="Pharmacy">
+                        <%} else if(mode.role === 'Govt_Agency'){%>
+                            <img src="/images/govt_agency.avif" class="img-fluid" alt="Govt_Agency">
+                        <%} else {%>
                             <img src="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360"
                                 class="img-fluid"
                                 alt="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360">
@@ -61,11 +67,14 @@
                                 <input class="form-control" type="text" id="name" name="name" value="<%=user.name%>"
                                     placeholder="Enter your name">
                             </div>
-                            <div class="form-group my-2">
-                                <label for="reg_no">Registration Number:</label>
-                                <input class="form-control" type="text" id="reg_no" name="reg_no" value="<%=user.reg_no%>"
-                                    placeholder="Registration Number">
-                            </div>
+                            <%if(mode.role === 'Doctor'){%>
+                                <div class="form-group my-2">
+                                    <label for="reg_no">Registration Number:</label>
+                                    <input class="form-control" type="text" id="reg_no" name="reg_no" value="<%=user.reg_no%>"
+                                        placeholder="Registration Number">
+                                </div>
+                            <%}%>
+                            
                             <div class="form-group my-2">
                                 <label for="username">Username:</label>
                                 <div class="input-group mb-3">
@@ -82,6 +91,23 @@
                                         aria-describedby="basic-addon1" disabled>
                                 </div>
                             </div>
+                            
+                            <%if(mode.role === 'Govt_Agency'){%>
+                                <div class="form-group my-2">
+                                    <label for="id">Identification Number:</label>
+                                    <input class="form-control" type="text" id="id" name="id" value="<%=user.id%>"
+                                        placeholder="Identification Number">
+                                </div>
+                            <%}%>
+
+                            <%if(mode.role === 'Laboratory'){%>
+                                <div class="form-group my-2">
+                                    <label for="instruments">Instruments:</label>
+                                    <textarea class="form-control" id="instruments" name="instruments"
+                                        rows="3" placeholder="Instruments/Facilities available..."><%=user.instruments%></textarea>
+                                </div>
+                            <%}%>
+
                             <%if(mode.role === 'Doctor'){%>
                                 <div>
                                     <label for="hospital">Hospital:</label>
@@ -144,12 +170,20 @@
                                             <%}%>                                    
                                         </div>
                                 <%}%>
-
-                            <div class="form-group my-2">
-                                <label for="address">Address:</label>
-                                <textarea class="form-control" id="address" name="address"
-                                    rows="4" placeholder="Enter your text here..."><%=user.address%></textarea>
-                            </div>
+                            
+                            <%if(mode.role === 'Patient' || mode.role === 'Doctor' || mode.role === 'Hospital'){%>
+                                <div class="form-group my-2">
+                                    <label for="address">Address:</label>
+                                    <textarea class="form-control" id="address" name="address"
+                                        rows="4" placeholder="Enter your text here..."><%=user.address%></textarea>
+                                </div>
+                            <%} else if(mode.role === 'Pharmacy' || mode.role === 'Laboratory'){%>
+                                <div class="form-group my-2">
+                                    <label for="hospital">Hospital:</label>
+                                    <input class="form-control" type="text" id="hospital" name="hospital"
+                                        value="<%=hospital%>" placeholder="Hospital" disabled>
+                                </div>
+                            <%}%>
 
                             <%if(mode.role==='Patient'){%>
                                 <div class="form-group my-2">
