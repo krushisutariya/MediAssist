@@ -1,4 +1,4 @@
-CREATE DATABASE MediAssist;
+    CREATE DATABASE MediAssist;
 
 -- Session Table
 CREATE TABLE Session (
