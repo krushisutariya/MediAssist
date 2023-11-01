@@ -140,15 +140,18 @@ CREATE TABLE Laboratory(
 );
 
 -- appointment table
-CREATE TABLE appointment (
+CREATE TABLE appoints (
     id CHAR(20),
-    patient_id CHAR(12) NOT NULL,
-    doc_reg_no VARCHAR(12) NOT NULL,
-    slot INT NOT NULL,
-    date VARCHAR(10) NOT NULL,
+    patient_email CHAR(12),
+    doc_email VARCHAR(12),
+    start_time VARCHAR(8),
+    end_time VARCHAR(8),
+    date VARCHAR(10),
+    is_pending CHAR(1),
+    prescription VARCHAR(1023),
     PRIMARY KEY(id),
-    FOREIGN KEY (patient_id) REFERENCES Patient(id),
-    FOREIGN KEY (doc_reg_no) REFERENCES Doctor(reg_no)
+    FOREIGN KEY (patient_email) REFERENCES Patient(EMAIL),
+    FOREIGN KEY (doc_email) REFERENCES Doctor(EMAIL)
 );
 
 -- Medicine Table
