@@ -1,6 +1,4 @@
-<!-- <div class="mt-4">&nbsp;</div> -->
-<!-- Slider Start -->
-<section class="banner">
+<section class="banner banner-main">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-12 col-xl-7">
@@ -9,8 +7,8 @@
 					<span class="text-uppercase text-sm letter-spacing ">Total Health care solution</span>
 					<img src="/images/logo.png" alt="LOGO">
 
-					<p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium quisquam
-						aperiam maiores sunt fugit, deserunt rem suscipit placeat.
+					<p class="mb-4 pr-5">
+						Your Compassionate Partner in Healthcare Management, where Technology Meets Care, and Lives are Enriched with Seamless Services, Every Step of the Way!
 					</p>
 				</div>
 			</div>
@@ -57,23 +55,82 @@
 	</div>
 </section>
 
-<%if(locals.user!==undefined && locals.user.role!=='practitioner' ){%>
-	<section class="banner1">
+<%if(locals.user===undefined){%>
+	<section class="banner banner-appointment">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-12 col-xl-7">
-					<div class="block1">
+					<div class="block">
 						<div class="divider mb-3"></div>
 
 						<h1 class="mb-3 mt-3">Book Appointment</h1>
 
-						<p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium quisquam
-							aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
+						<p class="mb-4 pr-5">
+							Seamless Healthcare Access: Book Your Appointments with Ease!
+							<br>
+							At MediAssist, we put your health in your hands. 
+							Our user-friendly platform allows you to effortlessly book appointments with the doctors of your choice in the hospital of your preference. 
+							Say goodbye to long waiting times and hello to convenience. 
+							Take control of your health journey and schedule appointments that fit your needs. Your well-being, your way.	
+						</p>
 						<div class="btn-container ">
-							<a href="/users/appointment" class="btn btn-main-2 btn-icon btn-round-full">Make appoinment
+							<a href="/users/patient/book-appointment" class="btn btn-main-2 btn-icon btn-round-full">Make appoinment
 								<i class="icofont-simple-right ml-2  "></i></a>
-							<a href="/users/appointment/view-appointments"
-								class="btn btn-main-2 btn-icon btn-round-full">View appoinment <i
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+<%} else if(locals.user.role==='Patient'){%>
+
+	<!-- Book Appoinments -->
+
+	<section class="banner banner-appointment">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xl-7">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Find Nearby Hospitals & Book Appointments</h1>
+
+						<p class="mb-4 pr-5">
+							Your Health, Your Choice: Easily discover hospitals in your vicinity and book appointments with your preferred doctors. 
+							Take control of your healthcare journey with our <q>Find Nearby Hospitals & Book Appointments</q> feature. Quality care, just a click away.
+						</p>
+						<div class="btn-container ">
+							<a href="/users/patient/book-appointment"
+								class="btn btn-main-2 btn-icon btn-round-full">Book appoinment <i
+								class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Track Appoinments -->
+
+	<section class="banner banner-past-appointment">
+		<div class="container">
+			<div class="row justify-content-end">
+				<div class="col-lg-6 col-md-12 col-xl-5">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Your Appoinment Manager</h1>
+
+						<p class="mb-4 pr-5">
+							Your Health, Your Control: Manage and track your appointments with ease.
+							<br>
+							View your scheduled appointments, track your healthcare journey, and cancel appointments when necessary, all in one place. 
+							Take charge of your health with our Patient Appointment Management feature.
+						</p>
+						<div class="btn-container ">
+							<a href="/users/patient/view-appointment"
+								class="btn btn-main-2 btn-icon btn-round-full">Track appoinment <i
 									class="icofont-simple-right ml-2  "></i></a>
 						</div>
 					</div>
@@ -81,51 +138,290 @@
 			</div>
 		</div>
 	</section>
-	<%}else{%>
-		<section class="banner1">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6 col-md-12 col-xl-7">
-						<div class="block1">
-							<div class="divider mb-3"></div>
+	
+<%} else if(locals.user.role==='Doctor'){ %>
 
-							<h1 class="mb-3 mt-3">Book Appointment</h1>
+	<!-- Upcoming Appointments -->
 
-							<p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium
-								quisquam
-								aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
-							<div class="btn-container ">
-								<a href="/users/appointment/doctor-view" class="btn btn-main-2 btn-icon btn-round-full">See all the appoinments
-									<i class="icofont-simple-right ml-2  "></i></a>
-							</div>
+	<section class="banner banner-appointment">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xl-7">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Upcoming Appointments</h1>
+
+						<p class="mb-4 pr-5">
+							Doctor's Schedule View
+							<br>
+							Stay Organized with MediAssist's Doctor's Schedule View. 
+							Easily access and manage your upcoming appointments in one convenient place. 
+							Streamline your daily workflow and provide the best care for your patients.
+						</p>
+						<div class="btn-container ">
+							<a href="/users/doctor/scheduled-appointment" class="btn btn-main-2 btn-icon btn-round-full">See all the appoinments
+								<i class="icofont-simple-right ml-2  "></i></a>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
-		<%}%>
-			<section class="section about">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-lg-4 col-sm-6">
-							<div class="about-img">
-								<img src="/images/team-1.jpg" alt="" class="img-fluid">
-								<img src="/images/team-5.jpg" alt="" class="img-fluid mt-4">
-							</div>
-						</div>
-						<div class="col-lg-4 col-sm-6">
-							<div class="about-img mt-4 mt-lg-0">
-								<img src="/images/team-4.jpg" alt="" class="img-fluid">
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="about-content pl-4 mt-4 mt-lg-0">
-								<h2 class="title-color">Personal care <br>& healthy living</h2>
-								<p class="mt-4 mb-5">We provide best leading medicle service Nulla perferendis veniam
-									deleniti ipsum
-									officia dolores repellat laudantium obcaecati neque.</p>
-							</div>
+		</div>
+	</section>
+
+	<!-- Past Appoinments -->
+
+	<section class="banner banner-past-appointment">
+		<div class="container">
+			<div class="row justify-content-end">
+				<div class="col-lg-6 col-md-12 col-xl-5">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Past Appointment</h1>
+
+						<p class="mb-4 pr-5">
+							Track Patient Progress
+							<br>
+							Access your appointment history to review past interactions, monitor patient conditions, and ensure the continuity of care.
+							Stay informed and provide personalized healthcare with our Doctor's Appointment History feature.
+						</p>
+						<div class="btn-container ">
+							<a href="/users/doctor/track-appointment" class="btn btn-main-2 btn-icon btn-round-full">See all the appoinments
+								<i class="icofont-simple-right ml-2  "></i></a>
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
+		</div>
+	</section>
+<%} else if(locals.user.role === 'Hospital'){%>
+	
+	<!-- Manage appoinments -->
+	
+	<section class="banner banner-appointment">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xl-7">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">View Appointments</h1>
+
+						<p class="mb-4 pr-5">
+							Monitor Upcoming Appointments at Your Hospital
+							<br>
+							With MediAssist, hospitals can stay ahead of their schedules by easily tracking upcoming appointments. 
+							Get real-time access to appointment details, ensuring that your staff and resources are optimally allocated. 
+							This feature streamlines the appointment management process, reduces wait times, and enhances the overall patient experience. 
+							Provide efficient and timely care by staying informed with MediAssist.
+						</p>
+						<div class="btn-container ">
+							<a href="/users/hospital/view-appointment" class="btn btn-main-2 btn-icon btn-round-full">See all the appoinments
+								<i class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Manage Doctors -->
+
+	<section class="banner banner-manage-doctors">
+		<div class="container">
+			<div class="row justify-content-end">
+				<div class="col-lg-6 col-md-12 col-xl-6">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Manage Your Doctors</h1>
+
+						<p class="mb-4 pr-5">
+							Empower Your Hospital: Streamline Doctor Management with MediAssist
+							<br>
+							MediAssists robust platform empowers hospitals to efficiently manage their medical staff. 
+							Gain a comprehensive view of your doctors qualifications, experience, and specializations, all in one place. 
+							Make informed decisions, optimize staffing, and ensure the highest quality of patient care. 
+							Elevate your hospitals capabilities with our doctor management tools. 
+							Your hospital, your doctors, and your patients - all seamlessly connected.</p>
+						<div class="btn-container ">
+							<a href="/users/hospital/doctors" class="btn btn-main-2 btn-icon btn-round-full">Your Doctors
+								<i class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Manage Patients -->
+
+	<section class="banner banner-manage-patients">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xl-7">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Manage Your Patients</h1>
+
+						<p class="mb-4 pr-5">
+							Access Comprehensive Patient Information
+							<br>
+							MediAssist empowers hospitals to provide patient-centered care by offering detailed insights into patient profiles. 
+							Hospitals can access comprehensive information about patients who have received services from their doctors. 
+							This includes medical history, treatment records, and more. 
+							With this wealth of information, hospitals can tailor care, improve patient outcomes, and foster a culture of healthcare excellence. 
+							Elevate the patient experience and enhance healthcare delivery with MediAssist.
+						</p>
+						<div class="btn-container ">
+							<a href="/users/hospital/patients" class="btn btn-main-2 btn-icon btn-round-full">Your Patients
+								<i class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Manage Pharmacy -->
+
+	<section class="banner banner-manage-pharma">
+		<div class="container">
+			<div class="row justify-content-end">
+				<div class="col-lg-6 col-md-12 col-xl-5">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Manage Your Pharmacy</h1>
+
+						<p class="mb-4 pr-5">
+							Streamline Your Hospitals Medication Services: Register Your Pharmacy Today!
+							<br>
+							Optimize medication management within your hospital by registering your pharmacy now.
+							Provide essential information to ensure seamless drug distribution. 
+							Join the MediAssist network and enhance patient care through efficient pharmacy services.</p>
+						<div class="btn-container ">
+							<a href="/users/hospital/add-pharma" class="btn btn-main-2 btn-icon btn-round-full">Add Pharmacy
+								<i class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Manage Laboratories -->
+
+	<section class="banner banner-manage-lab">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xl-5">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Manage Your Laboratory</h1>
+
+						<p class="mb-4 pr-5">
+							Enhance Your Hospitals Services: Register Your Laboratories with Ease!
+							<br>
+							Empower your hospitals diagnostic capabilities by registering your laboratories today.
+							Provide essential details and equipment listings, ensuring your patients have access to cutting-edge diagnostic facilities.
+							Join the MediAssist network and deliver the highest quality care.</p>
+						<div class="btn-container ">
+							<a href="/users/hospital/add-lab" class="btn btn-main-2 btn-icon btn-round-full">Add Laboratory
+								<i class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+<%} else if(locals.user.role === 'Pharmacy'){%>
+
+	<section class="banner banner-inventory">
+		<div class="container">
+			<div class="row justify-content-end">
+				<div class="col-lg-6 col-md-12 col-xl-5">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Inventory Management</h1>
+
+						<p class="mb-4 pr-5">
+							Efficient Stock Control: Pharmacy professionals can seamlessly manage their medicine inventory and stay informed about stock levels.
+							Take control of your pharmacys medication supplies, streamline inventory management, and ensure you are always well-stocked to serve your patients.
+							Experience smart inventory management with our Pharmacy Inventory Management feature.
+						</p>
+						<div class="btn-container ">
+							<a href="/users/pharmacy/manage-inventory"
+								class="btn btn-main-2 btn-icon btn-round-full">Manage Inventory<i
+								class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<%} else if(locals.user.role === 'Laboratory'){%>
+
+<%} else if(locals.user.role === 'Govt_Agency'){%>
+
+	<section class="banner banner-govt-agency">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xl-7">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Data-Driven Governance</h1>
+
+						<p class="mb-4 pr-5">
+							Empower Policy Decisions with MediAssist Government Mode
+							<br>
+							Welcome to the heart of healthcare governance. 
+							With MediAssists Government Mode, authorized agencies gain unparalleled insights into registered hospitals and enrolled doctors. 
+							Harness the power of data to frame policies, make informed political and economic decisions, and ensure the well-being of your citizens.
+							Explore the future of healthcare governance with us
+						</p>
+						<div class="btn-container ">
+							<a href="/users/govt-agency/view-data"
+								class="btn btn-main-2 btn-icon btn-round-full">View Data <i
+								class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<%}%>
+
+<section class="section about">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-4 col-sm-6">
+				<div class="about-img">
+					<img src="/images/team-1.png" alt="" class="img-fluid">
+					<img src="/images/team-5.jpg" alt="" class="img-fluid mt-4">
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6">
+				<div class="about-img mt-4 mt-lg-0">
+					<img src="/images/team-4.jpg" alt="" class="img-fluid">
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="about-content pl-4 mt-4 mt-lg-0">
+					<h2 class="title-color">Personal care <br>& healthy living</h2>
+					<p class="mt-4 mb-5">We provide best leading medicle service Nulla perferendis veniam
+						deleniti ipsum
+						officia dolores repellat laudantium obcaecati neque.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

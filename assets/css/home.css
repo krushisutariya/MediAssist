@@ -8,23 +8,51 @@ label {
   font-weight: bold;
 }
 
-
 .banner {
   position: relative;
   overflow: hidden;
   background: #fff;
+  min-height: 550px;
+  max-height: 600px;
+  margin-bottom: 15px;
+}
+.banner-main{
   background: url("../images/slider-bg-1.jpg") no-repeat;
   background-size: cover;
-  min-height: 550px;
 }
-.banner1 {
-  position: relative;
-  overflow: hidden;
-  background: #fff;
+.banner-appointment{
   background: url("https://riseapps.co/wp-content/uploads/2020/05/img_Doctor-Appointment-App-1024x768-min-1024x768.jpg") no-repeat;
   background-size: cover;
-  min-height: 550px;
 }
+.banner-past-appointment{
+  background: url("../images/doc-past-apt.avif") no-repeat;
+  background-size: cover;
+}
+.banner-manage-doctors{
+  background: url("../images/manage-doc.jpg") no-repeat;
+  background-size: cover;
+}
+.banner-manage-patients{
+  background: url("../images/manage-patient.jpg") no-repeat;
+  background-size: cover;
+}
+.banner-manage-pharma{
+  background: url("../images/manage-pharma.jpg") no-repeat;
+  background-size: cover;
+}
+.banner-inventory{
+  background: url("../images/manage-pharma.jpg") no-repeat;
+  background-size: cover;
+}
+.banner-manage-lab{
+  background: url("../images/manage-lab.jpg") no-repeat;
+  background-size: cover;
+}
+.banner-govt-agency{
+  background: url("../images/govt_agency.jpg") no-repeat;
+  background-size: cover;
+}
+
 .banner .block {
   padding: 80px 0px 160px;
 }
@@ -37,17 +65,6 @@ label {
   color: green;
 }
 
-.banner1 .block1 {
-  padding: 80px 0px 160px;
-}
-
-.banner1 .block1 h1 {
-  font-size: 60px;
-  line-height: 1.2;
-  letter-spacing: -1.2px;
-  text-transform: capitalize;
-  color: green;
-}
 .features{
   background-color: rgba(159, 226, 191, 0.15);
 }
@@ -90,43 +107,6 @@ label {
   }
 }
 
-@media (max-width: 480px) {
-  .banner1 .block1 h1 {
-    font-size: 38px;
-    line-height: 50px;
-  }
-  .banner1 {
-    min-height: 450px;
-    background: #fff !important;
-  }
-}
-
-@media (max-width: 400px) {
-  .banner1 .block1 h1 {
-    font-size: 28px;
-    line-height: 40px;
-  }
-  .banner1 {
-    min-height: 450px;
-    background: #fff !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .banner1 .block1 h1 {
-    font-size: 56px;
-    line-height: 70px;
-  }
-  .banner1 {
-    background: #fff !important;
-  }
-}
-
-@media (max-width: 992px) {
-  .banner1 {
-    background: #fff !important;
-  }
-}
 .features {
   margin-top: -70px;
   

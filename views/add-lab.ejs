@@ -1,0 +1,75 @@
+<title><%=title%></title>
+<div class="container" style="margin-top: 5rem;">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="card my-4">
+                <div class="card-body">
+                    <h2 class="card-title">Laboratory Registration</h2>
+                    <div class="my-4">
+                        <form id="timeForm" action="/users/hospital/add-lab/<%=user.email%>" method="post">
+                            <div class="form-group my-2">
+                                <label for="name">Name:</label>
+                                <input class="form-control" type="text" id="name" name="name" 
+                                    placeholder="Laboratory Name">
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="email">Email:</label>
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="email" id="email" name="email"
+                                        aria-label="Username" placeholder="Laboratory Email"
+                                        aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="username">Username:</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                    <input class="form-control" type="text" id="username" name="username"
+                                        placeholder="Laboratory Username">
+                                </div>
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="password">Password:</label>
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="text" id="password" name="password"
+                                        placeholder="Laboratory Password">
+                                </div>
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="re-password">Confirm Password:</label>
+                                <div class="input-group mb-3">
+                                        <input class="form-control" type="text" id="re-password" name="re-password"
+                                        placeholder="Re-Enter the Passwrd">
+                                </div>
+                            </div>
+                                
+                            <div class="form-group my-2">
+                                <label for="hospital">Hospital:</label>
+                                <input class="form-control" type="text" id="hospital" name="hospital"
+                                    placeholder="Hospital" disabled value="<%=user.email%>">
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="instruments">Instruments:</label>
+                                <textarea class="form-control" id="instruments" name="instruments"
+                                    rows="3" placeholder="Instruments/Facilities available..."></textarea>
+                            </div>
+                            <div>
+                                <label for="contact">Contact:</label>
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="text" class="contact" name="contact"
+                                    placeholder="Enter your contact number">
+                                </div>
+                                <p id="contact-feedback"></p>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-success my-4" type="submit">Submit</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

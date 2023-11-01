@@ -14,31 +14,56 @@
                 <li class="nav-item">
                     <a class="nav-link active color-me" aria-current="page" href="/">Home</a>
                 </li>
-                <%if(locals.user!==undefined && locals.user.role!=='practitioner' ){%>
+                <%if(locals.user===undefined){%>
                     <li class="nav-item">
-                        <a class="nav-link" href="/users/appointment">Appoinment</a>
+                        <a class="nav-link" href="/users/patient/book-appointment">Appoinment</a>
+                    </li>
+                <%}else if(locals.user.role==='Patient'){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/patient/book-appointment">Appoinment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/users/appointment/view-appointments">View_Appoinment</a>
+                        <a class="nav-link" href="/users/patients/view-appointments">View Appoinments</a>
                     </li>
-                    <%}else{%>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users/appointment">Appoinment</a>
-                        </li>
-                        <%}%>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/about">About_Us</a>
-                            </li>
+                <%}else if(locals.user.role==='Doctor'){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/doctor/scheduled-appointment">Appoinments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/doctor/track-appointment">Track Patients</a>
+                    </li>
+                <%}else if(locals.user.role==='Hospital'){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/hospital/view-appointment">Appoinments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/hospital/add-pharma">Add Pharmacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/hospital/add-lab">Add Laboratory</a>
+                    </li>
+                <%}else if(locals.user.role==='Pharmacy'){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/pharmacy/manage-inventory">Manage Inventory</a>
+                    </li>
+                <%}else if(locals.user.role === 'Govt_Agency'){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/govt-agency/view-data">View Data</a>
+                    </li>
+                <%}%>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About_Us</a>
+                </li>
             </ul>
             <div class="container-end">
                 <% if (locals.user) { %>
-                    <a class="btn btn-outline-light" href="/users/profile/<%=locals.user.email%>">
-                        <%=user.username%>
-                    </a>
-                    <a class="btn btn-outline-light" href="/users/sign-out">LOGOUT</a>
-                    <% } else { %>
-                        <a class="btn btn-outline-light" href="/users/sign-in">Login</a>
-                        <% } %>
+                <a class="btn btn-outline-light" href="/users/profile/<%=locals.user.email%>">
+                    <%=user.username%>
+                </a>
+                <a class="btn btn-outline-light" href="/users/sign-out">LOGOUT</a>
+                <% } else { %>
+                    <a class="btn btn-outline-light" href="/users/sign-in">Login</a>
+                <% } %>
             </div>
         </div>
     </div>

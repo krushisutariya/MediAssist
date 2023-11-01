@@ -10,8 +10,7 @@ router.get('/sign-in', usersController.sign_in); //redirected to controller rend
 router.get('/sign-out', usersController.clear_session); //redirected to controller signing out user
 router.get('/profile/:email', usersController.profile); //redirected to controller signing out user
 router.post('/update-profile/:email', usersController.update_profile); //redirected to controller updating user profile
-// router.use('/appointment', require('./appointment')); //redirected to controller rendering users page
-
+router.use('/hospital', require('./hospital')); //redirected to controller rendering hospital page
 router.post('/create-session', passport.authenticate(
     'local',
     { failureRedirect: '/users/sign-in' }
