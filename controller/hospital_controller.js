@@ -38,18 +38,12 @@ module.exports.register_lab = async function(req, res){
         // Write the query in the backticks below
         await pool.query(`INSERT INTO Laboratory(email,username,name,contact,instruments,email_hospital) VALUES ($1,$2,$3,$4,$5,$6)`,[req.body.email,req.body.username,req.body.name,req.body.contact,req.body.instruments,req.body.hospital]);
         await pool.query(`INSERT INTO Users(email,username,password,role) VALUES ($1,$2,$3,$4)`,[req.body.email,req.body.username,req.body.password,'Laboratory']);
-
-<<<<<<< HEAD
         req.flash('success', 'Laboratory added successfully');
         return res.redirect('/');
-    } catch (error) {
+    } catch (error){
         console.log('Error: ', err);
         return res.redirect('back');
     }
-    
-=======
-    req.flash('success', 'Laboratory added successfully');
-    return res.redirect('/');
 }
 
 // Render the upcoming appointments page
@@ -135,5 +129,4 @@ module.exports.cancel_appointment = async (req, res) => {
         console.log('Error: ', error.message);
         return res.status(500).json({ error: 'Server Error' });
     }
->>>>>>> c4c87da15cdf0d4309ebf604f7b365ff614eed92
 }
