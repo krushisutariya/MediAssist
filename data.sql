@@ -8,7 +8,7 @@ CREATE TABLE Session (
     PRIMARY KEY (sid)
 );
 
--- UserS Table
+-- Users Table
 CREATE TABLE Users (
     email VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
