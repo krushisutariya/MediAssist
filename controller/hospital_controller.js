@@ -49,12 +49,8 @@ module.exports.register_lab = async function(req, res){
 // Render the upcoming appointments page
 module.exports.appointments = async (req, res) => {
     try {
-        
-        
-       
-
-            
-            let appointment = await pool.query(`select * from appoints where (is_panding=0) && ( doc_email in (select doc_email from works where doc_email=req.body.doc_email))`);
+          
+        let appointment = await pool.query(`select * from appoints where (is_pending=0) && ( doc_email in (select doc_email from works where doc_email=req.body.doc_email))`);
            
         return res.render('hospital_appointments', {
             title: 'Appointments',
