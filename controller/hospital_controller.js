@@ -50,7 +50,7 @@ module.exports.register_lab = async function(req, res){
 module.exports.appointments = async (req, res) => {
     try {
           
-        let appointment = await pool.query(`select * from appoints where (is_pending=0) && ( doc_email in (select doc_email from works where doc_email=req.body.doc_email))`);
+        let appointment = await pool.query(``);
            
         return res.render('hospital_appointments', {
             title: 'Appointments',
@@ -81,10 +81,8 @@ module.exports.register_doctor = async (req, res) => {
 
 module.exports.manage_patients = async (req, res) => {
     try {
-        
-       
+        // Find out the patients that are enrolled in the hospital using the doctors details from the appoints table.
         let patient = await pool.query('select * from patient where email in (select patient_email from appoints where (is_pending=0) && ( doc_email in (select doc_email from works where doc_email=req.body.doc_email)))');
-        
 
         return res.render('hospital_manage_patients', {
             title: 'Manage Patients',
