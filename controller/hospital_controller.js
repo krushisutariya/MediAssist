@@ -38,6 +38,7 @@ module.exports.register_lab = async function(req, res){
         // Write the query in the backticks below
         await pool.query(`INSERT INTO Laboratory(email,username,name,contact,instruments,email_hospital) VALUES ($1,$2,$3,$4,$5,$6)`,[req.body.email,req.body.username,req.body.name,req.body.contact,req.body.instruments,req.body.hospital]);
         await pool.query(`INSERT INTO Users(email,username,password,role) VALUES ($1,$2,$3,$4)`,[req.body.email,req.body.username,req.body.password,'Laboratory']);
+
         req.flash('success', 'Laboratory added successfully');
         return res.redirect('/');
     } catch (error){
