@@ -181,7 +181,7 @@ CREATE TABLE works(
     start_time VARCHAR(8),
     end_time VARCHAR(8),
     salary DECIMAL(9,2),
-    PRIMARY KEY(doc_email, hosp_email),
-    FOREIGN KEY(doc_email) REFERENCES Doctor(EMAIL),
-    FOREIGN KEY(hosp_email) REFERENCES Hospital(EMAIL)
+    PRIMARY KEY(doc_reg_no,email),
+    FOREIGN KEY(doc_reg_no) REFERENCES Doctor(reg_no),
+    FOREIGN KEY(email) REFERENCES Hospital(EMAIL)
 );
