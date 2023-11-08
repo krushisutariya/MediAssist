@@ -42,7 +42,13 @@ module.exports.open_appointment = async (req, res) => {
         // You can use multiple queries to fetch the desired results like using doctors table for fetching the name of the doctor from 
         // the doctor's table but make sure you fetch it by making variables with appropriate names like doctor_name, patient_name, etc.
 
-        let appointment = await pool.query(``);
+        let appointment = await pool.query(`with appoints_detail(patient_email, date, time, prescription) as (
+                                            select patient_email, date, start_time, prescription
+                                            from appoints
+                                            where id = ${id} )
+                                        select name as patient_name, date, time, gender, height, weight, blood_group, diseases, past_history, contact
+                                        from appoints_detail, patient
+                                        where patient_email = email`);
         appointment = appointment.rows[0];
 
         return res.render('doctor_open_appointment', {
@@ -62,10 +68,14 @@ module.exports.update_appointment = async (req, res) => {
         
         // update the is_pending bit to 0 in the appoints table for the given appointment id
         // details are available in req.body like req.body.id, req.body.date, etc.
-        await pool.query(``);
+        await pool.query(`update appoints
+                          set is_pending = 0
+                          where id = ${req.body.id}`);
 
         // update the prescription in the appoints table for the given appointment id
-        await pool.query(``);
+        await pool.query(`update appoints
+                          set prescription = ${req.body.prescription}
+                          where id = ${req.body.id}`);
 
         req.flash('success', 'Appointment updated successfully');
         return res.redirect('/');
