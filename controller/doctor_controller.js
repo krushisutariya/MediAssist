@@ -4,7 +4,7 @@ const pool = require('../config/db');
 module.exports.upcoming_appointments = async (req, res) => {
     try {
         // Find out those appointments that are not cancelled and are not completed,i.e., is_pending bit is 1; from the appoints table
-        let appointment = await pool.query(``);
+        let appointment = await pool.query(`SELECT * FROM appoints WHERE is_pending = '1'`);
         appointment = appointment.rows;    
 
         return res.render('doctor_upcoming_appointments', {
@@ -21,7 +21,7 @@ module.exports.upcoming_appointments = async (req, res) => {
 module.exports.past_appointments = async (req, res) => {
     try {
         // Find out those appointments that are completed,i.e., is_pending bit is 0; from the appoints table
-        let appointment = await pool.query(``);
+        let appointment = await pool.query(`SELECT * FROM appoints WHERE is_pending = '1'`);
         appointment = appointment.rows;    
 
         return res.render('doctor_past_appointments', {
