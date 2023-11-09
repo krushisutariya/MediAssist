@@ -16,7 +16,7 @@ module.exports.add_lab = function(req, res){
 
 // Register a new Pharmacy
 module.exports.register_pharma = async function(req, res){
-    if(req.params.email === req.body.email){
+    if(req.params.email === req.user.email){
         try {
             if(req)
             // You have the data in req.body and can access it like this: req.body.detail_you_want. Make an INSERT query into the Pharmacy table using this data.
@@ -37,7 +37,7 @@ module.exports.register_pharma = async function(req, res){
 
 // Register a new Laboratory
 module.exports.register_lab = async function(req, res){
-    if(req.params.email === req.body.email){
+    if(req.params.email === req.user.email){
         try {
             // You have the data in req.body and can access it like this: req.body.detail_you_want. Make an INSERT query into the Pharmacy table using this data.
             // Write the query in the backticks below
@@ -82,7 +82,7 @@ module.exports.add_doctor = async (req, res) => {
 
 // Register a new Doctor at the hospital
 module.exports.register_doctor = async (req, res) => {
-    if(req.params.email === req.body.email){
+    if(req.params.email === req.user.email){
         try {
             // You have the data in req.body and can access it like this: req.body.detail_you_want. Make an INSERT query into the Doctor table using this data.
             // Write the query in the backticks below

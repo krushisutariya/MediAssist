@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/css/stocks.css">
+
+<section class="intro">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body p-0">
+                    <table class="table table-striped mb-0">
+                      <thead class="text-center">
+                        <tr>
+                          <th scope="col" class="bg-success text-light">Index</th>
+                          <th scope="col" class="bg-success text-light">Medicine Name</th>
+                          <th scope="col" class="bg-success text-light">Brand Name</th>
+                          <th scope="col" class="bg-success text-light">Stock</th>
+                        </tr>
+                      </thead>
+                      <tbody class="text-center">
+                        <% let index = 1; %>
+                        <%medicines.forEach((medicine) => {%>
+                            <tr>
+                                <td><%=index%></td>
+                                <td><%=medicine.name%></td>
+                                <td><%=medicine.brand_name%></td>
+                                <td><%=medicine.stock%></td>
+                              </tr>
+                        <%});
+                        index = index + 1%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </section>

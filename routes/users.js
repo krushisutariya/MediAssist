@@ -13,6 +13,7 @@ router.post('/update-profile/:email', usersController.update_profile); //redirec
 
 router.use('/hospital', require('./hospital')); //redirected to controller rendering hospital page
 router.use('/doctor', require('./doctor')); //redirected to controller rendering doctor page
+router.use('/pharmacy', require('./pharmacy')); //redirected to controller rendering pharmacy page
 
 router.post('/create-session', passport.authenticate(
     'local',

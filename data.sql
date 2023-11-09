@@ -70,7 +70,7 @@ CREATE TABLE Hospital_Contact(
 --Stores
 CREATE TABLE stores(
     email_pharm VARCHAR(255),
-    medicine_name VARCHAR(255),
+    name VARCHAR(255),
     brand_name VARCHAR(255),
     stock INT,
     PRIMARY KEY(email_pharm,medicine_name,brand_name),
@@ -156,7 +156,7 @@ CREATE TABLE appoints (
 
 -- Medicine Table
 CREATE TABLE Medicine(
-    medicine_name VARCHAR(255),
+    name VARCHAR(255),
     brand_name VARCHAR(255),
     PRIMARY KEY(medicine_name, brand_name)
 );
