@@ -31,7 +31,7 @@ module.exports.track_appointment = async (req, res) => {
         // given the patient's email in req.user.email, find out the appointments booked by the patients
         // All the appointments, i.e., pending bit 0 as well as 1
         // write two diiferent different queries for upcoming and past appointments
-        // write two diiferent different queries for upcoming and past appointments
+        
         let upcoming_appointments = await pool.query(`select * from appoints where patient_email=$1 && is_pending =0`,[req.user.email]);
         upcoming_appointments = upcoming_appointments.rows;
 
