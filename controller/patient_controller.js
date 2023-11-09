@@ -34,7 +34,7 @@ module.exports.track_appointment = async (req, res) => {
         let upcoming_appointments = await pool.query(`select * from appoints where patient_email=$1 && is_pending =0`,[req.user.email]);
         upcoming_appointments = upcoming_appointments.rows;
 
-        let past_appointments = await pool.query(``,);
+        let past_appointments = await pool.query(`select * from appoints where patient_email=$1 && is_pending =1`,[req.user.email]);
         past_appointments = past_appointments.rows;
       //
         return res.render('patient-appointments', {
