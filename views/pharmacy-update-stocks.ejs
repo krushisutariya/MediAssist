@@ -1,0 +1,75 @@
+<title><%=title%></title>
+<div class="container" style="margin-top: 5rem;">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="card my-4">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Update Medicine Stocks</h2>
+                    <div class="my-4">
+                        <form id="timeForm" action="/users/pharmacy/update-medicine-stocks/<%=locals.user.email%>" method="post">
+                            <div class="form-group my-2">
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="brand" name="brand">
+                                    <option selected value=null>Select Brand</option>
+                                    <%brands.forEach((brand) => {%>
+                                        <option value="<%=brand.brand_name%>"><%=brand.brand_name%></option>
+                                    <%})%>
+                                </select>
+                            </div>
+                            <div class="form-group my-2">
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="medicine" name="medicine">
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="stock">Available Units:</label>
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="text" id="stock" name="stock"
+                                        aria-label="Stock" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-success my-4" type="submit">Submit</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        let brand = document.getElementById('brand');
+        let medicine_option = document.getElementById('medicine');
+        let stock_button = document.getElementById('stock');
+        
+        document.addEventListener('DOMContentLoaded', function(e){
+            let medicines = <%- JSON.stringify(medicines) %>
+            if(brand.value === 'null'){
+                medicine_option.disabled = true;
+                stock_button.disabled = true;
+            }
+            brand.addEventListener('click', function(e){
+                if(brand.value === 'null'){
+                    medicine_option.value = null;
+                    medicine_option.disabled = true;
+                } else {
+                    medicine_option.disabled = false;
+                    medicine_option.innerHTML += `<option value=null>Select a Medicine</option>`;
+                    medicines.forEach((medicine) => {
+                        if(medicine.brand_name === brand.value){
+                            medicine_option.innerHTML += `<option value="${medicine.name}">${medicine.name}</option>`;
+                        }
+                    });
+                }
+                medicine_option.addEventListener('click', function(e){
+                    if(medicine_option.value !== 'null'){
+                        stock_button.disabled = false;
+                        let med = medicines.find(medicine => medicine.brand_name === brand.value && medicine.name === medicine_option.value);
+                        stock_button.value = med.stock;
+                    }
+                });
+            });
+        });
+</script>
