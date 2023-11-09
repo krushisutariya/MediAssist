@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <h2 class="card-title">Laboratory Registration</h2>
                     <div class="my-4">
-                        <form id="timeForm" action="/users/hospital/add-lab/<%=user.email%>" method="post">
+                        <form id="timeForm" action="/users/hospital/add-lab/<%=locals.user.email%>" method="post">
                             <div class="form-group my-2">
                                 <label for="name">Name:</label>
                                 <input class="form-control" type="text" id="name" name="name" 

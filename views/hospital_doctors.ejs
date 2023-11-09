@@ -1,0 +1,42 @@
+<title><%=title%></title>
+<link rel="stylesheet" href="/css/hospital-view-doctors.css">
+
+<section class="light">
+	<div class="container py-2">
+		<div class="h1 text-center text-dark" id="pageHeaderTitle">My Cards Light</div>
+        <% const classColors = ['blue', 'red', 'green', 'yellow']; %>
+        <% let classIndex = 0; %>
+        <% doctors.forEach((doctor) => {%>
+            <article class="postcard light <%=classColors[classIndex]%>">
+                <% if(!doctor.gender || doctor.gender === 'M'){%>
+                    <img class="postcard__img" src="/images/ll.png" alt="Image Title" />
+                <%} else {%>
+                    <img class="postcard__img" src="https://img.freepik.com/premium-vector/avatar-female-doctor-with-black-hair-doctor-with-stethoscope-vector-illustrationxa_276184-33.jpg" alt="Image Title" />
+                <%}%>
+                
+                <div class="postcard__text t-dark">
+                    <h1 class="postcard__title blue"><a href="#"><%=doctor.name%></a></h1>
+                    <div class="postcard__subtitle small">
+                        <p><%=doctor.username%></p>
+                    </div>
+                    <div class="postcard__bar"></div>
+                    <div class="postcard__preview-txt"><%=doctor.address%></div>
+                    <div class="postcard__preview-txt"><%=doctor.contact%></div>
+                    <div class="postcard__preview-txt"><%=doctor.qualification%></div>
+                    <div class="postcard__preview-txt"><%=doctor.institute%></div>
+                    <div class="postcard__preview-txt"><%=doctor.experience%></div>
+
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item">
+                            <i class="fas fa-clock mr-2"></i>
+                            Mon - Fri: 8:00 - 19:00
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <% classIndex = (classIndex + 1) % classColors.length; %>
+
+        <%});%>
+	</div>
+</section>

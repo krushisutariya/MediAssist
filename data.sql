@@ -1,4 +1,4 @@
-    CREATE DATABASE MediAssist;
+CREATE DATABASE MediAssist;
 
 -- Session Table
 CREATE TABLE Session (
@@ -11,7 +11,7 @@ CREATE TABLE Session (
 -- Users Table
 CREATE TABLE Users (
     email VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL,
     PRIMARY KEY (email)
@@ -141,14 +141,14 @@ CREATE TABLE Laboratory(
 
 -- appointment table
 CREATE TABLE appoints (
-    id CHAR(20),
-    patient_email CHAR(12),
-    doc_email VARCHAR(12),
+    id CHAR(10),
+    patient_email VARCHAR(255),
+    doc_email VARCHAR(255),
     start_time VARCHAR(8),
     end_time VARCHAR(8),
     date VARCHAR(10),
     is_pending CHAR(1),
-    prescription VARCHAR(1023),
+    prescription VARCHAR(2047),
     PRIMARY KEY(id),
     FOREIGN KEY (patient_email) REFERENCES Patient(EMAIL),
     FOREIGN KEY (doc_email) REFERENCES Doctor(EMAIL)
@@ -181,7 +181,7 @@ CREATE TABLE works(
     start_time VARCHAR(8),
     end_time VARCHAR(8),
     salary DECIMAL(9,2),
-    PRIMARY KEY(doc_email, hosp_email),
-    FOREIGN KEY(doc_email) REFERENCES Doctor(EMAIL),
-    FOREIGN KEY(hosp_email) REFERENCES Hospital(EMAIL)
+    PRIMARY KEY(doc_reg_no,email),
+    FOREIGN KEY(doc_reg_no) REFERENCES Doctor(reg_no),
+    FOREIGN KEY(email) REFERENCES Hospital(EMAIL)
 );
