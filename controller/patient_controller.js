@@ -32,14 +32,17 @@ module.exports.track_appointment = async (req, res) => {
         // All the appointments, i.e., pending bit 0 as well as 1
         // write two diiferent different queries for upcoming and past appointments
         let upcoming_appointments = await pool.query(``);
+        upcoming_appointments = upcoming_appointments.rows;
+
         let past_appointments = await pool.query(``);
+        past_appointments = past_appointments.rows;
 
         return res.render('patient-appointments', {
             title: 'Appointments',
             upcoming_appointments: upcoming_appointments,
             past_appointments: past_appointments
         });
-        
+
     } catch (error) {
         console.log('Error: ', error.message);
         return res.status(500).json({error: 'Server Error!'});
