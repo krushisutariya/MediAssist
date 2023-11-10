@@ -41,7 +41,6 @@ module.exports.open_appointment = async (req, res) => {
         // Given the appointment id, fetch the appointment details from the appoints table, i.e., the patient name, doctor name, date, time, etc.
         // You can use multiple queries to fetch the desired results like using doctors table for fetching the name of the doctor from 
         // the doctor's table but make sure you fetch it by making variables with appropriate names like doctor_name, patient_name, etc.
-
         let appointment = await pool.query(`with appoints_detail(patient_email, date, start_time, end_time, prescription, is_pending) as (
                                             select patient_email, date, start_time, end_time, prescription, is_pending
                                             from appoints
@@ -49,6 +48,7 @@ module.exports.open_appointment = async (req, res) => {
                                         select name as patient_name, email, date, start_time, end_time, prescription, is_pending, gender, height, weight, blood_group, diseases, past_history, contact
                                         from appoints_detail, patient
                                         where patient_email = email`, [id]);
+
         appointment = appointment.rows[0];
 
         return res.render('doctor-open-appointment', {
