@@ -141,7 +141,7 @@ CREATE TABLE Laboratory(
 
 -- appointment table
 CREATE TABLE appoints (
-    id CHAR(10),
+    id CHAR(15),
     patient_email VARCHAR(255),
     doc_email VARCHAR(255),
     start_time VARCHAR(8),
@@ -167,7 +167,7 @@ CREATE TABLE Pharmacy(
 	username VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     contact CHAR(10),
-    email_hospital CHAR(255) NOT NULL,
+    email_hospital VARCHAR(255) NOT NULL,
     PRIMARY KEY(email),
     FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL),
     FOREIGN KEY (email) REFERENCES Users(email),

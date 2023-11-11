@@ -25,8 +25,8 @@
                                 <td><%=medicine.brand_name%></td>
                                 <td><%=medicine.stock%></td>
                               </tr>
-                        <%});
-                        index = index + 1%>
+                              <% index = index + 1%>
+                            <%});%>
                       </tbody>
                     </table>
                   </div>
@@ -36,3 +36,76 @@
         </div>
     </div>
   </section>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+  <button type="button" class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#addMedicine">
+    Add a new Medicine
+  </button>
+</div>
+  
+
+<form action="/users/pharmacy/add-medicine" method="post">
+  <!-- Modal to add a medicine -->
+  <div
+    class="modal fade"
+    id="addMedicine"
+    tabindex="-1"
+    aria-labelledby="insertModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-5">
+        <div class="modal-header">
+          <h1 class="modal-title text-success fs-5" id="insertModalLabel">
+            Add Medicine
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label text-success">Name </label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            value=""
+            name="name"
+            required
+            placeholder="Medicine Name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="brand_name" class="form-label text-success">Brand Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="brand_name"
+            value=""
+            name="brand_name"
+            required
+            placeholder="Brand of the Medicine"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="stock" class="form-label text-success">Stock</label>
+          <input
+            type="number"
+            class="form-control"
+            id="stock"
+            value=""
+            name="stock"
+            required
+            placeholder="Stock Available"
+          />
+        </div>
+        <button type="submit" class="btn btn-success insert-submit-btn">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

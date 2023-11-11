@@ -63,3 +63,21 @@ module.exports.update_medicine_stocks = async function(req, res){
         return res.redirect('back');
     }
 }
+
+// Add a new medicine
+module.exports.add_medicine = async (req, res) => {
+    try {
+        
+        // write a query to insert a medicine into the medicne table and the stores table with 
+        // name in req.body.name, brand_name in req.body.brand_name, stock in req.body.stock and 
+        // pharma email in req.user.email
+        await pool.query(``);
+
+        req.flash('success', 'Medicine added Successfully!');
+        return res.redirect('back');
+
+    } catch (error) {
+        console.log('Error: ', err);
+        return res.status(500).json({ msg: 'Internal Server Error'});
+    }
+}
