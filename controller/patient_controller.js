@@ -27,7 +27,6 @@ module.exports.make_appointment = async (req, res) => {
 
 module.exports.track_appointment = async (req, res) => {
     try {
-        
         // given the patient's email in req.user.email, find out the appointments booked by the patients
         // All the appointments, i.e., pending bit 0 as well as 1
         // write two diiferent different queries for upcoming and past appointments
