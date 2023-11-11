@@ -6,13 +6,18 @@ module.exports.stocks = async (req, res) => {
         
         // req.user.email has the email of pharmacy logged in from which you can use the stores table to
         // find out the medicines and their quantities present in the pharmacy
+<<<<<<< HEAD
+        let medicines = await pool.query(`SELECT stock FROM stores WHERE email_pharam = $1`,[req.user.mail]);
+=======
         let medicines = await pool.query(`SELECT name, brand_name, stock FROM stores WHERE email_pharm = $1`,[req.user.email]);
+>>>>>>> d79506cd602c50eb4ecc4b89ab2c3d97cf4a9c4b
         medicines = medicines.rows;
 
         return res.render('pharmacy_stocks', {
             title: 'Stocks',
             medicines: medicines
         });
+
 
     } catch (error) {
         console.log('Error: ', error.message);
@@ -26,7 +31,11 @@ module.exports.update_stocks = async (req, res) => {
         
         // req.user.email has the email of pharmacy logged in from which you can use the stores table to
         // find out those medicines from the pharmacy whose quantity is greater than 0
+<<<<<<< HEAD
+        let medicines = await pool.query(`SELECT medicine_name,brand_name,stock FROM stores WHERE email_pharm=$1`,[req.user.email]);
+=======
         let medicines = await pool.query(`SELECT name, brand_name, stock FROM stores WHERE email_pharm = $1`,[req.user.email]);
+>>>>>>> d79506cd602c50eb4ecc4b89ab2c3d97cf4a9c4b
         medicines = medicines.rows;
 
         let brands = await pool.query(`SELECT distinct(brand_name) FROM stores WHERE email_pharm = $1`, [req.user.email]);
@@ -51,8 +60,8 @@ module.exports.update_medicine_stocks = async function(req, res){
         try {
             // write a query wherein you are having all the details in req.body and you need to update the stock
             // of a medicine given its brand_name as req.body.brand and name as req.body.medicine. Also the new stock value is in req.body.stock
-            await pool.query(``);
-    
+            await pool.query(`UPDATE stores SET stocks=$3 WHERE brand_name = $1 AND name = $2`,[req.body.brand,req.body.medicine,req.body.stock]);
+
             req.flash('success', 'Data Updated Successfully!');
             return res.redirect('/');
         } catch (error){
