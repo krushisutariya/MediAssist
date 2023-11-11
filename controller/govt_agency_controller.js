@@ -33,77 +33,77 @@ module.exports.hospitals = async (req, res) => {
 }
 
 // let hospitals = [
-    // {
-    //     "name": "City General Hospital",
-    //     "email": "info@citygeneralhospital.com",
-    //     "specialization": "General Medicine",
-    //     "total_beds": 300,
-    //     "total_staff": 150
-    //   },
-    //   {
-    //     "name": "Sunset Community Hospital",
-    //     "email": "info@sunsetcommunityhospital.com",
-    //     "specialization": "Emergency Medicine",
-    //     "total_beds": 200,
-    //     "total_staff": 100
-    //   },
-    //   {
-    //     "name": "Greenview Regional Medical Center",
-    //     "email": "info@greenviewmedicalcenter.com",
-    //     "specialization": "Surgery",
-    //     "total_beds": 250,
-    //     "total_staff": 120
-    //   },
-    //   {
-    //     "name": "Lakefront Health Center",
-    //     "email": "info@lakefronthealthcenter.com",
-    //     "specialization": "Obstetrics and Gynecology",
-    //     "total_beds": 180,
-    //     "total_staff": 90
-    //   },
-    //   {
-    //     "name": "Mountain View Hospital",
-    //     "email": "info@mountainviewhospital.com",
-    //     "specialization": "Orthopedics",
-    //     "total_beds": 220,
-    //     "total_staff": 110
-    //   },
-    //   {
-    //     "name": "Pinecrest Medical Center",
-    //     "email": "info@pinecrestmedicalcenter.com",
-    //     "specialization": "Cardiology",
-    //     "total_beds": 280,
-    //     "total_staff": 140
-    //   },
-    //   {
-    //     "name": "Harborview Medical Center",
-    //     "email": "info@harborviewmedicalcenter.com",
-    //     "specialization": "Neurology",
-    //     "total_beds": 320,
-    //     "total_staff": 160
-    //   },
-    //   {
-    //     "name": "Riverside Community Hospital",
-    //     "email": "info@riversidemedicalcenter.com",
-    //     "specialization": "Pediatrics",
-    //     "total_beds": 190,
-    //     "total_staff": 95
-    //   },
-    //   {
-    //     "name": "Valley Regional Hospital",
-    //     "email": "info@valleyregionalhospital.com",
-    //     "specialization": "Psychiatry",
-    //     "total_beds": 240,
-    //     "total_staff": 120
-    //   },
-    //   {
-    //     "name": "Oceanfront Health Institute",
-    //     "email": "info@oceanfronthealthinstitute.com",
-    //     "specialization": "Oncology",
-    //     "total_beds": 200,
-    //     "total_staff": 100
-    //   }
-    // ];
+//     {
+//         "name": "City General Hospital",
+//         "email": "info@citygeneralhospital.com",
+//         "specialization": "General Medicine",
+//         "total_beds": 300,
+//         "total_staff": 150
+//       },
+//       {
+//         "name": "Sunset Community Hospital",
+//         "email": "info@sunsetcommunityhospital.com",
+//         "specialization": "Emergency Medicine",
+//         "total_beds": 200,
+//         "total_staff": 100
+//       },
+//       {
+//         "name": "Greenview Regional Medical Center",
+//         "email": "info@greenviewmedicalcenter.com",
+//         "specialization": "Surgery",
+//         "total_beds": 250,
+//         "total_staff": 120
+//       },
+//       {
+//         "name": "Lakefront Health Center",
+//         "email": "info@lakefronthealthcenter.com",
+//         "specialization": "Obstetrics and Gynecology",
+//         "total_beds": 180,
+//         "total_staff": 90
+//       },
+//       {
+//         "name": "Mountain View Hospital",
+//         "email": "info@mountainviewhospital.com",
+//         "specialization": "Orthopedics",
+//         "total_beds": 220,
+//         "total_staff": 110
+//       },
+//       {
+//         "name": "Pinecrest Medical Center",
+//         "email": "info@pinecrestmedicalcenter.com",
+//         "specialization": "Cardiology",
+//         "total_beds": 280,
+//         "total_staff": 140
+//       },
+//       {
+//         "name": "Harborview Medical Center",
+//         "email": "info@harborviewmedicalcenter.com",
+//         "specialization": "Neurology",
+//         "total_beds": 320,
+//         "total_staff": 160
+//       },
+//       {
+//         "name": "Riverside Community Hospital",
+//         "email": "info@riversidemedicalcenter.com",
+//         "specialization": "Pediatrics",
+//         "total_beds": 190,
+//         "total_staff": 95
+//       },
+//       {
+//         "name": "Valley Regional Hospital",
+//         "email": "info@valleyregionalhospital.com",
+//         "specialization": "Psychiatry",
+//         "total_beds": 240,
+//         "total_staff": 120
+//       },
+//       {
+//         "name": "Oceanfront Health Institute",
+//         "email": "info@oceanfronthealthinstitute.com",
+//         "specialization": "Oncology",
+//         "total_beds": 200,
+//         "total_staff": 100
+//       }
+//     ];
 
     // let doctors = [
         //     {

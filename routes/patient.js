@@ -4,7 +4,7 @@ const passport = require('passport');
 
 const patientController = require('../controller/patient_controller.js');
 
-// router.get('/add-pharma', patientController.add_pharma);
+// router.get('/find-hospitals-doctors', patientController.find_hospitals_doctors);
 
 
 module.exports = router;

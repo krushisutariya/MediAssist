@@ -192,12 +192,12 @@ module.exports.update_profile = async function (req, res) {
             } else if (user.role === 'Hospital') {
                 
             // Update Hospital
-                
                 await pool.query(`UPDATE Users SET username = $1 WHERE email = $2`, [req.body.username, user.email]);
                 await pool.query('UPDATE Hospital SET username = $1 WHERE email = $2', [req.body.username, user.email]);
                 await pool.query('UPDATE Hospital SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Hospital SET address = $1 WHERE email = $2', [req.body.address, user.email]);
                 await pool.query('UPDATE Hospital SET specialities = $1 WHERE email = $2', [req.body.specialities, user.email]);
+                await pool.query('UPDATE Hospital SET location = $1 WHERE email = $2', [req.body.location, user.email]);
                 await pool.query('UPDATE Hospital SET insurance_policies = $1 WHERE email = $2', [req.body.insurance_policies, user.email]);
                 await pool.query('UPDATE Hospital SET cashless = $1 WHERE email = $2', [req.body.cashless, user.email]);
 

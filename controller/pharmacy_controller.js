@@ -6,11 +6,7 @@ module.exports.stocks = async (req, res) => {
         
         // req.user.email has the email of pharmacy logged in from which you can use the stores table to
         // find out the medicines and their quantities present in the pharmacy
-<<<<<<< HEAD
-        let medicines = await pool.query(`SELECT stock FROM stores WHERE email_pharam = $1`,[req.user.mail]);
-=======
         let medicines = await pool.query(`SELECT name, brand_name, stock FROM stores WHERE email_pharm = $1`,[req.user.email]);
->>>>>>> d79506cd602c50eb4ecc4b89ab2c3d97cf4a9c4b
         medicines = medicines.rows;
 
         return res.render('pharmacy_stocks', {
@@ -31,11 +27,7 @@ module.exports.update_stocks = async (req, res) => {
         
         // req.user.email has the email of pharmacy logged in from which you can use the stores table to
         // find out those medicines from the pharmacy whose quantity is greater than 0
-<<<<<<< HEAD
-        let medicines = await pool.query(`SELECT medicine_name,brand_name,stock FROM stores WHERE email_pharm=$1`,[req.user.email]);
-=======
         let medicines = await pool.query(`SELECT name, brand_name, stock FROM stores WHERE email_pharm = $1`,[req.user.email]);
->>>>>>> d79506cd602c50eb4ecc4b89ab2c3d97cf4a9c4b
         medicines = medicines.rows;
 
         let brands = await pool.query(`SELECT distinct(brand_name) FROM stores WHERE email_pharm = $1`, [req.user.email]);
