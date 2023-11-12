@@ -163,6 +163,7 @@ module.exports.update_profile = async function (req, res) {
                 await pool.query('UPDATE Patient SET username = $1 WHERE email = $2', [req.body.username, user.email]);
                 await pool.query('UPDATE Patient SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Patient SET gender = $1 WHERE email = $2', [req.body.gender, user.email]);
+                await pool.query('UPDATE Patient SET location = $1 WHERE email = $2', [req.body.location, user.email]);
                 await pool.query('UPDATE Patient SET weight = $1 WHERE email = $2', [parseFloat(req.body.weight), user.email]);
                 await pool.query('UPDATE Patient SET height = $1 WHERE email = $2', [parseFloat(req.body.height), user.email]);
                 await pool.query('UPDATE Patient SET diseases = $1 WHERE email = $2', [req.body.diseases, user.email]);

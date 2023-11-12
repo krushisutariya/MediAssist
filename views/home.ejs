@@ -103,7 +103,7 @@
 							Take control of your healthcare journey with our <q>Find Nearby Hospitals & Book Appointments</q> feature. Quality care, just a click away.
 						</p>
 						<div class="btn-container ">
-							<a href="/users/patient/find-hospitals-doctors"
+							<a href="/users/patient/find-hospitals-doctors"  id="findHospitalsDoctors"
 								class="btn btn-main-2 btn-icon btn-round-full">Book appoinment <i
 								class="icofont-simple-right ml-2  "></i></a>
 						</div>
@@ -459,3 +459,61 @@
 		</div>
 	</div>
 </section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var findHospitalsDoctors = document.getElementById('findHospitalsDoctors');
+        var isEventProcessed = false;
+
+        findHospitalsDoctors.addEventListener('click', function (event) {
+            // Check if the event has already been processed
+            if (isEventProcessed) {
+                return;
+            }
+
+            // Ask the user for location preference
+            var locationPreference = confirm('Do you want to use your current location for the appointment?');
+
+            // Prevent the default action of the anchor tag
+            event.preventDefault();
+
+            if (locationPreference) {
+                // If the user wants to use the current location, ask for permission
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    // Modify the href with latitude and longitude
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var newHref = findHospitalsDoctors.getAttribute('href') + '/?lat=' + latitude + '&lng=' + longitude;
+
+                    // Update the href attribute
+                    findHospitalsDoctors.setAttribute('href', newHref);
+
+                    // Process the request (you can add your logic here)
+                    alert('Request processed with current location: ' + newHref);
+
+                    // Set the flag to indicate that the event has been processed
+                    isEventProcessed = true;
+
+                    // Trigger the click event to proceed with the anchor tag's default action
+                    findHospitalsDoctors.click();
+                }, function (error) {
+                    console.error('Error getting current location:', error);
+
+                    // If there's an error, proceed with the anchor tag's default action without modifying the href
+                    isEventProcessed = true;
+                    findHospitalsDoctors.click();
+                });
+            } else {
+                // Process the request without modifying the href
+                alert('Request processed with your profile location.');
+
+                // Set the flag to indicate that the event has been processed
+                isEventProcessed = true;
+
+                // Trigger the click event to proceed with the anchor tag's default action
+                findHospitalsDoctors.click();
+            }
+        });
+    });
+</script>

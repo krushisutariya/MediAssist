@@ -1,0 +1,18 @@
+<title><%=title%></title>
+
+<div>
+    <% hospitals.forEach((hospital) => { %>
+        <div>
+        <h3><%= hospital.name %></h3>
+        <p><%= hospital.address %></p>
+        <p><%= hospital.email %></p>
+        <% doctorsInNearbyHospitals[hospital.email].doctors.forEach((doctor) => { %>
+            <div>
+                <h4><%= doctor.name %></h4>
+                <p><%= doctor.specialization %></p>
+                <p><%= doctor.email %></p>
+            </div>
+        <%})%>
+    <%})%>
+    
+</div>

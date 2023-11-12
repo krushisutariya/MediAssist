@@ -1,8 +1,73 @@
 const pool = require('../config/db');
+const axios = require('axios');
 
 // Render the appointment booking page
-module.exports.appointment = async (req, res) => {
+module.exports.find_hospitals_doctors = async (req, res) => {
     
+    try {
+        let hospitals = await pool.query(`select * from hospital`);
+        hospitals = hospitals.rows;
+        let nearbyHospitals = [];
+        let doctorsInNearbyHospitals = [];
+    
+        if (req.query) {
+            const lat = req.query.lat;
+            const lng = req.query.lng;
+    
+            // find the nearby hospitals
+            for (const hospital of hospitals) {
+                const apiKey = process.env.apiKey;
+    
+                const startCoordinates = lat + ',' + lng;
+                const endCoordinates = hospital.location;
+                const traffic = true;
+    
+                const tomtomApiEndpoint = 'https://api.tomtom.com/routing/1/calculateRoute/';
+                const url = `${tomtomApiEndpoint}${startCoordinates}:${endCoordinates}/json?key=${apiKey}&traffic=${traffic}`;
+    
+                const response = await axios.get(url);
+                const data = response.data;
+                const route = data.routes && data.routes[0];
+    
+                if (route) {
+                    const distance = route.summary.lengthInMeters / 1000; // in km
+                    console.log(typeof (distance));
+                    console.log(distance);
+                    const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
+    
+                    if (distance < 30) {
+                        await nearbyHospitals.push(hospital);
+    
+                        let doctors = await pool.query(`select * from doctor where email in (
+                                select doc_email from works where hosp_email=$1
+                            )`, [hospital.email]);
+                        doctors = doctors.rows;
+    
+                        doctorsInNearbyHospitals[hospital.email] = {
+                            doctors: doctors,
+                            distance: distance,
+                            travelTime: travelTime
+                        };
+                    }
+                } else {
+                    console.error('No route found.');
+                }
+            }
+        }
+    
+        console.log(nearbyHospitals);
+        console.log(doctorsInNearbyHospitals);
+        return res.render('patient-find-hospitals-doctors', {
+            title: 'Find Hospitals and Doctors',
+            hospitals: nearbyHospitals,
+            doctorsInNearbyHospitals: doctorsInNearbyHospitals
+        });
+    } catch (error) {
+        console.log('Error: ', error.message);
+        return res.status(500).json({ error: 'Server Error!' });
+    }
+    
+
 }
 
 // Make an appointment
