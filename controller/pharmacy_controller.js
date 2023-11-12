@@ -6,7 +6,11 @@ module.exports.stocks = async (req, res) => {
         
         // req.user.email has the email of pharmacy logged in from which you can use the stores table to
         // find out the medicines and their quantities present in the pharmacy
+
+        
+
         let medicines = await pool.query(`SELECT name, brand_name, stock FROM stores WHERE email_pharm = $1`,[req.user.email]);
+
         medicines = medicines.rows;
 
         return res.render('pharmacy_stocks', {
@@ -27,7 +31,9 @@ module.exports.update_stocks = async (req, res) => {
         
         // req.user.email has the email of pharmacy logged in from which you can use the stores table to
         // find out those medicines from the pharmacy whose quantity is greater than 0
+
         let medicines = await pool.query(`SELECT name, brand_name, stock FROM stores WHERE email_pharm = $1`,[req.user.email]);
+
         medicines = medicines.rows;
 
         let brands = await pool.query(`SELECT distinct(brand_name) FROM stores WHERE email_pharm = $1`, [req.user.email]);
@@ -72,7 +78,7 @@ module.exports.add_medicine = async (req, res) => {
         // write a query to insert a medicine into the medicne table and the stores table with 
         // name in req.body.name, brand_name in req.body.brand_name, stock in req.body.stock and 
         // pharma email in req.user.email
-        await pool.query(``);
+        await pool.query(`INSERT into medicine(name,brand_name) VALUES ($1,$2),INSERT INTO stores (email_pharma,name,brand_name,stock) VALUES ($3,$1,$2,$4)`,[req.body.name,req.body.brand_name,req.body.email,req.body.stock]);
 
         req.flash('success', 'Medicine added Successfully!');
         return res.redirect('back');
