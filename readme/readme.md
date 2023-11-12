@@ -10,10 +10,8 @@
   }
   
   .table {
-    border: 1px solid #ddd;
     padding: 10px;
     margin: 10px 0;
-  
     font-weight: bold;
     color: pink;
   }
@@ -29,15 +27,13 @@
 * [Overview](#overview)
 
 ## <div class="table" id="introduction"> Introduction </div>
-	
+#### <p>This Hospital Management System helps patients, doctors, hospitals, ambulances, and government agencies by making healthcare work better. It makes things like appointments and information easier, so patients get better care. It also helps with keeping track of data in healthcare. The goal is to solve problems for everyone involved and make healthcare services better overall.</p>
 ## <div class="table" id="technologies"> Technologies </div> 
-Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
+<ul>
+  <li>html</li>
+  <li>css</li>
+  <li>javascript</li>
+</ul>
+
 	
 ## <div class="table" id="overview"> Overview</div> 
-To run this project, install it locally using npm:
-in this readme file, when I click on Introduction, it should take me to that place.
-
-Make sure the IDs in the links (`#introduction`, `#technologies`, `#overview`) match the IDs of the corresponding sections. The headings should not be inside `<div>` elements; use heading tags directly.
