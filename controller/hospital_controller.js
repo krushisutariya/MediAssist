@@ -37,6 +37,7 @@ module.exports.register_pharma = async function(req, res){
 
 // Register a new Laboratory
 module.exports.register_lab = async function(req, res){
+
     if(req.params.email === req.user.email){
         try {
             // You have the data in req.body and can access it like this: req.body.detail_you_want. Make an INSERT query into the Pharmacy table using this data.
@@ -51,6 +52,7 @@ module.exports.register_lab = async function(req, res){
             return res.redirect('back');
         }
     } else {
+
         return res.redirect('back');
     }
 }

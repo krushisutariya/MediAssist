@@ -74,9 +74,9 @@ CREATE TABLE stores(
     name VARCHAR(255),
     brand_name VARCHAR(255),
     stock INT,
-    PRIMARY KEY(email_pharm,medicine_name,brand_name),
+    PRIMARY KEY(email_pharm,name,brand_name),
     FOREIGN KEY(email_pharm) REFERENCES Pharmacy(email),
-    FOREIGN KEY(medicine_name,brand_name) REFERENCES Medicine
+    FOREIGN KEY(name,brand_name) REFERENCES Medicine
 );
 
 --Access
@@ -123,7 +123,7 @@ CREATE TABLE Ambulance_driver(
     email VARCHAR(255) PRIMARY KEY,
     contact_number  CHAR(10), 
     licence  CHAR(16) NOT NULL,
-    vehicle_number VARCHAR(16) NOT NULL,
+    vehicle_number VARCHAR(16) NOT NULL
 );
 
 --Laboratory table
@@ -159,7 +159,7 @@ CREATE TABLE appoints (
 CREATE TABLE Medicine(
     name VARCHAR(255),
     brand_name VARCHAR(255),
-    PRIMARY KEY(medicine_name, brand_name)
+    PRIMARY KEY(name, brand_name)
 );
 
 -- Pharmacy Table
