@@ -1,11 +1,3 @@
-# mda {
-    
-}
-
-.table {
-    
-}
-
 # <div style="text-align: center; position: relative;padding: 20px;">Hospital Management System</div>
 
 ## <p style="text-align: center;"> Mediassist </p>
