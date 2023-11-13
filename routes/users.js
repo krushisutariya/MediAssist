@@ -16,6 +16,7 @@ router.use('/doctor', require('./doctor')); //redirected to controller rendering
 router.use('/pharmacy', require('./pharmacy')); //redirected to controller rendering pharmacy page
 router.use('/govt-agency', require('./govt-agency'));
 router.use('/patient', require('./patient'));
+router.use('/ambulance', require('./ambulance'));
 
 router.post('/create-session', passport.authenticate(
     'local',

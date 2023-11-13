@@ -31,8 +31,6 @@ module.exports.find_hospitals_doctors = async (req, res) => {
     
                 if (route) {
                     const distance = route.summary.lengthInMeters / 1000; // in km
-                    console.log(typeof (distance));
-                    console.log(distance);
                     const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
     
                     if (distance < 30) {
@@ -55,8 +53,6 @@ module.exports.find_hospitals_doctors = async (req, res) => {
             }
         }
     
-        console.log(nearbyHospitals);
-        console.log(doctorsInNearbyHospitals);
         return res.render('patient-find-hospitals-doctors', {
             title: 'Find Hospitals and Doctors',
             hospitals: nearbyHospitals,

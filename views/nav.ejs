@@ -50,7 +50,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/users/govt-agency/view-data">View Data</a>
                     </li>
-                <%}%>
+                <%}else if(locals.user.role === 'Ambulance_driver'){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/ambulance/nearby-hospitals" id="findHospitalsAmbNav">Nearby Hospitals</a>
+                    </li>
+                <%}%>%>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About_Us</a>
                 </li>

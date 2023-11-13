@@ -266,6 +266,18 @@ module.exports.update_profile = async function (req, res) {
                 await pool.query('UPDATE Govt_agency SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Govt_agency SET contact = $1 WHERE email = $2', [req.body.contact, user.email]);
 
+            } else if(user.role === 'Ambulance_driver'){
+
+                // Update Pharmacy
+
+                await pool.query(`UPDATE Users SET username = $1 WHERE email = $2`, [req.body.username, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET username = $1 WHERE email = $2', [req.body.username, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET name = $1 WHERE email = $2', [req.body.name, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET address = $1 WHERE email = $2', [req.body.address, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET licence = $1 WHERE email = $2', [req.body.licence, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET vehicle_number = $1 WHERE email = $2', [req.body.vehicle_number, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET contact = $1 WHERE email = $2', [req.body.contact, user.email]);
+
             } 
             req.flash('success', 'Profile Updated Successfully!');
             return res.redirect('back');

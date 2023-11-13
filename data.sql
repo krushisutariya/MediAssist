@@ -121,9 +121,11 @@ CREATE TABLE Doctor(
 --Ambulance_driver
 CREATE TABLE Ambulance_driver(
     email VARCHAR(255) PRIMARY KEY,
-    contact_number  CHAR(10), 
-    licence  CHAR(16) NOT NULL,
-    vehicle_number VARCHAR(16) NOT NULL
+    username VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    contact CHAR(10),
+    licence  VARCHAR(16) NOT NULL,
+    vehicle_number VARCHAR(10) NOT NULL
 );
 
 --Laboratory table
