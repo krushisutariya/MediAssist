@@ -1,1 +1,4 @@
 node_modules/
+views/demo.html
+views/demo2.html
+/.env

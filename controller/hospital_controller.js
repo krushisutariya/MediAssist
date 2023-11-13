@@ -37,6 +37,7 @@ module.exports.register_pharma = async function(req, res){
 
 // Register a new Laboratory
 module.exports.register_lab = async function(req, res){
+
     if(req.params.email === req.user.email){
         try {
             // You have the data in req.body and can access it like this: req.body.detail_you_want. Make an INSERT query into the Pharmacy table using this data.
@@ -51,6 +52,7 @@ module.exports.register_lab = async function(req, res){
             return res.redirect('back');
         }
     } else {
+
         return res.redirect('back');
     }
 }
@@ -150,6 +152,8 @@ module.exports.manage_patients = async (req, res) => {
         let patient = await pool.query('select a.start_time,a.end_time,a.doc_email,a.date,a.id , p.name,p.email,p.contact from appoints a join Patient p on a.patient_email = p.email where is_pending=0 && (a.doc_email in (select doc_email from works where hosp_email=req.user.email))');
         
     
+        let patient = await pool.query('select * from patient where email in (select patient_email from appoints where (is_pending=0) && ( doc_email in (select doc_email from works where hosp_email=req.user.email)))');
+
         return res.render('hospital_manage_patients', {
             title: 'Manage Patients',
             patients: patients

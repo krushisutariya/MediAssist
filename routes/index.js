@@ -14,6 +14,9 @@ router.get('/doctors',homeController.doctors); //redirected to controller render
 router.use('/users', require('./users')); //redirected to controller rendering users page
 // router.use('/functionality', require('./functionality')); //redirected to controller rendering functionality page
 // router.use('/project', require('./project')); //redirected to controller rendering projects page
+router.get('/getApiKey', (req, res) => {
+    res.json({ apiKey: process.env.apiKey });
+});
 
 
 module.exports = router;

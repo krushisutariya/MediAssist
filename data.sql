@@ -31,6 +31,7 @@ CREATE TABLE Patient (
     past_history VARCHAR(1023),
     address VARCHAR(255),
     contact CHAR(10),
+    location VARCHAR(20),
     PRIMARY KEY (email),
     FOREIGN KEY (email) REFERENCES Users(email),
     FOREIGN KEY (username) REFERENCES Users(username)
@@ -41,7 +42,7 @@ CREATE TABLE Hospital(
 	EMAIL VARCHAR(255) NOT NULL,
 	USERNAME VARCHAR(255) NOT NULL,
 	NAME VARCHAR(255) NOT NULL,
-	LOCATION VARCHAR(1023),
+	LOCATION VARCHAR(20),
 	ADDRESS VARCHAR(1023),
 	TOTAL_DOCTORS INT,
 	SPECIALITIES VARCHAR(1023),
@@ -73,9 +74,9 @@ CREATE TABLE stores(
     name VARCHAR(255),
     brand_name VARCHAR(255),
     stock INT,
-    PRIMARY KEY(email_pharm,medicine_name,brand_name),
+    PRIMARY KEY(email_pharm,name,brand_name),
     FOREIGN KEY(email_pharm) REFERENCES Pharmacy(email),
-    FOREIGN KEY(medicine_name,brand_name) REFERENCES Medicine
+    FOREIGN KEY(name,brand_name) REFERENCES Medicine
 );
 
 --Access
@@ -122,7 +123,7 @@ CREATE TABLE Ambulance_driver(
     email VARCHAR(255) PRIMARY KEY,
     contact_number  CHAR(10), 
     licence  CHAR(16) NOT NULL,
-    vehicle_number VARCHAR(16) NOT NULL,
+    vehicle_number VARCHAR(16) NOT NULL
 );
 
 --Laboratory table
@@ -141,7 +142,7 @@ CREATE TABLE Laboratory(
 
 -- appointment table
 CREATE TABLE appoints (
-    id CHAR(10),
+    id CHAR(15),
     patient_email VARCHAR(255),
     doc_email VARCHAR(255),
     start_time VARCHAR(8),
@@ -149,7 +150,7 @@ CREATE TABLE appoints (
     date VARCHAR(10),
     is_pending CHAR(1),
     prescription VARCHAR(2047),
-    PRIMARY KEY(id),
+    PRIMARY KEY(doc_email, start_time, end_time, date),
     FOREIGN KEY (patient_email) REFERENCES Patient(EMAIL),
     FOREIGN KEY (doc_email) REFERENCES Doctor(EMAIL)
 );
@@ -157,7 +158,7 @@ CREATE TABLE appoints (
 CREATE TABLE Medicine(
     name VARCHAR(255),
     brand_name VARCHAR(255),
-    PRIMARY KEY(medicine_name, brand_name)
+    PRIMARY KEY(name, brand_name)
 );
 
 -- Pharmacy Table
@@ -166,7 +167,7 @@ CREATE TABLE Pharmacy(
 	username VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     contact CHAR(10),
-    email_hospital CHAR(255) NOT NULL,
+    email_hospital VARCHAR(255) NOT NULL,
     PRIMARY KEY(email),
     FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL),
     FOREIGN KEY (email) REFERENCES Users(email),
@@ -180,7 +181,7 @@ CREATE TABLE works(
     start_time VARCHAR(8),
     end_time VARCHAR(8),
     salary DECIMAL(9,2),
-    PRIMARY KEY(doc_reg_no,email),
-    FOREIGN KEY(doc_reg_no) REFERENCES Doctor(reg_no),
-    FOREIGN KEY(email) REFERENCES Hospital(EMAIL)
+    PRIMARY KEY(doc_email,hosp_email),
+    FOREIGN KEY(doc_email) REFERENCES Doctor(EMAIL),
+    FOREIGN KEY(hosp_email) REFERENCES Hospital(EMAIL)
 );
