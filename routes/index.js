@@ -3,7 +3,7 @@ const router = express.Router();
 
 //accessing the controller folder
 const homeController = require('../controller/home_controller');
-// const passport = require('passport');
+const passport = require('passport');
 
 // Router-Controller cycle
 router.get('/', homeController.home); //redirected to controller rendering home page
@@ -14,7 +14,7 @@ router.post('/submit-mail', homeController.submit_contact); //redirected to cont
 router.use('/users', require('./users')); //redirected to controller rendering users page
 // router.use('/functionality', require('./functionality')); //redirected to controller rendering functionality page
 // router.use('/project', require('./project')); //redirected to controller rendering projects page
-router.get('/getApiKey', (req, res) => {
+router.get('/getApiKey', passport.checkAuthentication, (req, res) => {
     res.json({ apiKey: process.env.apiKey });
 });
 

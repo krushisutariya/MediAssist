@@ -68,12 +68,10 @@ passport.checkAuthentication = function (req, res, next) {
     return res.redirect('/users/sign-in');
 }
 
-// check if the user is a builder
-
+// check if the user is a Patient
 passport.checkPatient = function(req, res, next){
     if(req.isAuthenticated()){
-        if(req.user.role == 'patient'){
-
+        if(req.user.role == 'Patient'){
             return next();
         }
         return res.redirect('back');
@@ -84,7 +82,7 @@ passport.checkPatient = function(req, res, next){
 // check if the user is a Doctor
 passport.checkDoctor = function (req, res, next) {
     if (req.isAuthenticated()) {
-        if (req.user.role == 'doctor') {
+        if (req.user.role == 'Doctor') {
             return next();
         }
         return res.redirect('back');
@@ -92,10 +90,52 @@ passport.checkDoctor = function (req, res, next) {
     return res.redirect('/users/sign-in');
 }
 
-// check if user is a builder or a Doctor
-passport.checkPatientDoctor = function (req, res, next) {
+// check if the user is a Hospital
+passport.checkHospital = function(req, res, next){
+    if(req.isAuthenticated()){
+        if(req.user.role == 'Hospital'){
+            return next();
+        }
+        return res.redirect('back');
+    }
+    return res.redirect('/users/sign-in');
+}
+
+// check if the user is a Pharmacy
+passport.checkPharmacy = function (req, res, next) {
     if (req.isAuthenticated()) {
-        if (req.user.role == 'doctor' || req.user.role == 'patient') {
+        if (req.user.role == 'Pharmacy') {
+            return next();
+        }
+        return res.redirect('back');
+    }
+    return res.redirect('/users/sign-in');
+}
+// check if the user is a Laboratory
+passport.checkLaboratory = function(req, res, next){
+    if(req.isAuthenticated()){
+        if(req.user.role == 'Laboratory'){
+            return next();
+        }
+        return res.redirect('back');
+    }
+    return res.redirect('/users/sign-in');
+}
+
+// check if the user is a Government Agency
+passport.checkGovtAgency = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        if (req.user.role == 'Govt_Agency') {
+            return next();
+        }
+        return res.redirect('back');
+    }
+    return res.redirect('/users/sign-in');
+}
+// check if the user is an Ambulance Driver
+passport.checkAmbulanceDriver = function(req, res, next){
+    if(req.isAuthenticated()){
+        if(req.user.role == 'Ambulance_driver'){
             return next();
         }
         return res.redirect('back');
