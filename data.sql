@@ -149,7 +149,7 @@ CREATE TABLE appoints (
     date VARCHAR(10),
     is_pending CHAR(1),
     prescription VARCHAR(2047),
-    PRIMARY KEY(doc_email,date,start_time,end_time),
+    PRIMARY KEY(id),
     FOREIGN KEY (patient_email) REFERENCES Patient(EMAIL),
     FOREIGN KEY (doc_email) REFERENCES Doctor(EMAIL)
 );
