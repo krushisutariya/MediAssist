@@ -156,7 +156,6 @@ CREATE TABLE appoints (
     FOREIGN KEY (patient_email) REFERENCES Patient(EMAIL),
     FOREIGN KEY (doc_email) REFERENCES Doctor(EMAIL)
 );
-
 -- Medicine Table
 CREATE TABLE Medicine(
     name VARCHAR(255),

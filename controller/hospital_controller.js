@@ -132,10 +132,11 @@ module.exports.manage_patients = async (req, res) => {
     try {
         // Find out the patients that are enrolled in the hospital using the
         // doctors details from the appoints table.
-        let patients = await pool.query(`select * from patient where email in (select patient_email from appoints where (is_pending='0') AND ( doc_email in (select doc_email from works where hosp_email=$1)))`,[req.user.email]);
-        patients = patients.rows;
 
-        return res.render('hospital-patients', {
+        let patients = await pool.query('select a.start_time,a.end_time,a.doc_email,a.date,a.id , p.name,p.email,p.contact from appoints a join Patient p on a.patient_email = p.email where is_pending=0 && (a.doc_email in (select doc_email from works where hosp_email=req.user.email))');
+        patients = patients.rows;
+    
+        return res.render('hospital_manage_patients', {
             title: 'Manage Patients',
             patients: patients
         })
