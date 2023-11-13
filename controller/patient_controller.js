@@ -36,9 +36,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                     if (distance < 30) {
                         await nearbyHospitals.push(hospital);
     
-                        let doctors = await pool.query(`select * from doctor where email in (
-                                select doc_email from works where hosp_email=$1
-                            )`, [hospital.email]);
+                        let doctors = await pool.query(``);
                         doctors = doctors.rows;
     
                         doctorsInNearbyHospitals[hospital.email] = {
@@ -61,9 +59,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
     } catch (error) {
         console.log('Error: ', error.message);
         return res.status(500).json({ error: 'Server Error!' });
-    }
-    
-
+    }    
 }
 
 // Render the appointments page
@@ -186,10 +182,10 @@ module.exports.make_appointment = async (req, res) => {
 
         // Update the appoints table by making the is_pending bit 1 and adding the patient's email and id
         // req.user.email is the patient's email and req.params.email is the doctor's email
-        await pool.query(`UPDATE appoints SET is_pending = '1', patient_email = $1, id = $2 WHERE doc_email = $3 AND date = $4 AND start_time = $5 AND end_time = $6`, [req.user.email, id, req.query.email, req.query.date, start_time, end_time]);
-        let slot = await pool.query(`select * from appoints where id=$1`, [id]);
+        await pool.query(``);
+        let slot = await pool.query(``);
         slot = slot.rows[0];
-        let name = await pool.query(`select name from patient where email=$1`, [req.user.email]);
+        let name = await pool.query(``);
         name = name.rows[0].name;
 
         req.flash('success', 'Appointment booked successfully');
