@@ -128,23 +128,6 @@ module.exports.view_doctors = async (req, res) => {
     }
 }
 
-// Register a new Doctor at the hospital
-module.exports.register_doctor = async (req, res) => {
-    try {
-        // You have the data in req.body and can access it like this: req.body.detail_you_want. Make an INSERT query into the Doctor table using this data.
-        // Write the query in the backticks below
-        await pool.query(`insert into doctor (REG_NO,EMAIL,USESRNAME,NAME,GENDER,QUALIFICATION,EXPERIENCE,CONTACT,INSTITUTE,ADDRESS,SPECIALIZATION) valuse ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
-        [req.body.reg_no,req.body.email,req.body.username,req.body.name,req.body.name,req.body.gender,req.body.qualification,req.body.experience,req.body.contact,req.body.institute,req.body.address,req.body.specialization]);
-
-        req.flash('success', 'Doctor added successfully');
-        return res.redirect('/');
-
-    } catch (error) {
-        console.log('Error: ', error.message);
-        return res.status(500).json({ error: 'Server Error' });
-    }
-}
-
 module.exports.manage_patients = async (req, res) => {
     try {
         // Find out the patients that are enrolled in the hospital using the
