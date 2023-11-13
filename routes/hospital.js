@@ -10,6 +10,7 @@ router.post('/register-pharma/:email', hospitalController.register_pharma);
 router.post('/register-lab/:email', hospitalController.register_lab);
 router.post('/register-doctor/:email', hospitalController.register_doctor);
 router.get('/view-doctors', hospitalController.view_doctors);
+router.get('/view-patients', hospitalController.manage_patients);
 router.get('/add-doctor', hospitalController.add_doctor);
 router.get('/view-appointment', hospitalController.appointments);
 router.get('/cancel-appointment/:id', hospitalController.cancel_appointment);

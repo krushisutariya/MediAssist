@@ -1,6 +1,7 @@
-// Hackout'23
 // importing express library
 const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
 const app = express();
 
 // decalring the local server port or the Render port
@@ -19,6 +20,7 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 
 // providing access to the database
+const dotenv = require('dotenv').config();
 const pool = require('./config/db');
 
 // importing express-session library to create session cookies
@@ -37,6 +39,9 @@ const PgSession = require('connect-pg-simple')(session);
 // importing the connect-flash library to set up flash notifications and setting up its middleware
 const flash = require('connect-flash');
 const customMware = require('./config/flash_middleware');
+
+// Enable cors
+app.use(cors());
 
 // using the httpsRedirect middleware
 app.use('/', httpsRedirect());

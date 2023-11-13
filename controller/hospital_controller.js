@@ -37,6 +37,7 @@ module.exports.register_pharma = async function(req, res){
 
 // Register a new Laboratory
 module.exports.register_lab = async function(req, res){
+
     if(req.params.email === req.user.email){
         try {
             // You have the data in req.body and can access it like this: req.body.detail_you_want. Make an INSERT query into the Pharmacy table using this data.
@@ -51,6 +52,7 @@ module.exports.register_lab = async function(req, res){
             return res.redirect('back');
         }
     } else {
+
         return res.redirect('back');
     }
 }
@@ -126,29 +128,13 @@ module.exports.view_doctors = async (req, res) => {
     }
 }
 
-// Register a new Doctor at the hospital
-module.exports.register_doctor = async (req, res) => {
-    try {
-        // You have the data in req.body and can access it like this: req.body.detail_you_want. Make an INSERT query into the Doctor table using this data.
-        // Write the query in the backticks below
-        await pool.query(`insert into doctor (REG_NO,EMAIL,USESRNAME,NAME,GENDER,QUALIFICATION,EXPERIENCE,CONTACT,INSTITUTE,ADDRESS,SPECIALIZATION) valuse ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
-        [req.body.reg_no,req.body.email,req.body.username,req.body.name,req.body.name,req.body.gender,req.body.qualification,req.body.experience,req.body.contact,req.body.institute,req.body.address,req.body.specialization]);
-
-        req.flash('success', 'Doctor added successfully');
-        return res.redirect('/');
-
-    } catch (error) {
-        console.log('Error: ', error.message);
-        return res.status(500).json({ error: 'Server Error' });
-    }
-}
-
 module.exports.manage_patients = async (req, res) => {
     try {
         // Find out the patients that are enrolled in the hospital using the
         // doctors details from the appoints table.
-        let patient = await pool.query('select a.start_time,a.end_time,a.doc_email,a.date,a.id , p.name,p.email,p.contact from appoints a join Patient p on a.patient_email = p.email where is_pending=0 && (a.doc_email in (select doc_email from works where hosp_email=req.user.email))');
-        
+
+        let patients = await pool.query('select a.start_time,a.end_time,a.doc_email,a.date,a.id , p.name,p.email,p.contact from appoints a join Patient p on a.patient_email = p.email where is_pending=0 && (a.doc_email in (select doc_email from works where hosp_email=req.user.email))');
+        patients = patients.rows;
     
         return res.render('hospital_manage_patients', {
             title: 'Manage Patients',

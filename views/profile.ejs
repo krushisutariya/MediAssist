@@ -19,7 +19,9 @@
                             <img src="/images/pharmacy.jpg" class="img-fluid" alt="Pharmacy">
                         <%} else if(mode.role === 'Govt_Agency'){%>
                             <img src="/images/govt_agency.avif" class="img-fluid" alt="Govt_Agency">
-                        <%} else {%>
+                        <%} else if(mode.role === 'Ambulance_driver'){%>
+                            <img src="/images/ambulance_driver.png" class="img-fluid" alt="Ambulance Driver">
+                        <%} else {%>{%>
                             <img src="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360"
                                 class="img-fluid"
                                 alt="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360">
@@ -171,7 +173,7 @@
                                         </div>
                                 <%}%>
                             
-                            <%if(mode.role === 'Patient' || mode.role === 'Doctor' || mode.role === 'Hospital'){%>
+                            <%if(mode.role === 'Patient' || mode.role === 'Doctor' || mode.role === 'Hospital' || mode.role === 'Ambulance'){%>
                                 <div class="form-group my-2">
                                     <label for="address">Address:</label>
                                     <textarea class="form-control" id="address" name="address"
@@ -186,6 +188,11 @@
                             <%}%>
 
                             <%if(mode.role==='Patient'){%>
+                                <div class="form-group my-2" id="searchBoxContainer">
+                                    <label for="location">Location:</label>
+                                    <input class="form-control" type="text" id="location" name="location"
+                                    <%if(user.location !== null) {%> value="<%=user.location%>" <%}else{%> hidden <%}%> >
+                                </div>
                                 <div class="form-group my-2">
                                     <label for="dob">Date of Birth:</label>
                                     <input class="form-control" type="date" id="dob" name="birth_date"
@@ -326,6 +333,11 @@
                                 <%}%>
 
                                 <%if(mode.role==='Hospital'){%>
+                                    <div class="form-group my-2" id="searchBoxContainer">
+                                        <label for="location">Location:</label>
+                                        <input class="form-control" type="text" id="location" name="location"
+                                        <%if(user.location !== null) {%> value="<%=user.location%>" <%}else{%> hidden <%}%> >
+                                    </div>
                                     <div class="form-group my-2">
                                         <label for="total_doctors">Total Doctors:</label>
                                         <input class="form-control" id="total_doctors" name="total_doctors"
@@ -393,6 +405,19 @@
                                     </div>
                                 <%}%>
 
+                                <%if(mode.role==='Ambulance_driver'){%>
+                                    <div class="form-group my-2">
+                                        <label for="licence">Licence:</label>
+                                        <input class="form-control" type="text" id="licence" name="licence"
+                                        value="<%=user.licence%>">
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="vehicle_number">Vehicle Number:</label>
+                                        <input class="form-control" id="vehicle_number" name="vehicle_number"
+                                            value="<%=user.vehicle_number%>">
+                                    </div>
+                                <%}%>
+
                                 <div class="text-center">
                                     <button class="btn btn-success my-4" type="submit">Submit</button>
                                 </div>
@@ -403,3 +428,45 @@
                 </div>
             </div>
         </div>
+
+
+<script>
+    let apiKey = "";
+    // Fetch the API key
+    fetch('/getApiKey')
+        .then(response => response.json())
+        .then(data => {
+        apiKey = data.apiKey.trim();
+
+        // Initialize TomTom SearchBox after fetching the API key
+        initializeTomTomSearchBox(apiKey);
+    })
+    .catch(error => console.error('Error fetching API key:', error));
+
+    function initializeTomTomSearchBox(apiKey) {
+        var options = {
+            searchOptions: {
+                key: apiKey,
+                language: "en-GB",
+                limit: 5,
+                placeholder: "Search for Nearby Location"
+            },
+            autocompleteOptions: {
+                key: apiKey,
+                language: "en-GB",
+            }
+        };
+
+        // Set the container to the ID of the div
+        options.container = "#searchBoxContainer";
+
+        var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+
+        ttSearchBox.on("tomtom.searchbox.resultselected", function (data) {
+            document.getElementById("location").value = String(data.data.result.position.lat) + ',' + String(data.data.result.position.lng);
+        });
+
+        var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+        document.getElementById("searchBoxContainer").appendChild(searchBoxHTML);
+    }
+</script>

@@ -1,0 +1,67 @@
+<title><%=title%></title>
+<link rel="stylesheet" href="/css/find-hospital.css">
+
+    <div class="accordion">
+        <h1 class="accordion__title">NEARBY HOSPITALS</h1>
+        <% hospitals.forEach((hospital) => { %>
+            <div class="accordion__item">
+                <div class="accordion__header">
+                    <h2 class="accordion__header-title"><%= hospital.name %></h2>
+                    <div class="accordion__header-description">
+                        <p><%= Math.round(doctorsInNearbyHospitals[hospital.email].distance) %> km </p>
+                        <p><% const travelTime = doctorsInNearbyHospitals[hospital.email].travelTime;
+                                if (travelTime < 1) {
+                                const travelTimeMinutes = Math.round(travelTime * 60);
+                            %>
+                                <%= travelTimeMinutes %> minutes
+                            <%
+                                } else {
+                                const formattedTravelTime = travelTime.toFixed(2);
+                            %>
+                                <%= formattedTravelTime %> hours
+                            <%
+                                }
+                            %></p>
+                    </div>
+                    <i class="accordion__header-toggle"></i>
+                </div>
+                <div class="accordion__content">
+                    <h3 class="accordion__content-title"><i class="fa-solid fa-location-dot"></i> <%= hospital.address %></h3>
+                    <h3 class="accordion__content-title"><i class="fa-solid fa-envelope"></i> <%= hospital.email %></h3>
+                    <h3 class="accordion__content-title"><i class="fa-solid fa-house-medical"></i> <%= hospital.specialities %></h3>
+                    <h3 class="accordion__content-title"><i class="fa-solid fa-user-injured"></i> Insurance Policies: <%= hospital.insurance_policies %></h3>
+                    <h3 class="accordion__content-title"><i class="fa-solid fa-wallet"></i> Cashless: <%= hospital.cashless %></h3>
+                    <h3 class="accordion__content-title"><i class="fa-solid fa-user-doctor"></i> Doctors:</h3>
+
+                    <p class="accordion__content-text">
+                        <div class="team-boxed">
+                            <div class="container">
+                                <div class="row people">
+                                    <% doctorsInNearbyHospitals[hospital.email].doctors.forEach((doctor) => { %>
+                                        <div class="col-md-6 col-lg-4 item">
+                                            <div class="box">
+                                                <% if(!doctor.gender || doctor.gender === 'M'){%>
+                                                    <img class="postcard__img" src="/images/ll.png" alt="Image Title" />
+                                                <%} else {%>
+                                                    <img class="postcard__img" src="https://img.freepik.com/premium-vector/avatar-female-doctor-with-black-hair-doctor-with-stethoscope-vector-illustrationxa_276184-33.jpg" alt="Image Title" />
+                                                <%}%>
+                                                <h3 class="name"><a href="/users/patient/check-slots/<%=doctor.email%>" style="text-decoration: none;"><%=doctor.name%></a></h3>
+                                                <p class="title"><%=doctor.specialization%></p>
+                                                <p class="description"><%=doctor.qualification%></p>
+                                                <p class="description">Experience: <%=doctor.experience%> years</p>
+                                                <p class="description"><%=doctor.contact%></p>
+                                                <p class="description"><%=doctor.email%></p>
+                                            </div>
+                                        </div>
+                                    <%})%>
+                                </div>
+                            </div>
+                        </div>
+                    </p>
+                    
+                </div>
+            </div>
+        <%})%>
+    </div>
+
+<script src="/js/find-hospital.js"></script>
