@@ -4,8 +4,7 @@
   "description": "Appointment Scheduling System at a Busy clinic",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dharmesh",
   "license": "ISC",
