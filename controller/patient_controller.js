@@ -19,7 +19,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                 const apiKey = process.env.apiKey;
     
                 const startCoordinates = lat + ',' + lng;
-                const endCoordinates = hospital.location;
+                const endCoordinates = hospital.location.replace(/\s+/g, ''); // Remove spaces
                 const traffic = true;
     
                 const tomtomApiEndpoint = 'https://api.tomtom.com/routing/1/calculateRoute/';
@@ -31,11 +31,9 @@ module.exports.find_hospitals_doctors = async (req, res) => {
     
                 if (route) {
                     const distance = route.summary.lengthInMeters / 1000; // in km
-                    console.log(typeof (distance));
-                    console.log(distance);
                     const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
     
-                    if (distance < 30) {
+                    if (distance < 20) {
                         await nearbyHospitals.push(hospital);
     
                         let doctors = await pool.query(`select * from doctor where email in (
@@ -55,8 +53,6 @@ module.exports.find_hospitals_doctors = async (req, res) => {
             }
         }
     
-        console.log(nearbyHospitals);
-        console.log(doctorsInNearbyHospitals);
         return res.render('patient-find-hospitals-doctors', {
             title: 'Find Hospitals and Doctors',
             hospitals: nearbyHospitals,
@@ -149,9 +145,8 @@ module.exports.check_availability = async function (req, res) {
                     formattedEndTime = `${end_hours.toString().padStart(2, '0')}:${end_minutes.toString().padStart(2, '0')}`;
 
                     let new_slot_dummy = await pool.query(`INSERT INTO appoints (start_time, end_time, date, doc_email, is_pending) VALUES ($1, $2, $3, $4, $5)`, [formattedStartTime, formattedEndTime, date, req.params.email, '2']);
-                    new_slot_dummy = new_slot_dummy.rows[0];
+                    new_slot_dummy = await pool.query(`SELECT * FROM appoints WHERE start_time=$1 AND end_time=$2 AND date=$3 AND doc_email=$4 AND is_pending='2'`, [formattedStartTime, formattedEndTime, date, req.params.email]);
                     newSlots.push(new_slot_dummy);
-                    console.log(new_slot_dummy);
                 }
             }
         } else {
@@ -166,6 +161,7 @@ module.exports.check_availability = async function (req, res) {
             available: true,
             doctor: req.params.email
         });
+
     } catch (err) {
         console.log('Error: ', err);
         return res.redirect('back');

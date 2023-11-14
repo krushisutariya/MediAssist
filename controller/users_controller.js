@@ -22,51 +22,37 @@ module.exports.details = function (req, res) {
 }
 
 // Register New User
-// module.exports.new_user = async function (req, res) {
-//     if (req.body.re_password != req.body.password) {
-//         req.flash('error', 'Passwords are not matching');
-//         return res.redirect('back');
-//     }
-//     let user = await User.findOne({ $or: [{ email: req.body.email }, { username: req.body.username }] });
-//     console.log('Finding user:', user);
-//     if (!user) {
-//         try {
-//             user = await User.create(req.body);
-//             console.log('Creating user');
-//             if (req.body.role == 'practitioner') {
-//                 console.log('Creating Practitioner: ', user._id, user.name, user.username, user.email, user.password, user.role);
-//                 await Practioner.create({
-//                     user: user._id,
-//                     name: user.name,
-//                     username: user.username,
-//                     email: user.email,
-//                     password: user.password,
-//                     role: user.role
-//                 });
-//             } else {
-//                 await Patient.create({
-//                     user: user._id,
-//                     name: user.name,
-//                     username: user.username,
-//                     email: user.email,
-//                     password: user.password,
-//                     role: user.role
-//                 });
-//             }
-
-//             req.flash('success', 'User Registered Successfully!');
-//             return res.redirect('/users/sign-in');
-//         } catch (err) {
-//             req.flash('error', err);
-//             console.log('Error: ', err);
-//         }
-//     } else {
-//         req.flash('error', 'User already exists!');
-//         return res.render('sign_in', {
-//             title: "MediAssist | Sign In"
-//         });
-//     }
-// }
+module.exports.new_user = async function (req, res) {
+    try {
+        if (req.body.re_password != req.body.password) {
+            req.flash('error', 'Passwords are not matching');
+            return res.redirect('back');
+        }
+        let user = await pool.query(`SELECT * FROM Users WHERE email = $1 OR username = $2`, [req.body.email, req.body.username]);
+        user = user.rows[0];
+        if (!user) {
+            try {
+                user = await pool.query(`INSERT INTO Users(email, username, password, role) VALUES ($1, $2, $3, $4) RETURNING *`, [req.body.email, req.body.username, req.body.password, req.body.role]);
+                
+                await pool.query(`INSERT INTO ${req.body.role}(email, username, name) VALUES ($1, $2, $3)`, [req.body.email, req.body.username, req.body.name]);
+    
+                req.flash('success', 'User Registered Successfully!');
+                return res.redirect('/users/sign-in');
+            } catch (err) {
+                req.flash('error', err);
+                console.log('Error: ', err);
+            }
+        } else {
+            req.flash('error', 'User already exists!');
+            return res.render('sign_in', {
+                title: "MediAssist | Sign In"
+            });
+        }
+    } catch (error) {
+        console.log('Error: ', error);
+        return res.status(500).json({ error: 'Server Error!' });
+    }
+}
 
 // Profile section for User
 module.exports.profile = async function (req, res) {
@@ -265,6 +251,18 @@ module.exports.update_profile = async function (req, res) {
                 await pool.query('UPDATE Govt_agency SET id = $1 WHERE email = $2', [req.body.id, user.email]);
                 await pool.query('UPDATE Govt_agency SET name = $1 WHERE email = $2', [req.body.name, user.email]);
                 await pool.query('UPDATE Govt_agency SET contact = $1 WHERE email = $2', [req.body.contact, user.email]);
+
+            } else if(user.role === 'Ambulance_driver'){
+
+                // Update Pharmacy
+
+                await pool.query(`UPDATE Users SET username = $1 WHERE email = $2`, [req.body.username, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET username = $1 WHERE email = $2', [req.body.username, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET name = $1 WHERE email = $2', [req.body.name, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET address = $1 WHERE email = $2', [req.body.address, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET licence = $1 WHERE email = $2', [req.body.licence, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET vehicle_number = $1 WHERE email = $2', [req.body.vehicle_number, user.email]);
+                await pool.query('UPDATE Ambulance_driver SET contact = $1 WHERE email = $2', [req.body.contact, user.email]);
 
             } 
             req.flash('success', 'Profile Updated Successfully!');

@@ -50,11 +50,11 @@ CREATE TABLE Hospital(
 	CASHLESS VARCHAR(3),
 	ICU INT,
 	IICU INT,
-	OPERATION_THEATRES INT,
+	OPERATION_THEATRE INT,
 	GENERAL_WARD INT,
 	NURSE INT,
-	INTERNS INT,
-	OT_TECHNICIANS INT,
+	INTERN INT,
+	OT_TECHNICIAN INT,
 	PRIMARY KEY(EMAIL),
     FOREIGN KEY (email) REFERENCES Users(email),
     FOREIGN KEY (username) REFERENCES Users(username)
@@ -66,6 +66,79 @@ CREATE TABLE Hospital_Contact(
 	EMAIL VARCHAR(255),
 	CONTACT VARCHAR(20),
 	PRIMARY KEY (EMAIL, CONTACT)
+);
+
+-- Doctor Table
+CREATE TABLE Doctor(
+    REG_NO VARCHAR(15),
+    EMAIL VARCHAR(255) NOT NULL,
+    USERNAME VARCHAR(255) NOT NULL,
+    NAME VARCHAR(255) NOT NULL,
+    GENDER CHAR(1),
+    QUALIFICATION VARCHAR(512),
+    EXPERIENCE VARCHAR(255),
+    CONTACT CHAR(10),
+    INSTITUTE VARCHAR(255),
+    ADDRESS VARCHAR(1023),
+    SPECIALIZATION VARCHAR(255),
+    PRIMARY KEY (EMAIL),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
+);
+
+-- Pharmacy Table
+CREATE TABLE Pharmacy(
+    email VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    contact CHAR(10),
+    email_hospital VARCHAR(255) NOT NULL,
+    PRIMARY KEY(email),
+    FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
+);
+
+--Laboratory table
+CREATE TABLE Laboratory(
+    email VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    contact CHAR(10) ,
+    instruments VARCHAR(255),
+    email_hospital VARCHAR(255) NOT NULL,
+    FOREIGN KEY (email_hospital) REFERENCES Hospital(email),
+    PRIMARY KEY(email),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
+);
+-- Gov_Agency
+CREATE TABLE Govt_agency(
+    email VARCHAR(255) NOT NULL,
+	name VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL,
+    id VARCHAR(20),
+    contact CHAR(10),
+    PRIMARY KEY (email),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
+);
+
+--Ambulance_driver
+CREATE TABLE Ambulance_driver(
+    email VARCHAR(255) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    contact CHAR(10),
+    licence  VARCHAR(16) NOT NULL,
+    vehicle_number VARCHAR(10) NOT NULL
+);
+
+-- Medicine Table
+CREATE TABLE Medicine(
+    name VARCHAR(255),
+    brand_name VARCHAR(255),
+    PRIMARY KEY(name, brand_name)
 );
 
 --Stores
@@ -86,58 +159,6 @@ CREATE TABLE access(
     PRIMARY KEY (email_hospital,email_driver),
     FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL),
     FOREIGN KEY(email_driver) REFERENCES Ambulance_driver(email) 
-);
-
--- Gov_Agency
-CREATE TABLE Govt_agency(
-    email VARCHAR(255) NOT NULL,
-	name VARCHAR(255) NOT NULL,
-	username VARCHAR(255) NOT NULL,
-    id VARCHAR(20),
-    contact CHAR(10),
-    PRIMARY KEY (email),
-    FOREIGN KEY (email) REFERENCES Users(email),
-    FOREIGN KEY (username) REFERENCES Users(username)
-);
-
--- Doctor Table
-CREATE TABLE Doctor(
-    REG_NO VARCHAR(12),
-    EMAIL VARCHAR(255) NOT NULL,
-    USERNAME VARCHAR(255) NOT NULL,
-    NAME VARCHAR(255) NOT NULL,
-    GENDER CHAR(1),
-    QUALIFICATION VARCHAR(512),
-    EXPERIENCE VARCHAR(255),
-    CONTACT CHAR(10),
-    INSTITUTE VARCHAR(255),
-    ADDRESS VARCHAR(1023),
-    SPECIALIZATION VARCHAR(255),
-    PRIMARY KEY (EMAIL),
-    FOREIGN KEY (email) REFERENCES Users(email),
-    FOREIGN KEY (username) REFERENCES Users(username)
-);
-
---Ambulance_driver
-CREATE TABLE Ambulance_driver(
-    email VARCHAR(255) PRIMARY KEY,
-    contact_number  CHAR(10), 
-    licence  CHAR(16) NOT NULL,
-    vehicle_number VARCHAR(16) NOT NULL
-);
-
---Laboratory table
-CREATE TABLE Laboratory(
-    email VARCHAR(255) NOT NULL,
-	username VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    contact CHAR(10) ,
-    instruments VARCHAR(255),
-    email_hospital VARCHAR(255) NOT NULL,
-    FOREIGN KEY (email_hospital) REFERENCES Hospital(email),
-    PRIMARY KEY(email),
-    FOREIGN KEY (email) REFERENCES Users(email),
-    FOREIGN KEY (username) REFERENCES Users(username)
 );
 
 -- appointment table

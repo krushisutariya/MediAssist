@@ -20,9 +20,11 @@
                         <div class="card-text">Start time: <%= element.start_time %></div>
                         <div class="card-text">End time: <%= element.end_time %></div>
                     </div>
-                    <div class="text-center m-4">
-                        <a href="/users/hospital/cancel-appointment/<%=element.id%>" type="button" class="btn btn-danger">Delete Slot</a>
-                    </div>
+                    <% if(element.is_pending === '1'){ %>
+                        <div class="text-center m-4">
+                            <a href="/users/hospital/cancel-appointment/<%=element.id%>" type="button" class="btn btn-danger">Delete Slot</a>
+                        </div>
+                    <%}%>
                 </div>
             </div>
             <% }); %>

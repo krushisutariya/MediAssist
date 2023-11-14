@@ -1,0 +1,58 @@
+<title><%=title%></title>
+<link rel="stylesheet" href="/css/stocks.css" />
+
+<section class="intro">
+  <div class="mask d-flex align-items-center h-100">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                <thead class="text-center">
+                  <tr>
+                    <th scope="col" class="bg-success text-light">Index</th>
+                    <th scope="col" class="bg-success text-light">
+                      Hospital
+                    </th>
+                    <th scope="col" class="bg-success text-light">
+                      Email
+                    </th>
+                    <th scope="col" class="bg-success text-light">Distance (in km)</th>
+                    <th scope="col" class="bg-success text-light">Time to Reach</th>
+
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <% let index = 1; %> <%hospitals.forEach((hospital) => {%>
+                  <tr>
+                    <td><%=index%></td>
+                    <td><%=hospital.name%></td>
+                    <td><%=hospital.email%></td>
+                    <% let distance_time = distanceTime[hospital.email]; %>
+                    <td><%= Math.round(distance_time.distance)%></td>
+                    <td><% const travelTime = distance_time.travelTime;
+                            if (travelTime < 1) {
+                            const travelTimeMinutes = Math.round(travelTime * 60);
+                        %>
+                            <%= travelTimeMinutes %> minutes
+                        <%
+                            } else {
+                            const formattedTravelTime = travelTime.toFixed(2);
+                        %>
+                            <%= formattedTravelTime %> hours
+                        <%
+                            }
+                        %>
+                    </td>
+                  </tr>
+                  <% index = index + 1%> <%});%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

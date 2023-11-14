@@ -8,7 +8,7 @@
                 <div class="accordion__header">
                     <h2 class="accordion__header-title"><%= hospital.name %></h2>
                     <div class="accordion__header-description">
-                        <p><%= Math.round(doctorsInNearbyHospitals[hospital.email].distance) %> km </h2>
+                        <p><%= Math.round(doctorsInNearbyHospitals[hospital.email].distance) %> km </p>
                         <p><% const travelTime = doctorsInNearbyHospitals[hospital.email].travelTime;
                                 if (travelTime < 1) {
                                 const travelTimeMinutes = Math.round(travelTime * 60);
@@ -21,7 +21,7 @@
                                 <%= formattedTravelTime %> hours
                             <%
                                 }
-                            %>
+                            %></p>
                     </div>
                     <i class="accordion__header-toggle"></i>
                 </div>

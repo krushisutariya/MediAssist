@@ -115,7 +115,9 @@ module.exports.view_doctors = async (req, res) => {
     try {
         // Find out the doctors that are enrolled in the hospital using the works table. Need complete details of doctors from both
         // works as well as the doctor table.
-        let doctors = await pool.query(``);
+        let doctors = await pool.query(`SELECT *
+                                        FROM doctor JOIN works ON doctor.email = works.doc_email
+                                        WHERE works.hosp_email = $1`, [req.user.email]);
         doctors = doctors.rows;
 
         return res.render('hospital_doctors', {
@@ -154,7 +156,10 @@ module.exports.manage_patients = async (req, res) => {
     
         let patient = await pool.query('select * from patient where email in (select patient_email from appoints where (is_pending=0) && ( doc_email in (select doc_email from works where hosp_email=req.user.email)))');
 
-        return res.render('hospital_manage_patients', {
+        let patients = await pool.query(`select a.start_time,a.end_time,a.doc_email,a.date,a.id , p.name,p.email,p.contact from appoints a join Patient p on a.patient_email = p.email where a.is_pending='0' AND (a.doc_email in (select doc_email from works where hosp_email=$1))`, [req.user.email]);
+        patients = patients.rows;
+    
+        return res.render('hospital-patients', {
             title: 'Manage Patients',
             patients: patients
         })

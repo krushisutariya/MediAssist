@@ -3,6 +3,11 @@
 ## <p style="text-align: center;"> <img src="assets/images/logo.png" alt="htmlcssjs" style="width:300px; height: 100px;"> </p>
 
 ## Table of contents 🚀
+# <div style="text-align: center; position: relative;padding: 20px;">Hospital Management System</div>
+
+## <p style="text-align: center;"> Mediassist </p>
+
+## Table of contents
 * [Introduction](#introduction)
 * [Technologies](#technologies)
 * [Demo](#demo)

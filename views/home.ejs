@@ -58,32 +58,156 @@
 </section>
 
 <%if(locals.user===undefined){%>
-	<section class="banner banner-appointment">
+
+<section style="background-color: #F2FAF6;">
+	<!-- Patient -->
+	<div class="home-container mb-5">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12 col-xl-7">
-					<div class="block">
-						<div class="divider mb-3"></div>
-
-						<h1 class="mb-3 mt-3">Book Appointment</h1>
-
-						<p class="mb-4 pr-5">
-							Seamless Healthcare Access: Book Your Appointments with Ease!
-							<br>
-							At MediAssist, we put your health in your hands. 
-							Our user-friendly platform allows you to effortlessly book appointments with the doctors of your choice in the hospital of your preference. 
-							Say goodbye to long waiting times and hello to convenience. 
-							Take control of your health journey and schedule appointments that fit your needs. Your well-being, your way.	
-						</p>
-						<div class="btn-container ">
-							<a href="/users/patient/book-appointment" class="btn btn-main-2 btn-icon btn-round-full">Make appoinment
-								<i class="icofont-simple-right ml-2  "></i></a>
-						</div>
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-sm-6">
+					<div class="about-img">
+						<img src="/images/manage-patient.jpeg" alt="" class="img-fluid">
+					</div>
+				</div>
+				
+				<div class="col-lg-5">
+					<div class="about-content pl-4 mt-4 mt-lg-0">
+						<h2 class="title-color">Your Health,<br> Your Choice</h2>
+						<p class="mt-4 mb-5">Discover nearby hospitals, choose your preferred doctor, and 
+							<br>book appointments at your convenience with Medi Assist.</p>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+	
+	<!-- Hospital -->
+	<div class="home-container mb-5">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="about-content pr-4 mt-4 mt-lg-0">
+						<h2 class="title-color">Effortless Hospital Management</h2>
+						<p class="mt-4 mb-5">Streamline operations by registering doctors, pharmacies, 
+							<br>and laboratories with ease on Medi Assist</p>
+					</div>
+				</div>
+	
+				<div class="col-lg-5 col-sm-6">
+					<div class="about-img">
+						<img src="/images/hospital_home_1.jpg" alt="" class="img-fluid">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Doctor -->
+	<div class="home-container mb-5">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-sm-6">
+					<div class="about-img">
+						<img src="/images/team-6.webp" alt="" class="img-fluid">
+					</div>
+				</div>
+				
+				<div class="col-lg-5">
+					<div class="about-content pl-4 mt-4 mt-lg-0">
+						<h2 class="title-color">Empowering Healthcare Professionals</h2>
+						<p class="mt-4 mb-5">Conduct appointments, access patient profiles, and 
+							<br>simplify prescription management with Medi Assist.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Pharmacy -->
+	<div class="home-container mb-5">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="about-content pr-4 mt-4 mt-lg-0">
+						<h2 class="title-color">Efficient Inventory,<br> Easy Billing</h2>
+						<p class="mt-4 mb-5">Manage inventory seamlessly and simplify billing processes,
+							<br> giving patients easy access to their bills on Medi Assist.</p>
+					</div>
+				</div>
+	
+				<div class="col-lg-5 col-sm-6">
+					<div class="about-img">
+						<img src="/images/manage-pharma.png" alt="" class="img-fluid">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Laboratory -->
+	<div class="home-container mb-5">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-sm-6">
+					<div class="about-img">
+						<img src="/images/manage-lab.jpeg" alt="" class="img-fluid">
+					</div>
+				</div>
+				
+				<div class="col-lg-5">
+					<div class="about-content pl-4 mt-4 mt-lg-0">
+						<h2 class="title-color">Streamlined Testing Processes</h2>
+						<p class="mt-4 mb-5">Simplify billing for various tests and enhance patient experience 
+							<br>with transparent and efficient processes on Medi Assist.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Ambulance Driver -->
+	<div class="home-container mb-5">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="about-content pl-4 mt-4 mt-lg-0">
+						<h2 class="title-color">Emergency Services at <br> Your Fingertips</h2>
+						<p class="mt-4 mb-5">Ambulance drivers can quickly locate nearby hospitals, check bed availability,
+							<br> and alert hospitals in emergencies using Medi Assist.</p>
+					</div>
+				</div>
+
+				<div class="col-lg-5 col-sm-6">
+					<div class="about-img">
+						<img src="/images/ambulance.jpg" alt="" class="img-fluid">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Government Agency -->
+	<div class="home-container mb-5">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-sm-6">
+					<div class="about-img">
+						<img src="/images/govt_agency_home.jpg" alt="" class="img-fluid">
+					</div>
+				</div>
+				
+				<div class="col-lg-5">
+					<div class="about-content pl-4 mt-4 mt-lg-0">
+						<h2 class="title-color">Data-Driven <br> Healthcare Governance</h2>
+						<p class="mt-4 mb-5">Government agencies can track hospitals and doctors, conduct insightful data analysis,
+							<br> and shape policies for effective healthcare management through Medi Assist.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</section>
 	
 <%} else if(locals.user.role==='Patient'){%>
 
@@ -432,6 +556,32 @@
 		</div>
 	</section>
 
+<%} else if(locals.user.role === 'Ambulance_driver'){%>
+
+	<section class="banner banner-ambulance">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xl-5">
+					<div class="block">
+						<div class="divider mb-3"></div>
+
+						<h1 class="mb-3 mt-3">Emergency Response Mode</h1>
+
+						<p class="mb-4 pr-5 text-light">
+							Swiftly locate nearby hospitals, check bed availability, and estimate travel time with real-time traffic updates.
+							Ensure rapid response and efficient patient care in critical situations.
+						</p>
+						<div class="btn-container ">
+							<a href="/users/ambulance/nearby-hospitals" id="findHospitalsAmb"
+								class="btn btn-main-2 btn-icon btn-round-full">Nearby Hospitals <i
+								class="icofont-simple-right ml-2  "></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 <%}%>
 
 <section class="section about">
@@ -439,13 +589,13 @@
 		<div class="row align-items-center">
 			<div class="col-lg-4 col-sm-6">
 				<div class="about-img">
-					<img src="/images/team-1.png" alt="" class="img-fluid">
-					<img src="/images/team-5.jpg" alt="" class="img-fluid mt-4">
+					<img src="/images/hospital_home.jpg" alt="" class="img-fluid">
+					<img src="/images/pharmacy.avif" alt="" class="img-fluid mt-4">
 				</div>
 			</div>
 			<div class="col-lg-4 col-sm-6">
 				<div class="about-img mt-4 mt-lg-0">
-					<img src="/images/team-4.jpg" alt="" class="img-fluid">
+					<img src="/images/doctor.avif" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -464,108 +614,203 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var findHospitalsDoctors = document.getElementById('findHospitalsDoctors');
+		console.log(findHospitalsDoctors)
         var findHospitalsDoctorsNav = document.getElementById('findHospitalsDoctorsNav');
-
+		var findHospitalsAmb = document.getElementById('findHospitalsAmb');
+		var findHospitalsAmbNav = document.getElementById('findHospitalsAmbNav');
         var isEventProcessed = false;
 
-        findHospitalsDoctors.addEventListener('click', function (event) {
-            // Check if the event has already been processed
-            if (isEventProcessed) {
-                return;
-            }
-
-            // Ask the user for location preference
-            var locationPreference = confirm('Do you want to use your current location for the appointment?');
-
-            // Prevent the default action of the anchor tag
-            event.preventDefault();
-
-            if (locationPreference) {
-                // If the user wants to use the current location, ask for permission
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    // Modify the href with latitude and longitude
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    var newHref = findHospitalsDoctors.getAttribute('href') + '/?lat=' + latitude + '&lng=' + longitude;
-
-                    // Update the href attribute
-                    findHospitalsDoctors.setAttribute('href', newHref);
-
-                    // Process the request (you can add your logic here)
-                    alert('Request processed with current location: ' + newHref);
-
-                    // Set the flag to indicate that the event has been processed
-                    isEventProcessed = true;
-
-                    // Trigger the click event to proceed with the anchor tag's default action
-                    findHospitalsDoctors.click();
-                }, function (error) {
-                    console.error('Error getting current location:', error);
-
-                    // If there's an error, proceed with the anchor tag's default action without modifying the href
-                    isEventProcessed = true;
-                    findHospitalsDoctors.click();
-                });
-            } else {
-                // Process the request without modifying the href
-                alert('Request processed with your profile location.');
-
-                // Set the flag to indicate that the event has been processed
-                isEventProcessed = true;
-
-                // Trigger the click event to proceed with the anchor tag's default action
-                findHospitalsDoctors.click();
-            }
-        });
-
-		findHospitalsDoctorsNav.addEventListener('click', function (event) {
-            // Check if the event has already been processed
-            if (isEventProcessed) {
-                return;
-            }
-
-            // Ask the user for location preference
-            var locationPreference = confirm('Do you want to use your current location for the appointment?');
-
-            // Prevent the default action of the anchor tag
-            event.preventDefault();
-
-            if (locationPreference) {
-                // If the user wants to use the current location, ask for permission
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    // Modify the href with latitude and longitude
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    var newHref = findHospitalsDoctors.getAttribute('href') + '/?lat=' + latitude + '&lng=' + longitude;
-
-                    // Update the href attribute
-                    findHospitalsDoctors.setAttribute('href', newHref);
-
-                    // Process the request (you can add your logic here)
-                    alert('Request processed with current location: ' + newHref);
-
-                    // Set the flag to indicate that the event has been processed
-                    isEventProcessed = true;
-
-                    // Trigger the click event to proceed with the anchor tag's default action
-                    findHospitalsDoctors.click();
-                }, function (error) {
-                    console.error('Error getting current location:', error);
-
-                    // If there's an error, proceed with the anchor tag's default action without modifying the href
-                    isEventProcessed = true;
-                    findHospitalsDoctors.click();
-                });
-            } else {
-                // Process the request without modifying the href
-                alert('Request processed with your profile location.');
-
-                // Set the flag to indicate that the event has been processed
-                isEventProcessed = true;
-
-                // Trigger the click event to proceed with the anchor tag's default action
-                findHospitalsDoctors.click();
-            }
-        });
+		if(findHospitalsDoctors !== null){
+			findHospitalsDoctors.addEventListener('click', function (event) {
+				// Check if the event has already been processed
+				if (isEventProcessed) {
+					return;
+				}
+	
+				// Ask the user for location preference
+				var locationPreference = confirm('Do you want to use your current location for the appointment?');
+	
+				// Prevent the default action of the anchor tag
+				event.preventDefault();
+	
+				if (locationPreference) {
+					// If the user wants to use the current location, ask for permission
+					navigator.geolocation.getCurrentPosition(function (position) {
+						// Modify the href with latitude and longitude
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+						var newHref = findHospitalsDoctors.getAttribute('href') + '/?lat=' + latitude + '&lng=' + longitude;
+	
+						// Update the href attribute
+						findHospitalsDoctors.setAttribute('href', newHref);
+	
+						// Process the request (you can add your logic here)
+						alert('Request processed with current location: ' + newHref);
+	
+						// Set the flag to indicate that the event has been processed
+						isEventProcessed = true;
+	
+						// Trigger the click event to proceed with the anchor tag's default action
+						findHospitalsDoctors.click();
+					}, function (error) {
+						console.error('Error getting current location:', error);
+	
+						// If there's an error, proceed with the anchor tag's default action without modifying the href
+						isEventProcessed = true;
+						findHospitalsDoctors.click();
+					});
+				} else {
+					// Process the request without modifying the href
+					alert('Request processed with your profile location.');
+	
+					// Set the flag to indicate that the event has been processed
+					isEventProcessed = true;
+	
+					// Trigger the click event to proceed with the anchor tag's default action
+					findHospitalsDoctors.click();
+				}
+			});
+	
+			findHospitalsDoctorsNav.addEventListener('click', function (event) {
+				// Check if the event has already been processed
+				if (isEventProcessed) {
+					return;
+				}
+	
+				// Ask the user for location preference
+				var locationPreference = confirm('Do you want to use your current location for the appointment?');
+	
+				// Prevent the default action of the anchor tag
+				event.preventDefault();
+	
+				if (locationPreference) {
+					// If the user wants to use the current location, ask for permission
+					navigator.geolocation.getCurrentPosition(function (position) {
+						// Modify the href with latitude and longitude
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+						var newHref = findHospitalsDoctors.getAttribute('href') + '/?lat=' + latitude + '&lng=' + longitude;
+	
+						// Update the href attribute
+						findHospitalsDoctorsNav.setAttribute('href', newHref);
+	
+						// Process the request (you can add your logic here)
+						alert('Request processed with current location: ' + newHref);
+	
+						// Set the flag to indicate that the event has been processed
+						isEventProcessed = true;
+	
+						// Trigger the click event to proceed with the anchor tag's default action
+						findHospitalsDoctorsNav.click();
+					}, function (error) {
+						console.error('Error getting current location:', error);
+	
+						// If there's an error, proceed with the anchor tag's default action without modifying the href
+						isEventProcessed = true;
+						findHospitalsDoctorsNav.click();
+					});
+				} else {
+					// Process the request without modifying the href
+					alert('Request processed with your profile location.');
+	
+					// Set the flag to indicate that the event has been processed
+					isEventProcessed = true;
+	
+					// Trigger the click event to proceed with the anchor tag's default action
+					findHospitalsDoctorsNav.click();
+				}
+			});
+		} else {
+			findHospitalsAmbNav.addEventListener('click', function (event) {
+				// Check if the event has already been processed
+				if (isEventProcessed) {
+					return;
+				}
+	
+				// Ask the user for location preference
+				var locationPreference = confirm('Please allow us to access your location!');
+	
+				// Prevent the default action of the anchor tag
+				event.preventDefault();
+	
+				if (locationPreference) {
+					// If the user wants to use the current location, ask for permission
+					navigator.geolocation.getCurrentPosition(function (position) {
+						// Modify the href with latitude and longitude
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+						var newHref = findHospitalsAmbNav.getAttribute('href') + '/?lat=' + latitude + '&lng=' + longitude;
+	
+						// Update the href attribute
+						findHospitalsAmbNav.setAttribute('href', newHref);
+	
+						// Process the request (you can add your logic here)
+						alert('Request processed with current location: ' + newHref);
+	
+						// Set the flag to indicate that the event has been processed
+						isEventProcessed = true;
+	
+						// Trigger the click event to proceed with the anchor tag's default action
+						findHospitalsAmbNav.click();
+					}, function (error) {
+						console.error('Error getting current location:', error);
+	
+						// If there's an error, proceed with the anchor tag's default action without modifying the href
+						isEventProcessed = true;
+						findHospitalsAmbNav.click();
+					});
+				} else {
+					// Abort the request
+					alert('Request aborted.');
+					
+				}
+			});
+	
+			findHospitalsAmb.addEventListener('click', function (event) {
+				console.log('Inside the findHospitalsAmb event listener');
+	
+				// Check if the event has already been processed
+				if (isEventProcessed) {
+					return;
+				}
+	
+				// Ask the user for location preference
+				var locationPreference = confirm('Please allow us to access your location!');
+	
+				// Prevent the default action of the anchor tag
+				event.preventDefault();
+	
+				if (locationPreference) {
+					// If the user wants to use the current location, ask for permission
+					navigator.geolocation.getCurrentPosition(function (position) {
+						// Modify the href with latitude and longitude
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+						var newHref = findHospitalsAmb.getAttribute('href') + '/?lat=' + latitude + '&lng=' + longitude;
+	
+						// Update the href attribute
+						findHospitalsAmb.setAttribute('href', newHref);
+	
+						// Process the request (you can add your logic here)
+						alert('Request processed with current location: ' + newHref);
+	
+						// Set the flag to indicate that the event has been processed
+						isEventProcessed = true;
+	
+						// Trigger the click event to proceed with the anchor tag's default action
+						findHospitalsAmb.click();
+					}, function (error) {
+						console.error('Error getting current location:', error);
+	
+						// If there's an error, proceed with the anchor tag's default action without modifying the href
+						isEventProcessed = true;
+						findHospitalsAmb.click();
+					});
+				} else {
+					// Abort the request
+					alert('Request aborted.');
+				}
+			});
+		}
     });
 </script>
