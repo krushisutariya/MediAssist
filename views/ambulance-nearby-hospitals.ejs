@@ -18,6 +18,8 @@
                     <th scope="col" class="bg-success text-light">
                       Email
                     </th>
+                    <th scope="col" class="bg-success text-light">Total Beds</th>
+                    <th scope="col" class="bg-success text-light">Total Staff</th>
                     <th scope="col" class="bg-success text-light">Distance (in km)</th>
                     <th scope="col" class="bg-success text-light">Time to Reach</th>
 
@@ -29,6 +31,8 @@
                     <td><%=index%></td>
                     <td><%=hospital.name%></td>
                     <td><%=hospital.email%></td>
+                    <td><%=hospital.total_beds%></td>
+                    <td><%=hospital.total_staff%></td>
                     <% let distance_time = distanceTime[hospital.email]; %>
                     <td><%= Math.round(distance_time.distance)%></td>
                     <td><% const travelTime = distance_time.travelTime;
