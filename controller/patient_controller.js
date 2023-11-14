@@ -19,7 +19,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                 const apiKey = process.env.apiKey;
     
                 const startCoordinates = lat + ',' + lng;
-                const endCoordinates = hospital.location;
+                const endCoordinates = hospital.location.replace(/\s+/g, ''); // Remove spaces
                 const traffic = true;
     
                 const tomtomApiEndpoint = 'https://api.tomtom.com/routing/1/calculateRoute/';
@@ -33,7 +33,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                     const distance = route.summary.lengthInMeters / 1000; // in km
                     const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
     
-                    if (distance < 30) {
+                    if (distance < 20) {
                         await nearbyHospitals.push(hospital);
     
                         let doctors = await pool.query(`select * from doctor where email in (

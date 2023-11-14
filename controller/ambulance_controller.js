@@ -17,7 +17,7 @@ module.exports.nearby_hospitals = async function(req, res){
                 const apiKey = process.env.apiKey;
     
                 const startCoordinates = lat + ',' + lng;
-                const endCoordinates = hospital.location;
+                const endCoordinates = hospital.location.replace(/\s+/g, ''); // Remove spaces
                 const traffic = true;
     
                 const tomtomApiEndpoint = 'https://api.tomtom.com/routing/1/calculateRoute/';
@@ -50,7 +50,7 @@ module.exports.nearby_hospitals = async function(req, res){
             distanceTime: distanceTime
         });
     } catch (error) {
-        console.log('Error: ', error.message);
+        console.log('Error: ', error);
         return res.status(500).json({ error: 'Server Error!' });
     }
     
