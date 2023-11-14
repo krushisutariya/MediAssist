@@ -33,7 +33,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                     const distance = route.summary.lengthInMeters / 1000; // in km
                     const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
     
-                    if (distance < 20) {
+                    if (distance < 30) {
                         await nearbyHospitals.push(hospital);
     
                         let doctors = await pool.query(`select * from doctor where email in (
@@ -68,7 +68,6 @@ module.exports.find_hospitals_doctors = async (req, res) => {
 
 // Render the appointments page
 module.exports.check_slots = function (req, res) {
-    console.log(req.params.email);
     return res.render('appointment', {
         title: "Appointment | MediAssist",
         date: null,
@@ -81,21 +80,18 @@ module.exports.check_slots = function (req, res) {
 module.exports.check_availability = async function (req, res) {
     try {
         let date = req.body.date;
-        console.log(date);
         let slots = await pool.query(`select * from appoints where date=$1 AND doc_email=$2 and is_pending = '2'`, [date, req.params.email]);
         slots = slots.rows;
-        console.log('Entered in slots section: ', slots);
 
         if (slots.length == 0) {
             
-            console.log('Entered in slots creation section');
             let startTime = await pool.query(`select start_time from works where doc_email=$1`, [req.params.email]);
             startTime = startTime.rows[0].start_time;
             let endTime = await pool.query(`select end_time from works where doc_email=$1`, [req.params.email]);
             endTime = endTime.rows[0].end_time;
+            const newSlots = [];
 
             const slotDuration = 60 * 60 * 1000; // 1 hour in milliseconds
-            const newSlots = [];
 
             let formattedStartTime = "";
             let formattedEndTime = "";
@@ -119,14 +115,12 @@ module.exports.check_availability = async function (req, res) {
                     formattedEndTime = `${end_hours.toString().padStart(2, '0')}:${end_minutes.toString().padStart(2, '0')}`;
 
                     let new_slot_dummy = await pool.query(`INSERT INTO appoints (start_time, end_time, date, doc_email, is_pending) VALUES ($1, $2, $3, $4, $5)`, [formattedStartTime, formattedEndTime, date, req.params.email, '2']);
-                    new_slot_dummy = await pool.query(`SELECT * FROM appoints WHERE start_time=$1 AND end_time=$2 AND date=$3 AND doc_email=$4 AND is_pending='2`, [formattedStartTime, formattedEndTime, date, req.params.email]);
-                    new_slot_dummy = new_slot_dummy.rows[0];
+                    new_slot_dummy = await pool.query(`SELECT * FROM appoints WHERE start_time=$1 AND end_time=$2 AND date=$3 AND doc_email=$4 AND is_pending='2'`, [formattedStartTime, formattedEndTime, date, req.params.email]);
+                    new_slot_dummy = new_slot_dummy.rows;
                     newSlots.push(new_slot_dummy);
-                    console.log(new_slot_dummy);
                 }
             } else {
                 const numberOfSlots = parseInt(endTime.substring(0, 2), 10) - parseInt(startTime.substring(0, 2), 10);
-                console.log(numberOfSlots);
                 
                 const start_time = new Date(date + 'T' + startTime + ':00');
                 const end_time = new Date(date + 'T' + endTime + ':00');
@@ -146,21 +140,31 @@ module.exports.check_availability = async function (req, res) {
 
                     let new_slot_dummy = await pool.query(`INSERT INTO appoints (start_time, end_time, date, doc_email, is_pending) VALUES ($1, $2, $3, $4, $5)`, [formattedStartTime, formattedEndTime, date, req.params.email, '2']);
                     new_slot_dummy = await pool.query(`SELECT * FROM appoints WHERE start_time=$1 AND end_time=$2 AND date=$3 AND doc_email=$4 AND is_pending='2'`, [formattedStartTime, formattedEndTime, date, req.params.email]);
-                    newSlots.push(new_slot_dummy);
+                    new_slot_dummy = new_slot_dummy.rows;
+                    newSlots.push(...new_slot_dummy);
                 }
             }
+
+            return res.render('appointment', {
+                title: 'Appointment | MediAssist',
+                slots: newSlots,
+                date: date,
+                available: true,
+                doctor: req.params.email
+            });
+
         } else {
             slots = await pool.query(`select * from appoints where date=$1 AND is_pending = '2'`, [date]);
             slots = slots.rows;
-        }
 
-        return res.render('appointment', {
-            title: 'Appointment | MediAssist',
-            slots: slots,
-            date: date,
-            available: true,
-            doctor: req.params.email
-        });
+            return res.render('appointment', {
+                title: 'Appointment | MediAssist',
+                slots: slots,
+                date: date,
+                available: true,
+                doctor: req.params.email
+            });
+        }
 
     } catch (err) {
         console.log('Error: ', err);
