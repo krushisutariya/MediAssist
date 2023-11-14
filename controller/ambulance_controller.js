@@ -3,7 +3,16 @@ const axios = require('axios');
 
 module.exports.nearby_hospitals = async function(req, res){
     try {
-        let hospitals = await pool.query(`select * from hospital`);
+        let hospitals = await pool.query(`SELECT 
+                                            name, 
+                                            email, 
+                                            location,
+                                            (icu + iicu + operation_theatre + general_ward) AS total_beds,
+                                            (nurse + intern + ot_technician) AS total_staff
+                                        FROM 
+                                            hospital
+                                        ORDER BY 
+                                            name;`);
         hospitals = hospitals.rows;
         let nearbyHospitals = [];
         let distanceTime = [];
