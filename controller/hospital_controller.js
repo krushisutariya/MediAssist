@@ -130,6 +130,7 @@ module.exports.view_doctors = async (req, res) => {
     }
 }
 
+<<<<<<< HEAD
 // Register a new Doctor at the hospital
 module.exports.register_doctor = async (req, res) => {
     try {
@@ -147,10 +148,13 @@ module.exports.register_doctor = async (req, res) => {
     }
 }
 
+=======
+>>>>>>> f637f687618e3380f29498e143d23f3d03f176bf
 module.exports.manage_patients = async (req, res) => {
     try {
         // Find out the patients that are enrolled in the hospital using the
         // doctors details from the appoints table.
+<<<<<<< HEAD
         let patient = await pool.query('select a.start_time,a.end_time,a.doc_email,a.date,a.id , p.name,p.email,p.contact from appoints a join Patient p on a.patient_email = p.email where is_pending=0 && (a.doc_email in (select doc_email from works where hosp_email=req.user.email))');
         
     
@@ -160,6 +164,13 @@ module.exports.manage_patients = async (req, res) => {
         patients = patients.rows;
     
         return res.render('hospital-patients', {
+=======
+
+        let patients = await pool.query('select a.start_time,a.end_time,a.doc_email,a.date,a.id , p.name,p.email,p.contact from appoints a join Patient p on a.patient_email = p.email where is_pending=0 && (a.doc_email in (select doc_email from works where hosp_email=req.user.email))');
+        patients = patients.rows;
+    
+        return res.render('hospital_manage_patients', {
+>>>>>>> f637f687618e3380f29498e143d23f3d03f176bf
             title: 'Manage Patients',
             patients: patients
         })

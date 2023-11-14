@@ -212,10 +212,13 @@ module.exports.track_appointment = async (req, res) => {
         // All the appointments, i.e., pending bit 0 as well as 1
         // write two diiferent different queries for upcoming and past appointments
         
+<<<<<<< HEAD
         let upcoming_appointments = await pool.query(`select * from appoints where patient_email=$1 && is_pending =1`,[req.user.email]);
         upcoming_appointments = upcoming_appointments.rows;
 
         let past_appointments = await pool.query(`select * from appoints where patient_email=$1 && is_pending =0`,[req.user.email]);
+=======
+>>>>>>> f637f687618e3380f29498e143d23f3d03f176bf
         let upcoming_appointments = await pool.query(`select * from appoints where patient_email=$1 AND is_pending ='1'`,[req.user.email]);
         upcoming_appointments = upcoming_appointments.rows;
 
