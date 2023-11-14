@@ -47,7 +47,7 @@ app.use(cors());
 app.use('/', httpsRedirect());
 
 // using middleware to parse form data into req.body
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 // cookie parser
 app.use(cookieParser());
