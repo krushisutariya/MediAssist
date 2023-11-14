@@ -175,6 +175,25 @@ CREATE TABLE appoints (
     FOREIGN KEY (patient_email) REFERENCES Patient(EMAIL),
     FOREIGN KEY (doc_email) REFERENCES Doctor(EMAIL)
 );
+-- Medicine Table
+CREATE TABLE Medicine(
+    name VARCHAR(255),
+    brand_name VARCHAR(255),
+    PRIMARY KEY(name, brand_name)
+);
+
+-- Pharmacy Table
+CREATE TABLE Pharmacy(
+    email VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    contact CHAR(10),
+    email_hospital VARCHAR(255) NOT NULL,
+    PRIMARY KEY(email),
+    FOREIGN KEY(email_hospital) REFERENCES Hospital(EMAIL),
+    FOREIGN KEY (email) REFERENCES Users(email),
+    FOREIGN KEY (username) REFERENCES Users(username)
+);
 
 -- Works Table
 CREATE TABLE works(
