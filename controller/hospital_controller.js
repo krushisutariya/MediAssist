@@ -115,7 +115,9 @@ module.exports.view_doctors = async (req, res) => {
     try {
         // Find out the doctors that are enrolled in the hospital using the works table. Need complete details of doctors from both
         // works as well as the doctor table.
-        let doctors = await pool.query(``);
+        let doctors = await pool.query(`SELECT *
+                                        FROM doctor JOIN works ON doctor.email = works.doc_email
+                                        WHERE works.hosp_email = $1`, [req.user.email]);
         doctors = doctors.rows;
 
         return res.render('hospital_doctors', {

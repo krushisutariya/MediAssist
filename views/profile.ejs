@@ -1,3 +1,5 @@
+<title><%=title%></title>
+
 <%var dateString=user.birth_date;var dateObject=new Date(dateString); var year=dateObject.getFullYear();var
     month=dateObject.getMonth() + 1; var day=dateObject.getDate();var formattedDate=year + "-" + (month < 10 ? "0" +
     month : month) + "-" + (day < 10 ? "0" + day : day);%>
