@@ -1,136 +1,164 @@
-# <div style="text-align: center; position: relative;padding: 20px;">🩺 Hospital Management System 🩺</div>
+# 🩺 Hospital Management System 🩺
 
-## <p style="text-align: center;"> <img src="assets/images/logo.png" alt="htmlcssjs" style="width:300px; height: 100px;"> </p>
+## ![htmlcssjs](assets/images/logo.png)
 
-## Table of contents 🚀
+## Table of Contents 🚀
 * [Introduction](#introduction)
+* [Privileges](#privileges)
 * [Technologies](#technologies)
 * [Demo](#demo)
 * [Team](#team)
-## <div id="introduction" style="padding: 10px;margin: 10px 0;font-weight: bold; color: pink;">⭐ Introduction </div>
-##### <p>This Hospital Management System helps patients, doctors, hospitals, ambulances, and government agencies by making healthcare work better. It makes things like appointments and information easier, so patients get better care. It also helps with keeping track of data in healthcare. The goal is to solve problems for everyone involved and make healthcare services better overall.</p>
 
-## <div id="technologies" style="padding: 10px; margin: 10px 0; font-weight: bold; color: pink;">⭐ Technologies </div> 
-<img src="assets/images/htmlcssjs.png" alt="htmlcssjs" style="width:300px; height: 100px;"> 
-<img src="assets/images/postgresql.png" alt="" style="width:100px; height: 100px;">
-</br>
+## ⭐ Introduction
+This Hospital Management System helps patients, doctors, hospitals, ambulances, and government agencies by making healthcare work better. It makes things like appointments and information easier, so patients get better care. It also helps with keeping track of data in healthcare. The goal is to solve problems for everyone involved and make healthcare services better overall.
 
-#### <pre> HTML           CSS        JavaScript     PostgreSql
-                                1.NodeJs
-                                2.ExpressJS
-                                3.PassportJs
-                                4.EJS
-</pre>
-
-## <div id="demo" style="padding: 10px;margin: 10px 0;font-weight: bold; color: pink;">⭐ Demo </div> 
-###### <p> You can visit our website using this link</p>
-link :
-
-https://beautiful-loafers-eel.cyclic.app/
-
-
-
-### Features :
-<ul style="padding: 0; margin: 0;">
-    <li style="margin-bottom: 20px; text-decoration: underline;">
-        <strong>Login</strong>
-        <br>
-        <img src="assets/images/login.png" alt="htmlcssjs" style="width:700px; height: 300px; border: 1px solid #ccc;">
-    </li>
-    <li style=" margin-bottom: 20px; text-decoration: underline;">
-        <strong>Sign Up</strong>
-        <br>
-        <img src="assets/images/signup.png" alt="htmlcssjs" style="width:700px; height: 300px; border: 1px solid #ccc;">
-    </li>
-    <li style="margin-bottom: 20px; text-decoration: underline;">
-        <strong>Home Page</strong>
-        <br>
-        <img src="assets/images/home.png" alt="htmlcssjs" style="width:700px; height: 300px; border: 1px solid #ccc;">
-    </li>
-    <li style=" margin-bottom: 20px; text-decoration: underline;">
-        <strong>Facilities</strong>
-        <br>
-        <img src="assets/images/f1.png" alt="htmlcssjs" style="width:200px; height: 100px; border: 1px solid #ccc;">
-        <img src="assets/images/f2.png" alt="htmlcssjs" style="width:200px; height: 100px; border: 1px solid #ccc;">
-        <img src="assets/images/f3.png" alt="htmlcssjs" style="width:200px; height: 100px; border: 1px solid #ccc;">
-        <img src="assets/images/f4.png" alt="htmlcssjs" style="width:200px; height: 100px; border: 1px solid #ccc;">
-        <img src="assets/images/f5.png" alt="htmlcssjs" style="width:200px; height: 100px; border: 1px solid #ccc;">
-        <img src="assets/images/f6.png" alt="htmlcssjs" style="width:200px; height: 100px; border: 1px solid #ccc;">
-        <img src="assets/images/f7.png" alt="htmlcssjs" style="width:200px; height: 100px; border: 1px solid #ccc;">
-        <img src="assets/images/f8.png" alt="htmlcssjs" style="width:200px; height: 100px; border: 1px solid #ccc;">
-
-### Specific facilities for users.
-
-<li style=" margin-bottom: 20px; ">
-<strong style="text-decoration: underline;">Patient 🙎‍♂</strong>
-        <br>
-      <h5>  <p>Patients use this to schedule appointments.</p> </h5>
-
-<img src="assets/images/patientbookappoint.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-       <h5> <p>Patients use this to monitor and manage their appointments.</p> </h5?>
-<img src="assets/images/patienttrackappoint.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
+## ⭐ Privileges
+- **For Patients**
+  - Access information about hospitals, including specialties, services, and location.
+  - Book appointments with doctors at preferred hospitals.
+  - Access pharmacy and laboratory information.
+  - View prescription history and medical bills.
+  - Monitor appointments and receive reminders.
+  - View and update personal health information.
+- **For Doctors**
+  - Access patient information and medical history.
+  - Schedule patient appointments.
+  - Generate prescriptions and bills.
+  - Track patient progress, diets, and lab reports.
+  - Maintain a schedule of appointments.
+  - View hospital information and resources.
+- **For Hospitals**
+  - Register and provide basic information.
+  - Specify medical specialties and services.
+  - Manage ICU availability and bed occupancy.
+  - List available doctors and staff.
+  - Offer medical insurance details.
+  - Monitor and manage appointments and patient data.
+  - Receive appointment notifications.
+  - Access ambulance service requests and notifications.
+- **For Ambulance Services**
+  - Locate and navigate to the nearest hospitals.
+  - Access hospital data including bed availability and staff information.
+  - Notify hospitals in case of emergencies.
+- **For Government Agencies**
+  - Access a personalized database for monitoring hospitals, doctors, and patient’s restricted data.
+  - Monitor healthcare infrastructure, services, and resources.
+  - Utilize data for policy -making and resource allocation.
+## ⭐ Technologies
+HTML
 <br>
+<img src="assets/images/html.png" alt="HTML" width="100" height="100">  
+<br>
+CSS
+<br>
+<img src="assets/images/css.png" alt="CSS" width="100" height="100">
+<br>
+JavaScript
+<br>
+<img src="assets/images/javascript.png" alt="JavaScript" width="85" height="88">
+<br>
+PostgreSQL
+<br>
+<img src="assets/images/postgresql.png" alt="PostgreSQL" width="100" height="100">
+<br>
+NodeJs
+<br>
+<img src="assets/images/nodejs.png" alt="Node.js" width="100" height="100">
+<br>
+ExpressJs
+<br>
+<img src="assets/images/expressjs.png" alt="Express.js" width="100" height="100">
+<br>
+PassportJs
+<br>
+<img src="assets/images/passportjs.png" alt="Passport.js" width="100" height="100">
+<br>
+EJS
+<br>
+<img src="assets/images/ejs.png" alt="EJS" width="100" height="100">
 
-<li style=" margin-bottom: 20px; ">
-        <strong style="text-decoration: underline;">Doctor 👨‍⚕</strong>
-        <br>
-      <h5>  <p>Doctor can see both past and upcoming events.</p> </h5>
-
-<img src="assets/images/doctorpastappoint.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-       <br>
-       <br>
-<img src="assets/images/doctorupcomingappoint.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
 
 
-<li style=" margin-bottom: 20px; ">
-        <strong style="text-decoration: underline;">Hosptial 🏥</strong>
-        <br>
-      <h5><p>View all scheduled appointments.</p></h5> 
-      <img src="assets/images/happpoint.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-      <h5><p>Access information about all doctors and add new doctors to its roster.</p></h5> 
-      <img src="assets/images/hmanagedoc.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-      <h5><p>Monitor and manage the admissions of patients within the hospital.</p></h5> 
-      <img src="assets/images/hmanagepat.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-      <h5><p>Add pharmacies to its services.</p></h5> 
-      <img src="assets/images/hmanagepharm.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-      <h5><p>Integrate laboratories as part of its facilities.</p></h5> 
-      <img src="assets/images/hmanagelab.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-      
+## ⭐ Demo
+You can visit our website using this link
+https://tasty angelfish.cyclic.app/
 
-<li style=" margin-bottom: 20px; ">
-        <strong style="text-decoration: underline;">Ambulance Driver 🚑</strong>
-        <br>
-      <h5><p>An ambulance driver can utilize this system to transport a patient to the nearest hospital, taking into consideration bed availability and the specialized expertise of the attending doctor.</p></h5> 
+### Features
+   **Login**
+  ![Login](assets/images/login.png)
 
-<img src="assets/images/ambudriver.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-       <li style=" margin-bottom: 20px; ">
-        <strong style="text-decoration: underline;">Government Agency 🏬</strong>
-        <br>
-      <h5><p>A government agency can access hospital and doctor data through this platform, facilitating informed decision-making.</p></h5>
+   **Sign Up**
+  ![Sign Up](assets/images/signup.png)
 
-<img src="assets/images/gov_age.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-       <li style=" margin-bottom: 20px; ">
-        <strong style="text-decoration: underline;">Pharmacy   💊</strong>
-        <br>
+   **Home Page**
+  ![Home Page](assets/images/home.png)
 
-<h5><p>It is not initially included as a part of the primary user profile, but it can be registered by the hospital</p></h5>
-<h5><p>It can update the stock of medicines</p></h5>
-<img src="assets/images/pharmstock.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
-       <h5><p>Inventory management can also be done by the pharmacy.</p></h5>
+   **Facilities**
+<br>
+  <img src="assets/images/f1.png" alt="Facility 1" width="100" height="80">
+<img src="assets/images/f2.png" alt="Facility 2" width="100" height="80">
+<img src="assets/images/f3.png" alt="Facility 3" width="100" height="80">
+<img src="assets/images/f4.png" alt="Facility 4" width="100" height="80">
+<img src="assets/images/f5.png" alt="Facility 5" width="100" height="80">
+<img src="assets/images/f6.png" alt="Facility 6" width="100" height="80">
+<img src="assets/images/f7.png" alt="Facility 7" width="100" height="80">
+<img src="assets/images/f8.png" alt="Facility 8" width="100" height="80">
 
-<img src="assets/images/pharminv.png" alt="htmlcssjs" style="width:400px; height: 150px; border: 1px solid #ccc;">
- 
-</ul>
+### Specific Facilities for Users
 
-## <div id="introduction" style="padding: 10px;margin: 10px 0;font-weight: bold; color: pink;">⭐ Team  </div>
-<ol style="text-align=center">
-<li>Aaditya Patel</li>
-<li>Aakshat Kadiya</li>
-<li>Dharmesh Kota</li>
-<li>Krishil Jayswal</li>
-<li>Krushi Sutariya</li>
-</ol>
+   🟢 **Patient 🙎‍♂**
+   <br>
+     Patients can search for nearby hospitals
+    ![Patients can search for nearby hospitals](assets/images/patient_nearbyhos.jpg)
+     Patients use this to monitor and manage their appointments.
+    ![Patient Track Appointment](assets/images/patientbookappoint.jpg)
+
+   🟢 **Doctor 👨‍⚕**
+   <br>
+     Doctors can see both past and upcoming events.
+    ![Doctor Past Appointments](assets/images/doctorpastappoint.png)
+    ![Doctor Upcoming Appointments](assets/images/doctorupcomingappoint.png)
+
+   🟢**Hospital 🏥**
+   <br>
+     View all scheduled appointments.
+    ![Hospital Appointments](assets/images/happpoint.png)
+     Access information about all doctors and add new doctors to its roster.
+    ![Hospital Manage Doctors](assets/images/hmanagedoc.png)
+     Monitor and manage the admissions of patients within the hospital.
+    ![Hospital Manage Patients](assets/images/hmanagepat.png)
+     Add pharmacies to its services.
+    ![Hospital Manage Pharmacy](assets/images/hmanagepharm.png)
+     Integrate laboratories as part of its facilities.
+    ![Hospital Manage Lab](assets/images/hmanagelab.png)
+
+   🟢 **Ambulance Driver 🚑**
+   <br>
+     An ambulance driver can utilize this system to transport a patient to the nearest hospital, taking into consideration bed availability and the specialized expertise of the attending doctor.
+    ![Ambulance Driver](assets/images/ambudriver.png)
+     Ambulance driver can find out nearby hospitals with traffic time considered
+  ![Ambulance Driver](assets/images/ambulance_nearbyhos.png.jpg)
+
+   🟢**Government Agency 🏬**
+   <br>
+     A government agency can access hospital and doctor data through this platform, facilitating informed decision making.
+    ![Government Agency](assets/images/gov_age.png)
+
+   🟢 **Pharmacy 💊**
+   <br>
+     It is not initially included as part of the primary user profile but can be registered by the hospital.
+     It can update the stock of medicines.
+    ![Pharmacy Stock](assets/images/pharmstock.png)
+     pharmacy can manage their inventory by adding or updating medicine stocks
+  ![Pharmacy Inventory](assets/images/pharm_stock.jpg)
+
+## ⭐ Team
+1. Aaditya Patel
+2. Aakshat Kadiya
+3. Dharmesh Kota
+4. Krishil Jayswal
+5. Krushi Sutariya
 
 😊💕Trust us with your health, and we promise we won't break your heart.💕😊
 
-<p style="font-size: 24px; font-weight: bold; color: #4CAF50;">Thank you.....🌟💫</p>
+Thank you.....🌟💫
