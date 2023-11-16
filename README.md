@@ -71,6 +71,14 @@ PassportJs
 <br>
 EJS
 
+## ⭐ Demo
+You can visit our website using this link
+
+   https://tasty-angelfish.cyclic.app/
+
+### Features
+   ▪️ **Login**
+  ![Login](assets/images/login.png)
 
 
 ## ⭐ Demo
@@ -81,6 +89,38 @@ You can visit our website using this link
 ### Features
    ▪️ **Login**
   ![Login](assets/images/login.png)
+
+   ▪️ **Sign Up**
+  ![Sign Up](assets/images/signup.png)
+
+  ▪️ **Home Page**
+  ![Home Page](assets/images/home.png)
+
+   ▪️ **Facilities**
+<br>
+  <img src="assets/images/f1.png" alt="Facility 1" width="400" height="150">
+<img src="assets/images/f2.png" alt="Facility 2" width="400" height="150">
+<img src="assets/images/f3.png" alt="Facility 3" width="400" height="150">
+<img src="assets/images/f4.png" alt="Facility 4" width="400" height="150">
+<img src="assets/images/f5.png" alt="Facility 5" width="400" height="150">
+<img src="assets/images/f6.png" alt="Facility 6" width="400" height="150">
+<img src="assets/images/f7.png" alt="Facility 7" width="400" height="150">
+<img src="assets/images/f8.png" alt="Facility 8" width="400" height="150">
+
+### ▪️ Specific Facilities for Users
+
+   🟢 **Patient 🙎‍♂**
+   <br>
+    -Patients can search for nearby hospitals
+    ![Patients can search for nearby hospitals](assets/images/patient_nearbyhos.jpg)
+     -Patients use this to monitor and manage their appointments.
+    ![Patient Track Appointment](assets/images/patientbookappoint.jpg)
+
+   🟢 **Doctor 👨‍⚕**
+   <br>
+     -Doctors can see both past and upcoming events.
+    ![Doctor Past Appointments](assets/images/doctorpastappoint.png)
+    ![Doctor Upcoming Appointments](assets/images/doctorupcomingappoint.png)
 
    ▪️ **Sign Up**
   ![Sign Up](assets/images/signup.png)
@@ -155,7 +195,7 @@ You can visit our website using this link
 
 ## ⭐ Team
 1. Aditya Patel
-2. Aakshat Kadiya
+2. Akshat Kadiya
 3. Dharmesh Kota
 4. Krishil Jayswal
 5. Krushi Sutariya
