@@ -155,7 +155,7 @@ You can visit our website using this link
 
 ## Team 
 1. Aditya Patel
-2. Akshat Kadiya
+2. Akshat Kadia
 3. Dharmesh Kota
 4. Krishil Jayswal
 5. Krushi Sutariya
