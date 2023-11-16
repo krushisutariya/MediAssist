@@ -2,17 +2,20 @@
 
 ## ![htmlcssjs](assets/images/logo.png)
 
-## Table of Contents 🚀
-* [Introduction](#introduction)
-* [Privileges](#privileges)
-* [Technologies](#technologies)
-* [Demo](#demo)
-* [Team](#team)
+* [Introduction](#section-introduction)
+* [Privileges](#section-privileges)
+* [Technologies](#section-technologies)
+* [Demo](#section-demo)
+* [Team](#section-team)
 
-## ⭐ Introduction
+## Introduction 💫
 This Hospital Management System helps patients, doctors, hospitals, ambulances, and government agencies by making healthcare work better. It makes things like appointments and information easier, so patients get better care. It also helps with keeping track of data in healthcare. The goal is to solve problems for everyone involved and make healthcare services better overall.
 
-## ⭐ Privileges
+
+##  Introduction 💫
+This Hospital Management System helps patients, doctors, hospitals, ambulances, and government agencies by making healthcare work better. It makes things like appointments and information easier, so patients get better care. It also helps with keeping track of data in healthcare. The goal is to solve problems for everyone involved and make healthcare services better overall.
+
+##   Privileges 💫
 - **For Patients**
   - Access information about hospitals, including specialties, services, and location.
   - Book appointments with doctors at preferred hospitals.
@@ -44,7 +47,7 @@ This Hospital Management System helps patients, doctors, hospitals, ambulances, 
   - Access a personalized database for monitoring hospitals, doctors, and patient’s restricted data.
   - Monitor healthcare infrastructure, services, and resources.
   - Utilize data for policy -making and resource allocation.
-## ⭐ Technologies
+## Technologies 💫
 HTML
 <br>
 <img src="assets/images/html.png" alt="HTML" width="100" height="100">  
@@ -71,7 +74,7 @@ PassportJs
 <br>
 EJS
 
-## ⭐ Demo
+## Demo 💫
 You can visit our website using this link
 
    https://tasty-angelfish.cyclic.app/
@@ -193,7 +196,7 @@ You can visit our website using this link
 -interactive profile page for each user
 ![Profile Page](assets/images/profile.jpg)
 
-## ⭐ Team
+## Team 💫
 1. Aditya Patel
 2. Akshat Kadiya
 3. Dharmesh Kota
@@ -203,33 +206,3 @@ You can visit our website using this link
 😊💕Trust us with your health, and we promise we won't break your heart.💕😊
 
 Thank you.....🌟💫
-
-  
-  #mda {
-    
-  }
-  
-  .table {
-    
-  }
-
-
-# <div style="text-align: center; position: relative;padding: 20px;">Hospital Management System</div>
-
-## <p style="text-align: center;"> Mediassist </p>
-
-## Table of contents
-* [Introduction](#introduction)
-* [Technologies](#technologies)
-* [Overview](#overview)
-
-## <div style="padding: 10px;margin: 10px 0;font-weight: bold; color: pink;"> Introduction </div>
-#### <p>This Hospital Management System helps patients, doctors, hospitals, ambulances, and government agencies by making healthcare work better. It makes things like appointments and information easier, so patients get better care. It also helps with keeping track of data in healthcare. The goal is to solve problems for everyone involved and make healthcare services better overall.</p>
-## <div  style="padding: 10px;margin: 10px 0;font-weight: bold; color: pink;"> Technologies </div> 
-
- 
-<img src="assets/images/java-script.png" alt="JavaScript" style="width: 200px; height: 150px;">
-
-
-	
-## <div  style="padding: 10px;margin: 10px 0;font-weight: bold; color: pink;"> Overview</div> 
