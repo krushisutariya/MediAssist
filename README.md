@@ -153,7 +153,7 @@ You can visit our website using this link
 
 <a name="team"></a>
 
-## ⭐ Team 
+## Team 
 1. Aditya Patel
 2. Akshat Kadiya
 3. Dharmesh Kota
