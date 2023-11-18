@@ -50,6 +50,50 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                 } else {
                     console.error('No route found.');
                 }
+            } 
+        } else {
+            let patient = await pool.query(`select location from patient where email=$1`, [req.user.email]);
+            patient = patient.rows[0].location;
+
+            const lat = patient.split(',')[0];
+            const lng = patient.split(',')[1];
+
+            // find the nearby hospitals
+            for (const hospital of hospitals) {
+                const apiKey = process.env.apiKey;
+    
+                const startCoordinates = lat + ',' + lng;
+                const endCoordinates = hospital.location.replace(/\s+/g, ''); // Remove spaces
+                const traffic = true;
+    
+                const tomtomApiEndpoint = 'https://api.tomtom.com/routing/1/calculateRoute/';
+                const url = `${tomtomApiEndpoint}${startCoordinates}:${endCoordinates}/json?key=${apiKey}&traffic=${traffic}`;
+    
+                const response = await axios.get(url);
+                const data = response.data;
+                const route = data.routes && data.routes[0];
+    
+                if (route) {
+                    const distance = route.summary.lengthInMeters / 1000; // in km
+                    const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
+    
+                    if (distance < 30) {
+                        await nearbyHospitals.push(hospital);
+    
+                        let doctors = await pool.query(`select * from doctor where email in (
+                                select doc_email from works where hosp_email=$1
+                            )`, [hospital.email]);
+                        doctors = doctors.rows;
+    
+                        doctorsInNearbyHospitals[hospital.email] = {
+                            doctors: doctors,
+                            distance: distance,
+                            travelTime: travelTime
+                        };
+                    }
+                } else {
+                    console.error('No route found.');
+                }
             }
         }
     

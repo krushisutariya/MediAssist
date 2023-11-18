@@ -26,6 +26,7 @@ CREATE TABLE Patient (
     gender CHAR(1),
     height FLOAT,
     weight FLOAT,
+    birth_date VARCHAR(10),
     blood_group VARCHAR(3),
     diseases VARCHAR(255),
     past_history VARCHAR(1023),
