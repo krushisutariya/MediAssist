@@ -74,7 +74,7 @@ EJS
 ## Demo 
 You can visit our website using this link
 
-   https://tasty-angelfish.cyclic.app/
+   https://mediassist-production.up.railway.app/
 
 ### Features
    ▪️ **Login**
