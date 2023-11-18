@@ -10,7 +10,8 @@ module.exports.find_hospitals_doctors = async (req, res) => {
         let nearbyHospitals = [];
         let doctorsInNearbyHospitals = [];
     
-        if (req.query) {
+        if (Object.keys(req.query).length > 0) {
+            console.log('Live location');
             const lat = req.query.lat;
             const lng = req.query.lng;
     
@@ -52,17 +53,18 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                 }
             } 
         } else {
-            let patient = await pool.query(`select location from patient where email=$1`, [req.user.email]);
-            patient = patient.rows[0].location;
+            console.log('Profile location');
 
-            const lat = patient.split(',')[0];
-            const lng = patient.split(',')[1];
+            let location = await pool.query(`select location from patient where email=$1`, [req.user.email]);
+            location = location.rows[0].location;
+
+            console.log(location);
 
             // find the nearby hospitals
             for (const hospital of hospitals) {
                 const apiKey = process.env.apiKey;
     
-                const startCoordinates = lat + ',' + lng;
+                const startCoordinates = location;
                 const endCoordinates = hospital.location.replace(/\s+/g, ''); // Remove spaces
                 const traffic = true;
     
