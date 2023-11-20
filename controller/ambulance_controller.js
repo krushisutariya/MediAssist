@@ -49,7 +49,7 @@ module.exports.nearby_hospitals = async function (req, res) {
                 const distance = route.summary.lengthInMeters / 1000; // in km
                 const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
   
-                if (distance < 30) {
+                if (distance < 20) {
                   nearbyHospitals.push(hospital);
                   distanceTime[hospital.email] = {
                     distance: distance,

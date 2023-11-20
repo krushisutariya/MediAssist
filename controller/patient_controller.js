@@ -33,7 +33,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                     const distance = route.summary.lengthInMeters / 1000; // in km
                     const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
     
-                    if (distance < 30) {
+                    if (distance < 20) {
                         await nearbyHospitals.push(hospital);
     
                         let doctors = await pool.query(`select * from doctor where email in (
@@ -76,7 +76,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                     const distance = route.summary.lengthInMeters / 1000; // in km
                     const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
     
-                    if (distance < 30) {
+                    if (distance < 20) {
                         await nearbyHospitals.push(hospital);
     
                         let doctors = await pool.query(`select * from doctor where email in (
