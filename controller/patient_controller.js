@@ -357,3 +357,18 @@ module.exports.track_appointment = async (req, res) => {
         return res.status(500).json({error: 'Server Error!'});
     }
 }
+
+// Cancel an appointment
+module.exports.cancel_appointment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Given the appointment id, delete the appointment from the appoints table
+        await pool.query(`delete from appoints where id= $1`, [id]);
+
+        req.flash('success', 'Appointment cancelled successfully');
+        return res.redirect('back');
+    } catch (error) {
+        console.log('Error: ', error.message);
+        return res.status(500).json({ error: 'Server Error' });
+    }
+}

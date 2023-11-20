@@ -9,6 +9,6 @@ router.get('/check-slots/:email', passport.checkPatient, patientController.check
 router.post('/check-availability/:email', passport.checkPatient, patientController.check_availability);
 router.post('/make-appointment', passport.checkPatient, patientController.make_appointment);
 router.get('/track-appointment', passport.checkPatient, patientController.track_appointment);
-
+router.get('/cancel-appointment/:id', passport.checkPatient, patientController.cancel_appointment);
 
 module.exports = router;
