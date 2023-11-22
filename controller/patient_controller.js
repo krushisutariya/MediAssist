@@ -10,7 +10,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
         let nearbyHospitals = [];
         let doctorsInNearbyHospitals = [];
     
-        if (req.query) {
+        if (Object.keys(req.query).length > 0) {
             const lat = req.query.lat;
             const lng = req.query.lng;
     
@@ -33,7 +33,50 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                     const distance = route.summary.lengthInMeters / 1000; // in km
                     const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
     
-                    if (distance < 30) {
+                    if (distance < 20) {
+                        await nearbyHospitals.push(hospital);
+    
+                        let doctors = await pool.query(`select * from doctor where email in (
+                                select doc_email from works where hosp_email=$1
+                            )`, [hospital.email]);
+                        doctors = doctors.rows;
+    
+                        doctorsInNearbyHospitals[hospital.email] = {
+                            doctors: doctors,
+                            distance: distance,
+                            travelTime: travelTime
+                        };
+                    }
+                } else {
+                    console.error('No route found.');
+                }
+            } 
+        } else {
+
+            let location = await pool.query(`select location from patient where email=$1`, [req.user.email]);
+            location = location.rows[0].location;
+
+
+            // find the nearby hospitals
+            for (const hospital of hospitals) {
+                const apiKey = process.env.apiKey;
+    
+                const startCoordinates = location;
+                const endCoordinates = hospital.location.replace(/\s+/g, ''); // Remove spaces
+                const traffic = true;
+    
+                const tomtomApiEndpoint = 'https://api.tomtom.com/routing/1/calculateRoute/';
+                const url = `${tomtomApiEndpoint}${startCoordinates}:${endCoordinates}/json?key=${apiKey}&traffic=${traffic}`;
+    
+                const response = await axios.get(url);
+                const data = response.data;
+                const route = data.routes && data.routes[0];
+    
+                if (route) {
+                    const distance = route.summary.lengthInMeters / 1000; // in km
+                    const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
+    
+                    if (distance < 20) {
                         await nearbyHospitals.push(hospital);
     
                         let doctors = await pool.query(`select * from doctor where email in (
@@ -80,7 +123,7 @@ module.exports.check_slots = function (req, res) {
 module.exports.check_availability = async function (req, res) {
     try {
         let date = req.body.date;
-        let slots = await pool.query(`select * from appoints where date=$1 AND doc_email=$2 and is_pending = '2'`, [date, req.params.email]);
+        let slots = await pool.query(`select * from appoints where date=$1 AND doc_email=$2`, [date, req.params.email]);
         slots = slots.rows;
 
         if (slots.length == 0) {
@@ -114,10 +157,11 @@ module.exports.check_availability = async function (req, res) {
                     const end_minutes = slotEndTime.getMinutes();
                     formattedEndTime = `${end_hours.toString().padStart(2, '0')}:${end_minutes.toString().padStart(2, '0')}`;
 
-                    let new_slot_dummy = await pool.query(`INSERT INTO appoints (start_time, end_time, date, doc_email, is_pending) VALUES ($1, $2, $3, $4, $5)`, [formattedStartTime, formattedEndTime, date, req.params.email, '2']);
-                    new_slot_dummy = await pool.query(`SELECT * FROM appoints WHERE start_time=$1 AND end_time=$2 AND date=$3 AND doc_email=$4 AND is_pending='2'`, [formattedStartTime, formattedEndTime, date, req.params.email]);
-                    new_slot_dummy = new_slot_dummy.rows;
-                    newSlots.push(new_slot_dummy);
+                    newSlots.push({
+                        start_time: formattedStartTime,
+                        end_time: formattedEndTime,
+                        is_booked: false
+                    });
                 }
             } else {
                 const numberOfSlots = parseInt(endTime.substring(0, 2), 10) - parseInt(startTime.substring(0, 2), 10);
@@ -138,10 +182,11 @@ module.exports.check_availability = async function (req, res) {
                     const end_minutes = slotEndTime.getMinutes();
                     formattedEndTime = `${end_hours.toString().padStart(2, '0')}:${end_minutes.toString().padStart(2, '0')}`;
 
-                    let new_slot_dummy = await pool.query(`INSERT INTO appoints (start_time, end_time, date, doc_email, is_pending) VALUES ($1, $2, $3, $4, $5)`, [formattedStartTime, formattedEndTime, date, req.params.email, '2']);
-                    new_slot_dummy = await pool.query(`SELECT * FROM appoints WHERE start_time=$1 AND end_time=$2 AND date=$3 AND doc_email=$4 AND is_pending='2'`, [formattedStartTime, formattedEndTime, date, req.params.email]);
-                    new_slot_dummy = new_slot_dummy.rows;
-                    newSlots.push(...new_slot_dummy);
+                    newSlots.push({
+                        start_time: formattedStartTime,
+                        end_time: formattedEndTime,
+                        is_booked: false
+                    });
                 }
             }
 
@@ -154,12 +199,92 @@ module.exports.check_availability = async function (req, res) {
             });
 
         } else {
-            slots = await pool.query(`select * from appoints where date=$1 AND is_pending = '2'`, [date]);
-            slots = slots.rows;
+
+            let startTime = await pool.query(`select start_time from works where doc_email=$1`, [req.params.email]);
+            startTime = startTime.rows[0].start_time;
+            let endTime = await pool.query(`select end_time from works where doc_email=$1`, [req.params.email]);
+            endTime = endTime.rows[0].end_time;
+            const newSlots = [];
+
+            const slotDuration = 60 * 60 * 1000; // 1 hour in milliseconds
+
+            let formattedStartTime = "";
+            let formattedEndTime = "";
+            
+            if(!startTime || !endTime) {
+                start_time = new Date(date + 'T09:00:00');
+                end_time = new Date(date + 'T17:00:00');
+                const numberOfSlots = 8;
+
+                for (let i = 0; i < numberOfSlots; i++) {
+                    const slotStartTime = new Date(startTime.getTime() + i * slotDuration);
+                    const slotEndTime = new Date(slotStartTime.getTime() + slotDuration);
+
+                    // Extract hours and minutes from Date object using getHours() and getMinutes() methods
+                    const start_hours = slotStartTime.getHours();
+                    const start_minutes = slotStartTime.getMinutes();
+                    formattedStartTime = `${start_hours.toString().padStart(2, '0')}:${start_minutes.toString().padStart(2, '0')}`;
+
+                    const end_hours = slotEndTime.getHours();
+                    const end_minutes = slotEndTime.getMinutes();
+                    formattedEndTime = `${end_hours.toString().padStart(2, '0')}:${end_minutes.toString().padStart(2, '0')}`;
+
+                    if(slots.some(slot =>
+                        slot.start_time === formattedStartTime && slot.end_time === formattedEndTime
+                    )) {
+                        newSlots.push({
+                            start_time: formattedStartTime,
+                            end_time: formattedEndTime,
+                            is_booked: true
+                        });
+                    } else {
+                        newSlots.push({
+                            start_time: formattedStartTime,
+                            end_time: formattedEndTime,
+                            is_booked: false
+                        });
+                    }
+                }
+            } else {
+                const numberOfSlots = parseInt(endTime.substring(0, 2), 10) - parseInt(startTime.substring(0, 2), 10);
+                
+                const start_time = new Date(date + 'T' + startTime + ':00');
+                const end_time = new Date(date + 'T' + endTime + ':00');
+                
+                for(let i = 0; i < numberOfSlots; i++){
+                    const slotStartTime = new Date(start_time.getTime() + i * slotDuration);
+                    const slotEndTime = new Date(slotStartTime.getTime() + slotDuration);
+
+                    // Extract hours and minutes from Date object using getHours() and getMinutes() methods
+                    const start_hours = slotStartTime.getHours();
+                    const start_minutes = slotStartTime.getMinutes();
+                    formattedStartTime = `${start_hours.toString().padStart(2, '0')}:${start_minutes.toString().padStart(2, '0')}`;
+
+                    const end_hours = slotEndTime.getHours();
+                    const end_minutes = slotEndTime.getMinutes();
+                    formattedEndTime = `${end_hours.toString().padStart(2, '0')}:${end_minutes.toString().padStart(2, '0')}`;
+
+                    if(slots.some(slot =>
+                        slot.start_time === formattedStartTime && slot.end_time === formattedEndTime
+                    )) {
+                        newSlots.push({
+                            start_time: formattedStartTime,
+                            end_time: formattedEndTime,
+                            is_booked: true
+                        });
+                    } else {
+                        newSlots.push({
+                            start_time: formattedStartTime,
+                            end_time: formattedEndTime,
+                            is_booked: false
+                        });
+                    }
+                }
+            }
 
             return res.render('appointment', {
                 title: 'Appointment | MediAssist',
-                slots: slots,
+                slots: newSlots,
                 date: date,
                 available: true,
                 doctor: req.params.email
@@ -190,7 +315,7 @@ module.exports.make_appointment = async (req, res) => {
 
         // Update the appoints table by making the is_pending bit 1 and adding the patient's email and id
         // req.user.email is the patient's email and req.params.email is the doctor's email
-        await pool.query(`UPDATE appoints SET is_pending = '1', patient_email = $1, id = $2 WHERE doc_email = $3 AND date = $4 AND start_time = $5 AND end_time = $6`, [req.user.email, id, req.query.email, req.query.date, start_time, end_time]);
+        await pool.query(`INSERT INTO appoints(is_pending, patient_email, id, doc_email, date, start_time, end_time) VALUES  ('1', $1, $2, $3, $4, $5, $6)`, [req.user.email, id, req.query.email, req.query.date, start_time, end_time]);
         let slot = await pool.query(`select * from appoints where id=$1`, [id]);
         slot = slot.rows[0];
         let name = await pool.query(`select name from patient where email=$1`, [req.user.email]);
@@ -230,5 +355,20 @@ module.exports.track_appointment = async (req, res) => {
     } catch (error) {
         console.log('Error: ', error.message);
         return res.status(500).json({error: 'Server Error!'});
+    }
+}
+
+// Cancel an appointment
+module.exports.cancel_appointment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Given the appointment id, delete the appointment from the appoints table
+        await pool.query(`delete from appoints where id= $1`, [id]);
+
+        req.flash('success', 'Appointment cancelled successfully');
+        return res.redirect('back');
+    } catch (error) {
+        console.log('Error: ', error.message);
+        return res.status(500).json({ error: 'Server Error' });
     }
 }
