@@ -19,7 +19,7 @@ CREATE TABLE Users (
 
 -- Patient Table
 CREATE TABLE Patient (
-    id CHAR(12),
+    id CHAR(12) NOT NULL,
     email VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -207,3 +207,28 @@ CREATE TABLE works(
     FOREIGN KEY(doc_email) REFERENCES Doctor(EMAIL),
     FOREIGN KEY(hosp_email) REFERENCES Hospital(EMAIL)
 );
+
+-- Patient ID generate trigger
+CREATE OR REPLACE FUNCTION generate_patient_id()
+RETURNS CHAR(12) AS $$
+DECLARE
+    result CHAR(12);
+BEGIN
+    -- Generate a unique 12-digit ID using timestamp and random number
+    result := to_char(LPAD(FLOOR(RANDOM() * 100000000000)::TEXT, 12, '0'));
+    RETURN result;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION set_patient_id()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Set the patient ID using the generate_patient_id function
+    NEW.id := generate_patient_id();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_patient_id_trigger
+BEFORE INSERT ON patient
+FOR EACH ROW EXECUTE FUNCTION set_patient_id();

@@ -61,11 +61,14 @@ module.exports.register_lab = async function(req, res){
 module.exports.appointments = async (req, res) => {
     try {
           
-        let appointment = await pool.query(``);
-           
-        
         // Find out the doctors that are enrolled in the hospital using the works table
-        let appointments = await pool.query(`select * from appoints where (is_pending='1')`);
+        let appointments = await pool.query(`with hosp_doctors as (
+                                                select distinct(doc_email)
+                                                from works
+                                                where hosp_email=$1)
+                                            select *
+                                            from appoints natural join hosp_doctors
+                                            where (is_pending='1')`, [req.user.email]);
         appointments = appointments.rows;
         
         return res.render('hospital_appointments', {

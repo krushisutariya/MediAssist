@@ -99,8 +99,7 @@
       135deg,
       rgba(0, 0, 0, 0.6) 0%,
       rgba(0, 0, 0, 0.8) 75%
-    ),
-    url(http://lorempixel.com/480/480/);
+    );
   background-size: cover;
   background-color: var(--base-color);
   padding: 0 5%;

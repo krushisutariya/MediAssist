@@ -23,7 +23,7 @@
                             <img src="/images/govt_agency.avif" class="img-fluid" alt="Govt_Agency">
                         <%} else if(mode.role === 'Ambulance_driver'){%>
                             <img src="/images/ambulance_driver.png" class="img-fluid" alt="Ambulance Driver">
-                        <%} else {%>{%>
+                        <%} else {%>
                             <img src="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360"
                                 class="img-fluid"
                                 alt="https://img.freepik.com/premium-vector/medical-design_24877-33068.jpg?w=360">
@@ -76,6 +76,14 @@
                                     <label for="reg_no">Registration Number:</label>
                                     <input class="form-control" type="text" id="reg_no" name="reg_no" value="<%=user.reg_no%>"
                                         placeholder="Registration Number">
+                                </div>
+                            <%}%>
+
+                            <%if(mode.role === 'Patient'){%>
+                                <div class="form-group my-2">
+                                    <label for="id">Registration Number:</label>
+                                    <input class="form-control" type="text" id="id" name="id" value="<%=user.id%>"
+                                        placeholder="Patient ID Number" disabled>
                                 </div>
                             <%}%>
                             
@@ -471,4 +479,54 @@
         var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
         document.getElementById("searchBoxContainer").appendChild(searchBoxHTML);
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#datepicker').datepicker();
+    });
+</script>
+<script>
+const contactInput = document.getElementById('contact');
+const contactFeedback = document.getElementById('contact-feedback');
+
+contactInput.addEventListener('input', () => {
+    const contactString = contactInput.value;
+
+    const enteredContact = contactInput.value.trim();
+    const contactPattern = /^\d{10}$/;
+
+    if (contactPattern.test(enteredContact)) {
+        contactFeedback.textContent = 'Contact is valid.';
+        contactFeedback.style.color = 'green';
+    } else {
+        contactFeedback.textContent = 'Contact is Invalid.';
+        contactFeedback.style.color = 'red';
+    }
+});
+</script>
+<script>
+// Get references to the input field and feedback element
+const WeightInput = document.getElementById('weight');
+const WeightFeedback = document.getElementById('weight-feedback');
+
+// Add an event listener to the input field for input events
+WeightInput.addEventListener('input', function () {
+    // Get the entered PIN code
+    const enteredPin = WeightInput.value.trim();
+
+    // Define a regular expression to match a 6-digit PIN code
+    const WeightPattern = /^\d{1,3}$/;
+
+    // Check if the entered PIN code matches the pattern
+    if (WeightPattern.test(enteredPin)) {
+        // Valid PIN code
+        WeightFeedback.textContent = 'Weight is valid.';
+        WeightFeedback.style.color = 'green';
+    } else {
+        // Invalid PIN code
+        WeightFeedback.textContent = 'Weight is Invalid.';
+        WeightFeedback.style.color = 'red';
+    }
+});
 </script>

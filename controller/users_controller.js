@@ -1,6 +1,7 @@
 const { query } = require('express');
 const pool = require('../config/db');
 const e = require('connect-flash');
+const bcrypt = require('bcryptjs');
 
 // Sign-In Page Rendering
 module.exports.sign_in = function (req, res) {
@@ -32,7 +33,8 @@ module.exports.new_user = async function (req, res) {
         user = user.rows[0];
         if (!user) {
             try {
-                user = await pool.query(`INSERT INTO Users(email, username, password, role) VALUES ($1, $2, $3, $4) RETURNING *`, [req.body.email, req.body.username, req.body.password, req.body.role]);
+                const hashedPassword = await bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+                user = await pool.query(`INSERT INTO Users(email, username, password, role) VALUES ($1, $2, $3, $4) RETURNING *`, [req.body.email, req.body.username, hashedPassword, req.body.role]);
                 
                 await pool.query(`INSERT INTO ${req.body.role}(email, username, name) VALUES ($1, $2, $3)`, [req.body.email, req.body.username, req.body.name]);
     

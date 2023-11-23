@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../config/db');
+const bcrypt = require('bcryptjs');
 
 passport.use('local', new LocalStrategy({
     usernameField: 'email_username',
@@ -12,7 +13,7 @@ passport.use('local', new LocalStrategy({
         const rows = await pool.query('SELECT * FROM Users WHERE email = $1 OR username = $1', [email_username]);
         const user = rows.rows[0];
 
-        if(!user || user.password != password){
+        if(!user || !(await bcrypt.compareSync(password, user.password))){
             req.flash('error', 'Invalid Username/Password');
             return done(null, false);
         }
