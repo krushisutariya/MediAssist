@@ -3,6 +3,7 @@ const pool = require('../config/db');
 const bcrypt = require('bcryptjs');
 
 module.exports.home = async function(req, res){
+   
     return res.render('home', {
         title: "MediAssist | Home"
     });
