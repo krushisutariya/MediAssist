@@ -3,21 +3,6 @@ const pool = require('../config/db');
 const bcrypt = require('bcryptjs');
 
 module.exports.home = async function(req, res){
-    try {
-        console.log('Hashing all users password!');
-        let users = await pool.query(`select * from users where email != 'hospital@example.com'`);
-        users = users.rows;
-        for (const user of users) {
-            const hashedPassword = await bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
-            await pool.query('UPDATE users SET password = $1 WHERE email = $2', [hashedPassword, user.email]);
-        }
-        console.log('All users password hashed!');
-
-                
-    } catch (error) {
-        console.log('Error: ', error);
-        return res.redirect('back');
-    }
     return res.render('home', {
         title: "MediAssist | Home"
     });
