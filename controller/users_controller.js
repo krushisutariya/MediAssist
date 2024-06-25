@@ -74,7 +74,8 @@ module.exports.profile = async function (req, res) {
                     contact = null;
                 }
                 var total_doctors = null;
-                var total_doctors = await pool.query(`SELECT count(doc_email) FROM works WHERE hosp_email = ${rows.email}`);
+                var total_doctors = await pool.query(`SELECT count(doc_email) FROM works WHERE hosp_email = $1`, [rows.email]);
+                console.log(total_doctors);
                 total_doctors = total_doctors.rows[0];
                 return res.render('profile', {
                     title: "MediAssist | Profile",
