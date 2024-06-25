@@ -6,9 +6,6 @@ module.exports.stocks = async (req, res) => {
         
         // req.user.email has the email of pharmacy logged in from which you can use the stores table to
         // find out the medicines and their quantities present in the pharmacy
-
-        
-
         let medicines = await pool.query(`SELECT name, brand_name, stock FROM stores WHERE email_pharm = $1`,[req.user.email]);
 
         medicines = medicines.rows;

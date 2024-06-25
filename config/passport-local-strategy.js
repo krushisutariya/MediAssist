@@ -13,7 +13,7 @@ passport.use('local', new LocalStrategy({
         const rows = await pool.query('SELECT * FROM Users WHERE email = $1 OR username = $1', [email_username]);
         const user = rows.rows[0];
 
-        if(!user || !(await bcrypt.compareSync(password, user.password))){
+        if(!user || !(bcrypt.compareSync(password, user.password))){
             req.flash('error', 'Invalid Username/Password');
             return done(null, false);
         }

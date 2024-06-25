@@ -5,6 +5,7 @@ const axios = require('axios');
 const app = express();
 
 // decalring the local server port or the Render port
+const dotenv = require('dotenv').config();
 const port = process.env.PORT || 8000;
 
 // providing https server for Render
@@ -20,7 +21,6 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 
 // providing access to the database
-const dotenv = require('dotenv').config();
 const pool = require('./config/db');
 
 // importing express-session library to create session cookies
@@ -30,7 +30,7 @@ const crypto = require('crypto');
 // importing the passport js libraries
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-const passportJWT = require('./config/passport-jwt-strategy');
+// const passportJWT = require('./config/passport-jwt-strategy');
 
 // giving access to the mongo-connect || pg-connect-simple for session storage
 // const MongoStore = require('connect-mongo');
@@ -76,12 +76,13 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: (1000*60*100)
+        maxAge: (1000*60*10)
     },
     // storing the cookie-data in mongo db
     store: new PgSession({
         pool,
-        tableName: 'session'
+        tableName: 'session',
+
     })
 }));
 
