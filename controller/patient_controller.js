@@ -19,6 +19,7 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                 const apiKey = process.env.apiKey;
     
                 const startCoordinates = lat + ',' + lng;
+                if (!hospital.location) continue;
                 const endCoordinates = hospital.location.replace(/\s+/g, ''); // Remove spaces
                 const traffic = true;
     
@@ -56,12 +57,18 @@ module.exports.find_hospitals_doctors = async (req, res) => {
             let location = await pool.query(`select location from patient where email=$1`, [req.user.email]);
             location = location.rows[0].location;
 
+            if (!location) {
+                req.flash('error', 'Please update your location to find nearby hospitals and doctors');
+                return res.redirect('/users/profile/' + req.user.email);
+            }
+
 
             // find the nearby hospitals
             for (const hospital of hospitals) {
                 const apiKey = process.env.apiKey;
     
                 const startCoordinates = location;
+                if (!hospital.location) continue;
                 const endCoordinates = hospital.location.replace(/\s+/g, ''); // Remove spaces
                 const traffic = true;
     
@@ -76,8 +83,8 @@ module.exports.find_hospitals_doctors = async (req, res) => {
                     const distance = route.summary.lengthInMeters / 1000; // in km
                     const travelTime = route.summary.travelTimeInSeconds / 3600; // in hrs
     
-                    if (distance < 20) {
-                        await nearbyHospitals.push(hospital);
+                    if (distance < 25) {
+                        nearbyHospitals.push(hospital);
     
                         let doctors = await pool.query(`select * from doctor where email in (
                                 select doc_email from works where hosp_email=$1
